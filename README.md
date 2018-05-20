@@ -1,6 +1,6 @@
-# boono_mobile
-
-A new Flutter project.
+# BoonoMobile
+https://github.com/k-nasa/line-book-bot
+このLineBotのアプリ版を作成中
 
 ## Getting Started
 
