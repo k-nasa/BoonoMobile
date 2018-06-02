@@ -109,6 +109,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     return new Scaffold(
       appBar: new AppBar(
         title: const Text('Bottom navigation'),
+        backgroundColor: _navigationViews[_currentIndex]._color,
       ),
       body: new Center(
           child: _buildTransitionsStack()
