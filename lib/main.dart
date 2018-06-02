@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:boono_mobile/config/conf.dart';
 
-void main() => runApp(new MyApp());
+import 'package:boono_mobile/page/widget/bottom_nav_bar.dart';
 
-class MyApp extends StatelessWidget {
+var token;
+
+void main() async {
+  Config config = new Config();
+  await config.init();
+  token = config.token;
+
+  runApp(new App());
+}
+
+class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -58,6 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: new Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      bottomNavigationBar: new BottomNavigation(),
     );
   }
 }
+
