@@ -3,6 +3,7 @@ description: A new Flutter project.
 
 dependencies:
   sqflite: any
+  path_provider: any
   flutter:
     sdk: flutter
 
