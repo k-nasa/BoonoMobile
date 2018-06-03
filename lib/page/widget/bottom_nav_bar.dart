@@ -83,10 +83,12 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
+    List <BottomNavigationBarItem> botNavBarList = _navigationViews
+        .map((NavigationIconView navigationView) => navigationView.item)
+        .toList();
+
     final BottomNavigationBar botNavBar = new BottomNavigationBar(
-      items: _navigationViews
-          .map((NavigationIconView navigationView) => navigationView.item)
-          .toList(),
+      items: botNavBarList,
       currentIndex: _currentIndex,
       type: _type,
       onTap: (int index) {
