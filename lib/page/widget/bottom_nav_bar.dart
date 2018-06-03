@@ -7,7 +7,6 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> with TickerProviderStateMixin {
-
   int _currentIndex = 0;
   BottomNavigationBarType _type = BottomNavigationBarType.shifting;
   List<NavigationIconView> _navigationViews;
@@ -80,13 +79,6 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         ),
       ],
     );
-
-    //final List<Widget> transitions = <Widget>[];
-
-    //for (NavigationIconView view in _navigationViews)
-    //  transitions.add(view.transition(_type, context));
-
-    //return new Stack(children: transitions);
   }
 
   @override
@@ -125,10 +117,7 @@ class NavigationIconView {
     String title,
     Color color,
     TickerProvider vsync
-  }) : _icon = icon,
-        _color = color,
-        _title = title,
-        item = new BottomNavigationBarItem(
+  }) : item = new BottomNavigationBarItem(
           icon: icon,
           title: new Text(title),
           backgroundColor: color,
@@ -143,31 +132,7 @@ class NavigationIconView {
     );
   }
 
-  final Widget _icon;
-  final Color _color;
-  final String _title;
   final BottomNavigationBarItem item;
   final AnimationController controller;
   CurvedAnimation _animation;
-
-  FadeTransition transition(BottomNavigationBarType type, BuildContext context) {
-    return new FadeTransition(
-      opacity: _animation,
-      child: new SlideTransition(
-        position: new Tween<Offset>(
-          begin: const Offset(0.0, 0.02), // Slightly down.
-          end: Offset.zero,
-        ).animate(_animation),
-        child: new IconTheme(
-          data: new IconThemeData(
-            size: 120.0,
-          ),
-          child: new Semantics(
-            label: 'Placeholder for $_title tab',
-            child: _icon,
-          ),
-        ),
-      ),
-    );
-  }
 }
