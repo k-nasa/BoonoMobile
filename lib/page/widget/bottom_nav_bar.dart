@@ -103,6 +103,10 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     );
 
     return Scaffold(
+      //appBar: new AppBar(
+      //  title: new Text('BoonoMobile'),
+      //  backgroundColor: _navigationViews[_currentIndex]._color,
+      //),
       body: _buildTransitionsStack(),
       bottomNavigationBar: botNavBar,
     );
@@ -115,7 +119,8 @@ class NavigationIconView {
     String title,
     Color color,
     TickerProvider vsync
-  }) : item = new BottomNavigationBarItem(
+  }) : _color = color,
+        item = new BottomNavigationBarItem(
           icon: icon,
           title: new Text(title),
           backgroundColor: color,
@@ -131,6 +136,7 @@ class NavigationIconView {
   }
 
   final BottomNavigationBarItem item;
+  final Color _color;
   final AnimationController controller;
   CurvedAnimation _animation;
 }
