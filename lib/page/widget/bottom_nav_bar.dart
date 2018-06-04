@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:boono_mobile/page/add_description_list.dart';
+
 class BottomNavigation extends StatefulWidget {
 
   @override
@@ -67,7 +69,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
           offstage: _currentIndex != 1,
           child: new TickerMode(
             enabled: _currentIndex == 1,
-            child: new Text('second page!!'),
+            child: new AddDescriptionPage(),
           ),
         ),
         new Offstage(
