@@ -27,7 +27,9 @@ class Config {
 
   generateToken() async {
     var res = await http.post(UserCreateURL);
-    print(res.body);
-    dbManager.database.insert('config', { 'token': res.body });
+
+    print(res.statusCode);
+    if(res.statusCode == 200)
+      dbManager.database.insert('config', { 'token': res.body });
   }
 }
