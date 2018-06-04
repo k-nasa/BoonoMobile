@@ -10,7 +10,13 @@ void main() async {
   await config.init();
   token = config.token;
 
-  runApp(new App());
+  print(token);
+  if(token != null) {
+    print(token);
+    runApp(new App());
+  }
+  else
+    runApp(new ErrorPage());
 }
 
 class App extends StatelessWidget {
@@ -24,4 +30,18 @@ class App extends StatelessWidget {
       home: new BottomNavigation(),
     );
   }
+}
+
+class ErrorPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Flutter Demo',
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: new Center(child: new Text('サーバーとの通信でエラーが起きました'),),
+    );
+  }
+
 }
