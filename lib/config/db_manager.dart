@@ -12,7 +12,7 @@ class DBManager {
     if (database == null) {
       Directory directory = await getApplicationDocumentsDirectory();
       database = await openDatabase(
-          join(directory.path, 'Boonoigjsg.db'), //path
+          join(directory.path, 'Boono.db'), //path
           version: 1,
           onCreate: (Database db, int version) async {
             createConfigTable(db);
