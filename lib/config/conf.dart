@@ -2,8 +2,6 @@ import 'package:http/http.dart' as http;
 import 'package:boono_mobile/config/db_manager.dart';
 import 'package:boono_mobile/route/api_routes.dart';
 
-final SEARVER_URL = 'http://e0457500.ngrok.io';
-
 class Config {
   final DBManager dbManager = new DBManager();
   String token;
