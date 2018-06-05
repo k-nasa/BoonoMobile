@@ -4,14 +4,46 @@ class AddDescriptionPage extends StatelessWidget {
   String _content;
   final _formKey = new GlobalKey<FormState>();
 
-  _submit() {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    saveContent(type){
+
+    }
+
+    Widget alertDialog = new AlertDialog(
+      title: new Text("リストのタイプを選択してください"),
+      content: new Text('内容: $_content'),
+      actions: <Widget>[
+        new FlatButton(
+            onPressed: () {
+              saveContent('auther');
+              Navigator.pop(context);
+            },
+            child: new Text('作者')
+        ),
+        new FlatButton(
+            onPressed: () {
+              saveContent('title');
+              Navigator.pop(context);
+            },
+            child: new Text('タイトル')
+        )
+      ],
+    );
+
+    _submit() {
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+        print(_content);
+        showDialog(
+            context: context,
+            builder: (_) => alertDialog
+        );
+      }
+    }
+
+
     return new Container(
       child: new Form(
         key: _formKey,
