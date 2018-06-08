@@ -61,29 +61,32 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
       }
     }
 
-
-    return new Container(
-      child: new Form(
+    Widget addSubscriptionForm () {
+      return new Form(
         key: _formKey,
         child: new Padding(
-          padding: new EdgeInsets.only(top: 30.0, left: 20.0,right: 20.0),
+          padding: new EdgeInsets.all(10.0),
           child: new Row(
             children: <Widget>[
               new Flexible(
                 child: new TextFormField(
                   decoration: new InputDecoration(
                     //contentPadding: new EdgeInsets.only(top: 20.0),
-                    hintText: '購読リスト追加'
+                      hintText: '購読リスト追加'
                   ),
                   validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
-                  onSaved: (val) => _content = val,
+                  onSaved: (val) {
+                    setState(() {
+                      _content = val;
+                    });
+                  },
                 ),
               ),
               new Container(
                 margin: new EdgeInsets.symmetric(horizontal: 4.0),
                 child: new IconButton(
                     icon: new Icon(Icons.send),
-                    color: Colors.orangeAccent,
+                    color: Colors.blue,
                     onPressed: () => _submit()),
               ),
             ],
