@@ -10,14 +10,12 @@ void main() async {
   Config config = new Config();
   await config.init();
   token = config.token;
-
   print(token);
-  if(token != null) {
-    print(token);
-    runApp(new App());
-  }
-  else
+
+  if(token == null)
     runApp(new ErrorPage());
+  else
+    runApp(new App());
 }
 
 class App extends StatelessWidget {
