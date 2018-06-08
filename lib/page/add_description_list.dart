@@ -1,41 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:boono_mobile/model/subscription_item.dart';
 
-class AddDescriptionPage extends StatelessWidget {
+class AddSubscriptionItemPage extends StatefulWidget {
+  @override
+  _AddSubscriptionItemPageState createState() => new _AddSubscriptionItemPageState();
+}
+
+class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
+
   String _content;
+  String _type;
+  List<SubscriptionItem> subItems;
   final _formKey = new GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  saveSubscriptionItem() {
+    var subscriptionItem = new SubscriptionItem(content: _content, type: _type);
+    subscriptionItem.save();
+    Navigator.pop(context);
+
+    setState(() { //rebuildのために追加
+    });
+  }
+
+
+  @override
   Widget build(BuildContext context) {
-
-    saveContent(type){
-
-    }
-
     Widget alertDialog = new AlertDialog(
       title: new Text("リストのタイプを選択してください"),
-      content: new Text('内容: $_content'),
       actions: <Widget>[
         new FlatButton(
             onPressed: () {
-              saveContent('auther');
-              Navigator.pop(context);
+              _type = 'AuthorItem';
+              saveSubscriptionItem();
             },
             child: new Text('作者')
         ),
         new FlatButton(
             onPressed: () {
-              saveContent('title');
-              Navigator.pop(context);
+              _type = 'TitleItem';
+              saveSubscriptionItem();
             },
             child: new Text('タイトル')
         )
       ],
     );
 
+
     _submit() {
       if (_formKey.currentState.validate()) {
         _formKey.currentState.save();
-        print(_content);
         showDialog(
             context: context,
             builder: (_) => alertDialog
