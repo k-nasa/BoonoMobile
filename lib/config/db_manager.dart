@@ -31,7 +31,14 @@ class DBManager {
       '''create table $TABLE_NAME(
         $TOKEN text not null)'''
     );
+  }
 
-    print('CREATE config TABLE');
+  Future<String> fetchUserToken() async {
+    await openDB();
+
+    List<Map> config =  await database.rawQuery("select * from config");
+    if (config.isEmpty) return null ;
+
+    return config.first['token'];
   }
 }
