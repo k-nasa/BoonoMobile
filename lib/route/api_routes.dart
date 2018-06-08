@@ -1,3 +1,5 @@
-final API_URL = 'http://e0457500.ngrok.io';
+final API_URL = 'http://2e8e5cab.ngrok.io';
 
-final UserCreateURL = API_URL + '/user';
+final UserCreateURL = API_URL + '/users';
+final SubscriptionCreateURL = API_URL + '/subscription_items';
+final SubscriptionsURL = API_URL + '/subscription_items';
