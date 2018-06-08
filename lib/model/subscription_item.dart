@@ -10,6 +10,49 @@ class SubscriptionItem {
 
   SubscriptionItem({this.content, this.type});
 
-  save() {
+  Map toHash() {
+    return {'content': this.content, 'type': this.type};
+  }
+
+  save() async {
+    DBManager db = new  DBManager();
+    String userToken = await db.fetchUserToken();
+
+    var res = await http.post(
+        SubscriptionCreateURL,
+        body: {
+          'content': content,
+          'type': type,
+          'token': userToken
+        }
+    );
+
+    return true;
+  }
+
+  Future<List<SubscriptionItem>> all() async{
+    DBManager db = new DBManager();
+    String userToken = await db.fetchUserToken();
+
+    var res = await http.get(
+      SubscriptionsURL + '/$userToken',
+    );
+
+    List jsonArray = json.decode(res.body);
+    print(res.body);
+    print(jsonArray);
+
+    List<SubscriptionItem> subItems = [];
+
+    for(var subItem in jsonArray){
+      subItems.add(
+          new SubscriptionItem(
+              content: subItem['content'],
+              type: subItem['type']
+          )
+      );
+    }
+
+    return subItems;
   }
 }
