@@ -12,7 +12,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   int _currentIndex = 0;
   BottomNavigationBarType _type = BottomNavigationBarType.shifting;
   List<NavigationIconView> _navigationViews;
-
+  List<Widget> _pages;
   @override
   void initState() {
     super.initState();
@@ -37,6 +37,8 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       )
     ];
 
+    _pages = pages();
+
     for (NavigationIconView view in _navigationViews)
       view.controller.addListener(_rebuild);
 
@@ -55,32 +57,12 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     });
   }
 
-  Widget _buildTransitionsStack() {
-    return new Stack(
-      children: <Widget>[
-        new Offstage(
-          offstage: _currentIndex != 0,
-          child: new TickerMode(
-            enabled: _currentIndex== 0,
-            child: new Text('first page!!'),
-          ),
-        ),
-        new Offstage(
-          offstage: _currentIndex != 1,
-          child: new TickerMode(
-            enabled: _currentIndex == 1,
-            child: new AddDescriptionPage(),
-          ),
-        ),
-        new Offstage(
-          offstage: _currentIndex != 2,
-          child: new TickerMode(
-            enabled: _currentIndex == 2,
-            child: new Text('therd page!!'),
-          ),
-        ),
-      ],
-    );
+  List<Widget> pages (){
+    return [
+      new Text('first'),
+      new AddSubscriptionItemPage(),
+      new Text('third'),
+    ];
   }
 
   @override
@@ -103,11 +85,11 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     );
 
     return Scaffold(
-      //appBar: new AppBar(
-      //  title: new Text('BoonoMobile'),
-      //  backgroundColor: _navigationViews[_currentIndex]._color,
-      //),
-      body: _buildTransitionsStack(),
+      appBar: new AppBar(
+        title: new Text('BoonoMobile'),
+        backgroundColor: _navigationViews[_currentIndex]._color,
+      ),
+      body: _pages[_currentIndex],
       bottomNavigationBar: botNavBar,
     );
   }
