@@ -19,13 +19,20 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
     super.dispose();
   }
 
-  saveSubscriptionItem() {
+  saveSubscriptionItem() async{
     var subscriptionItem = new SubscriptionItem(content: _content, type: _type);
-    subscriptionItem.save();
+
+    if (await subscriptionItem.save()){
+      _controller.clear();
+      Scaffold.of(context).showSnackBar(simpleSnackBar('購読リストに追加しました'));
+    }
+    else
+      Scaffold.of(context).showSnackBar(simpleSnackBar('購読リストに追加に失敗しました'));
+
     Navigator.pop(context);
 
-    setState(() { //rebuildのために追加
-    });
+    //rebuildのために追加
+    setState(() => null);
   }
 
 
@@ -134,6 +141,10 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
           ),
         );
     }
+  }
+
+  Widget simpleSnackBar(content) {
+    return new SnackBar(content: Text(content));
   }
 
   Widget _createSubscription(int index) {
