@@ -12,6 +12,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
   String _type;
   List<SubscriptionItem> subItems;
   final _formKey = new GlobalKey<FormState>();
+  var _controller = new TextEditingController();
 
   @override
   void dispose() {
@@ -74,6 +75,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
                     //contentPadding: new EdgeInsets.only(top: 20.0),
                       hintText: '購読リスト追加'
                   ),
+                  controller: _controller,
                   validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
                   onSaved: (val) {
                     setState(() {
