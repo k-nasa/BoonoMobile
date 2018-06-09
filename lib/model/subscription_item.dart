@@ -27,7 +27,10 @@ class SubscriptionItem {
         }
     );
 
-    return true;
+    if (res.statusCode == 201)
+      return true;
+    else
+      return false;
   }
 
   Future<List<SubscriptionItem>> all() async{
