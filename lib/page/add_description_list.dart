@@ -132,7 +132,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
         return new CircularProgressIndicator();
       default:
         if(snapshot.hasError)
-          return new Text("Error: ${snapshot.error}");
+          return new Text("サーバーからの応答がないためリストを取得できません");
         subItems = snapshot.data;
         return new Flexible(
           child: new ListView.builder(
