@@ -151,6 +151,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
       children: <Widget>[
         new ListTile(
           title: new Text(subItems[index].content),
+          subtitle: new Text(subItems[index].type),
         ),
         new Divider(height: 5.0,)
       ],
