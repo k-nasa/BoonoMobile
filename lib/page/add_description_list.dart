@@ -11,8 +11,16 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
   String _content;
   String _type;
   List<SubscriptionItem> subItems;
-  final _formKey = new GlobalKey<FormState>();
-  var _controller = new TextEditingController();
+  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  final TextEditingController _controller = new TextEditingController();
+  final FocusNode _focusNode = new FocusNode();
+
+  void _listener(){
+    if(_focusNode.hasFocus)
+      print('foucused');
+    else
+      print('not foucesed');
+  }
 
   @override
   void dispose() {
