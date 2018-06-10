@@ -42,9 +42,6 @@ class SubscriptionItem {
     );
 
     final List jsonArray = json.decode(res.body);
-    print(res.body);
-    print(jsonArray);
-
     List<SubscriptionItem> subItems = [];
 
     for(var subItem in jsonArray){
