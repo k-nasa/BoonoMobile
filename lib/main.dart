@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:boono_mobile/page/widget/bottom_nav_bar.dart';
 
-var token;
+String token;
 
 void main() async {
   Config config = new Config();

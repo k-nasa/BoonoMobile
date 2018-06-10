@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:http/http.dart' as http;
 import 'package:boono_mobile/config/db_manager.dart';
 import 'package:boono_mobile/route/api_routes.dart';
@@ -7,7 +9,7 @@ class Config {
   String token;
 
   //アプリを開いたときにcall
-  init() async {
+  void init() async {
     await dbManager.openDB();
     
     if (await setToken() == null) {
@@ -16,7 +18,7 @@ class Config {
     setToken();
   }
 
-  setToken() async {
+  Future<String> setToken() async {
     List<Map> config =  await dbManager.database.rawQuery("select * from config");
     if (config.isEmpty) return null;
 
@@ -25,7 +27,7 @@ class Config {
     return config.first['token'];
   }
 
-  generateToken() async {
+  void generateToken() async {
     var res = await http.post(UserCreateURL);
 
     print(res.statusCode);
