@@ -37,11 +37,11 @@ class SubscriptionItem {
     DBManager db = new DBManager();
     String userToken = await db.fetchUserToken();
 
-    var res = await http.get(
+    final http.Response res = await http.get(
       SubscriptionsURL + '/$userToken',
     );
 
-    List jsonArray = json.decode(res.body);
+    final List jsonArray = json.decode(res.body);
     print(res.body);
     print(jsonArray);
 

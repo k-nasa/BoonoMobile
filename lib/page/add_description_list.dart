@@ -19,8 +19,8 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
     super.dispose();
   }
 
-  saveSubscriptionItem() async{
-    var subscriptionItem = new SubscriptionItem(content: _content, type: _type);
+  void saveSubscriptionItem() async{
+    final SubscriptionItem subscriptionItem = new SubscriptionItem(content: _content, type: _type);
 
     if (await subscriptionItem.save()){
       _controller.clear();
@@ -79,8 +79,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
               new Flexible(
                 child: new TextFormField(
                   decoration: new InputDecoration(
-                    //contentPadding: new EdgeInsets.only(top: 20.0),
-                      hintText: '購読リスト追加'
+                      hintText: '購読リスト追加',
                   ),
                   controller: _controller,
                   validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
@@ -143,7 +142,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
     }
   }
 
-  Widget simpleSnackBar(content) {
+  Widget simpleSnackBar(String content) {
     return new SnackBar(content: Text(content));
   }
 
