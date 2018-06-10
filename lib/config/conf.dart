@@ -19,7 +19,7 @@ class Config {
   }
 
   Future<String> setToken() async {
-    List<Map> config =  await dbManager.database.rawQuery("select * from config");
+    final List config =  await dbManager.database.rawQuery("select * from config");
     if (config.isEmpty) return null;
 
     token = config.first['token'];
@@ -28,7 +28,7 @@ class Config {
   }
 
   void generateToken() async {
-    var res = await http.post(UserCreateURL);
+    final http.Response res = await http.post(UserCreateURL);
 
     print(res.statusCode);
     if(res.statusCode == 200)

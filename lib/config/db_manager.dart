@@ -23,9 +23,9 @@ class DBManager {
       print('db open!');
   }
 
-  createConfigTable(Database db) {
-    final String TABLE_NAME = "config";
-    final String TOKEN = "token";
+  void createConfigTable(Database db) {
+    const String TABLE_NAME = 'config';
+    const String TOKEN = 'token';
 
     db.execute(
       '''create table $TABLE_NAME(
@@ -36,7 +36,7 @@ class DBManager {
   Future<String> fetchUserToken() async {
     await openDB();
 
-    List<Map> config =  await database.rawQuery("select * from config");
+    final config =  await database.rawQuery('select * from config');
     if (config.isEmpty) return null ;
 
     return config.first['token'];

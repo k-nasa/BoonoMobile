@@ -14,11 +14,11 @@ class SubscriptionItem {
     return {'content': this.content, 'type': this.type};
   }
 
-  save() async {
+  Future<bool> save() async {
     DBManager db = new  DBManager();
     String userToken = await db.fetchUserToken();
 
-    var res = await http.post(
+    final res = await http.post(
         SubscriptionCreateURL,
         body: {
           'content': content,
