@@ -9,17 +9,30 @@ class AddSubscriptionItemPage extends StatefulWidget {
 class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
 
   String _content;
-  String _type;
+  String _type = 'TitleItem';
+  bool onCustomKeyboard = false;
+
   List<SubscriptionItem> subItems;
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   final TextEditingController _controller = new TextEditingController();
-  final FocusNode _focusNode = new FocusNode();
+  final FocusNode focusNode = new FocusNode();
 
-  void _listener(){
-    if(_focusNode.hasFocus)
-      print('foucused');
+  @override
+  void initState() {
+    super.initState();
+    focusNode.addListener(listener);
+  }
+
+  void listener(){
+    if(focusNode.hasFocus){
+      setState(() {
+        onCustomKeyboard = true;
+      });
+    }
     else
-      print('not foucesed');
+      setState(() {
+        onCustomKeyboard = false;
+      });
   }
 
   @override
@@ -46,34 +59,11 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget alertDialog = new AlertDialog(
-      title: new Text("リストのタイプを選択してください"),
-      actions: <Widget>[
-        new FlatButton(
-            onPressed: () {
-              _type = 'AuthorItem';
-              saveSubscriptionItem();
-            },
-            child: new Text('作者')
-        ),
-        new FlatButton(
-            onPressed: () {
-              _type = 'TitleItem';
-              saveSubscriptionItem();
-            },
-            child: new Text('タイトル')
-        )
-      ],
-    );
 
-
-    _submit() {
+    void _submit() {
       if (_formKey.currentState.validate()) {
         _formKey.currentState.save();
-        showDialog(
-            context: context,
-            builder: (_) => alertDialog
-        );
+        saveSubscriptionItem();
       }
     }
 
@@ -86,28 +76,38 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
             children: <Widget>[
               new Flexible(
                 child: new TextFormField(
-                  decoration: new InputDecoration(
-                      hintText: '購読リスト追加',
-                  ),
+                  focusNode: focusNode,
+                  decoration: InputDecoration(hintText: '購読リスト追加',),
                   controller: _controller,
                   validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
-                  onSaved: (val) {
-                    setState(() {
-                      _content = val;
-                    });
-                  },
+                  onSaved: (val) { _content = val; },
+                  onFieldSubmitted:(_) => _submit(),
                 ),
-              ),
-              new Container(
-                margin: new EdgeInsets.symmetric(horizontal: 4.0),
-                child: new IconButton(
-                    icon: new Icon(Icons.send),
-                    color: Colors.blue,
-                    onPressed: () => _submit()),
               ),
             ],
           ),
         ),
+      );
+    }
+
+    Widget selectTypeForm() {
+      return Row(
+        children: <Widget>[
+          Text('リストのタイプを選択'),
+          Padding(padding: EdgeInsets.all(10.0),),
+          IconButton(
+            tooltip: '本',
+            icon: Icon(Icons.book),
+            onPressed: () => _type = 'TitleItem',
+            color: Colors.blueAccent,
+          ),
+          IconButton(
+            tooltip: '作者',
+            icon: Icon(Icons.account_circle),
+            onPressed: () => _type = 'AuthorItem',
+            color: Colors.blueAccent,
+          ),
+        ],
       );
     }
 
@@ -125,6 +125,10 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
         children: <Widget>[
           new Center(child: addSubscriptionForm(),),
           subscriptionListPage(),
+          //new Offstage(
+          //  offstage: !onCustomKeyboard,
+          //  child: selectTypeForm(),
+          //)
         ],
       ),
     );

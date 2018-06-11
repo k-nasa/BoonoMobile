@@ -36,6 +36,7 @@ class DBManager {
     await openDB();
 
     final config =  await database.rawQuery('select * from config');
+
     if (config.isEmpty) return null ;
 
     return config.first['token'];
