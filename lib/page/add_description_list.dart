@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/subscription_item.dart';
+import 'package:boono_mobile/page/widget/type_select_field.dart';
 
 class AddSubscriptionItemPage extends StatefulWidget {
   @override
@@ -88,27 +89,6 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
       );
     }
 
-    Widget selectTypeForm() {
-      return Row(
-        children: <Widget>[
-          Text('リストのタイプを選択'),
-          Padding(padding: EdgeInsets.all(10.0),),
-          IconButton(
-            tooltip: '本',
-            icon: Icon(Icons.book),
-            onPressed: () => _type = 'TitleItem',
-            color: Colors.blueAccent,
-          ),
-          IconButton(
-            tooltip: '作者',
-            icon: Icon(Icons.account_circle),
-            onPressed: () => _type = 'AuthorItem',
-            color: Colors.blueAccent,
-          ),
-        ],
-      );
-    }
-
     Widget subscriptionListPage() {
       SubscriptionItem subItem = new SubscriptionItem();
 
@@ -125,7 +105,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
           subscriptionListPage(),
           new Offstage(
             offstage: !onCustomKeyboard,
-            child: selectTypeForm(),
+            child: new TypeSelectField(),
           )
         ],
       ),
