@@ -8,19 +8,18 @@ import 'package:path/path.dart';
 class DBManager {
   Database database;
 
-  Future openDB() async {
-    if (database == null) {
-      Directory directory = await getApplicationDocumentsDirectory();
-      database = await openDatabase(
-          join(directory.path, 'Bo.db'), //path
-          version: 1,
-          onCreate: (Database db, int version) async {
-            createConfigTable(db);
-          }
-      );
-    }
+  void openDB() async {
     if (database != null)
-      print('db open!');
+      return ;
+
+    Directory directory = await getApplicationDocumentsDirectory();
+    database = await openDatabase(
+        join(directory.path, 'Bo.db'), //path
+        version: 1,
+        onCreate: (Database db, int version) async {
+          createConfigTable(db);
+        }
+    );
   }
 
   void createConfigTable(Database db) {
