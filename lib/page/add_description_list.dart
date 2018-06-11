@@ -50,8 +50,6 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
     else
       Scaffold.of(context).showSnackBar(simpleSnackBar('購読リストに追加に失敗しました'));
 
-    Navigator.pop(context);
-
     //rebuildのために追加
     setState(() => null);
   }
@@ -125,10 +123,10 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
         children: <Widget>[
           new Center(child: addSubscriptionForm(),),
           subscriptionListPage(),
-          //new Offstage(
-          //  offstage: !onCustomKeyboard,
-          //  child: selectTypeForm(),
-          //)
+          new Offstage(
+            offstage: !onCustomKeyboard,
+            child: selectTypeForm(),
+          )
         ],
       ),
     );
@@ -165,7 +163,7 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
           title: new Text(subItems[index].content),
           subtitle: new Text(subItems[index].type),
         ),
-        new Divider(height: 5.0,)
+        const Divider(height: 5.0,)
       ],
     );
   }
