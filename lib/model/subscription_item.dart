@@ -21,7 +21,7 @@ class SubscriptionItem {
           'type': type,
           'token': userToken
         }
-    ).catchError((e) => null );
+    ).catchError((Error e) => null );
 
     if (res.statusCode == 201)
       return true;
