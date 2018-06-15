@@ -14,8 +14,8 @@ class DescriptionBlocProvider extends InheritedWidget {
         super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(InheritedWidget oldWidget) {
-    // TODO: implement updateShouldNotify
+  bool updateShouldNotify(InheritedWidget oldWidget){
+    return true;
   }
 
   static DescriptionBloc of(BuildContext context) =>
