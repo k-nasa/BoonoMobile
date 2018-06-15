@@ -10,13 +10,10 @@ class AddSubscriptionItemPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return SubscriptionBlocProvider(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           AddSubscriptionForm(),
           SubscriptionListView(),
-          TypeSelectField(),
+          //TypeSelectField(),
         ],
       ),
     );
