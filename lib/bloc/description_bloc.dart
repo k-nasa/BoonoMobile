@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 
+import 'package:boono_mobile/model/subscription_item.dart';
+
 class TypeChange{
   final String type;
   TypeChange(this.type);
@@ -38,9 +40,11 @@ class SubscriptionBloc{
     _type.add(type);
   }
 
-  void _setContent(SetContent setContent) {
-    content = setContent.content;
-    print(content);
-    print(type);
+  void _setContent(SetContent setContent) { content = setContent.content; }
+
+  Future<bool> subscriptionSave() async {
+    SubscriptionItem subItem = SubscriptionItem(content: content, type: type);
+    bool isSaved = await subItem.save();
+    return isSaved;
   }
 }
