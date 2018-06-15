@@ -6,7 +6,31 @@ class AddSubscriptionItemPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          AddSubscriptionForm(),
+          SubscriptionListView(),
+          TypeSelectField(),
+        ],
+      ),
+    );
   }
 }
 
+class AddSubscriptionForm extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('hoge');
+  }
+}
+
+class SubscriptionListView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('hoge1');
+  }
+}
