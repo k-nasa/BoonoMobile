@@ -5,7 +5,6 @@ import 'package:boono_mobile/bloc/description_bloc.dart';
 import 'package:boono_mobile/bloc/description_bloc_provider.dart';
 
 class AddSubscriptionItemPage extends StatelessWidget{
-
   @override
   Widget build(BuildContext context) {
     return SubscriptionBlocProvider(
@@ -13,7 +12,7 @@ class AddSubscriptionItemPage extends StatelessWidget{
         children: <Widget>[
           AddSubscriptionForm(),
           SubscriptionListView(),
-          //TypeSelectField(),
+          TypeSelectField(),
         ],
       ),
     );
@@ -34,6 +33,15 @@ class AddSubscriptionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
+
+    void listener(){
+      if(focusNode.hasFocus)
+        subscriptionBloc.showField.add(ShowSelectField(true));
+      else
+      subscriptionBloc.showField.add(ShowSelectField(false));
+    }
+
+    focusNode.addListener(listener);
 
     void _submit() async {
       if (_formKey.currentState.validate()) {
