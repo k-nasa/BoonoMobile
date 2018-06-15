@@ -74,8 +74,47 @@ class AddSubscriptionForm extends StatelessWidget {
 }
 
 class SubscriptionListView extends StatelessWidget {
+  final SubscriptionItem subItem = SubscriptionItem();
+  List<SubscriptionItem> subItems;
+
   @override
   Widget build(BuildContext context) {
-    return Text('hoge1');
+    return FutureBuilder<List<SubscriptionItem>>(
+        future: subItem.all(),
+        builder: (context, snapshot) => Flexible(child: buildSubscriptionList(snapshot))
+    );
+  }
+
+  Widget buildSubscriptionList(AsyncSnapshot<List<SubscriptionItem>> snapshot) {
+    switch(snapshot.connectionState) {
+      case ConnectionState.none:
+      case ConnectionState.waiting:
+        return new CircularProgressIndicator();
+      default:
+        if(snapshot.hasError)
+          return ListView(
+            children: <Widget>[
+              Text("サーバーからの応答がないためリストを取得できません"),
+            ],
+          );
+
+        subItems = snapshot.data;
+        return ListView.builder(
+            itemBuilder: (BuildContext context, int index) => _createSubscription(index),
+            itemCount: subItems.length
+        );
+    }
+  }
+
+  Widget _createSubscription(int index) {
+    return new Column(
+      children: <Widget>[
+        new ListTile(
+          title: new Text(subItems[index].content),
+          subtitle: new Text(subItems[index].type),
+        ),
+        const Divider(height: 5.0,)
+      ],
+    );
   }
 }
