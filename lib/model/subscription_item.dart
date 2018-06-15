@@ -10,10 +10,6 @@ class SubscriptionItem {
 
   SubscriptionItem({this.content, this.type});
 
-  Map toHash() {
-    return {'content': this.content, 'type': this.type};
-  }
-
   Future<bool> save() async {
     DBManager db = new  DBManager();
     String userToken = await db.fetchUserToken();
