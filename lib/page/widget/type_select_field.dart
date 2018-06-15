@@ -3,11 +3,27 @@ import 'package:boono_mobile/bloc/description_bloc_provider.dart';
 import 'package:boono_mobile/bloc/description_bloc.dart';
 
 class TypeSelectField extends StatelessWidget{
-  String type;
 
   @override
   Widget build(BuildContext context) {
     final subscriptionBloc = SubscriptionBlocProvider.of(context);
+    return StreamBuilder<bool>(
+      stream: subscriptionBloc.showSelectField,
+      initialData: false,
+      builder: (_, snapshot){
+        if (snapshot.data == true ) return TypeSelectFieldContent();
+        else return Container();
+      },
+    );
+  }
+}
+
+class TypeSelectFieldContent extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final subscriptionBloc = SubscriptionBlocProvider.of(context);
+    String type;
+
     return StreamBuilder(
       stream: subscriptionBloc.typeString,
       initialData: 'TitleItem',
@@ -36,4 +52,5 @@ class TypeSelectField extends StatelessWidget{
       },
     );
   }
+
 }
