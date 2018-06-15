@@ -28,11 +28,26 @@ class AddSubscriptionForm extends StatelessWidget {
   final TextEditingController _controller = new TextEditingController();
   final FocusNode focusNode = new FocusNode();
 
+  Widget SimpleSnackBar(String content) {
+    return SnackBar(
+      content: Text(content),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    void _submit() {
-      if (_formKey.currentState.validate()) print('hoge');
+    SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
+
+    void _submit() async {
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+        _controller.clear();
+
+        if (await subscriptionBloc.subscriptionSave())
+          Scaffold.of(context).showSnackBar(SimpleSnackBar('作成しました'));
+        else
+          Scaffold.of(context).showSnackBar(SimpleSnackBar('作成に失敗しました'));
+      }
     }
 
     return new Form(
@@ -47,7 +62,7 @@ class AddSubscriptionForm extends StatelessWidget {
                 decoration: InputDecoration(hintText: '購読リスト追加',),
                 controller: _controller,
                 validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
-                //onSaved: (val) { _content = val; },
+                onSaved: (val) => subscriptionBloc.setContent.add(SetContent(val)),
                 onFieldSubmitted:(_) => _submit(),
               ),
             ),
