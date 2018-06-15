@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/subscription_item.dart';
 import 'package:boono_mobile/page/widget/type_select_field.dart';
+import 'package:boono_mobile/bloc/description_bloc.dart';
 import 'package:boono_mobile/bloc/description_bloc_provider.dart';
 
 class AddSubscriptionItemPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return DescriptionBlocProvider(
+    return SubscriptionBlocProvider(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,

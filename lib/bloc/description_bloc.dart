@@ -11,8 +11,7 @@ class SetContent {
   SetContent(this.content);
 }
 
-
-class DescriptionBloc{
+class SubscriptionBloc{
   String content;
   String type = 'TitleItem';
 
@@ -28,7 +27,8 @@ class DescriptionBloc{
   final BehaviorSubject<String> _content = BehaviorSubject<String>(seedValue: '');
   Stream<String> get contentString => _content.stream;
 
-  DescriptionBloc() {
+
+  SubscriptionBloc() {
     _typeChangeController.stream.listen(_typeChange);
     _setContentController.stream.listen(_setContent);
   }

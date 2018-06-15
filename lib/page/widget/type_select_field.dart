@@ -7,9 +7,9 @@ class TypeSelectField extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    final descriptionBloc = DescriptionBlocProvider.of(context);
+    final subscriptionBloc = SubscriptionBlocProvider.of(context);
     return StreamBuilder(
-      stream: descriptionBloc.typeString,
+      stream: subscriptionBloc.typeString,
       initialData: 'TitleItem',
       builder: (context, snapshot){
         type = snapshot.data;
@@ -21,13 +21,13 @@ class TypeSelectField extends StatelessWidget{
               IconButton(
                 tooltip: '本',
                 icon: Icon(Icons.book),
-                onPressed: () => descriptionBloc.typeChange.add(TypeChange('TitleItem')),
+                onPressed: () => subscriptionBloc.typeChange.add(TypeChange('TitleItem')),
                 color: type == 'TitleItem' ? Colors.blueAccent: Colors.black,
               ),
               IconButton(
                 tooltip: '作者',
                 icon: Icon(Icons.account_circle),
-                onPressed: () => descriptionBloc.typeChange.add(TypeChange('AuthorItem')),
+                onPressed: () => subscriptionBloc.typeChange.add(TypeChange('AuthorItem')),
                 color: type == 'AuthorItem' ? Colors.blueAccent: Colors.black,
               ),
             ],

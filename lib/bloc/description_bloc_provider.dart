@@ -3,14 +3,14 @@ import 'package:meta/meta.dart';
 import 'package:flutter/widgets.dart';
 import 'package:boono_mobile/bloc/description_bloc.dart';
 
-class DescriptionBlocProvider extends InheritedWidget {
-  final DescriptionBloc descriptionBloc;
+class SubscriptionBlocProvider extends InheritedWidget {
+  final SubscriptionBloc subscriptionBloc;
 
-  DescriptionBlocProvider({
+  SubscriptionBlocProvider({
     Key key,
-    DescriptionBloc descriptionBloc,
+    SubscriptionBloc subscriptionBloc,
     @required Widget child,
-  }) : descriptionBloc  = descriptionBloc ?? DescriptionBloc(),
+  }) : subscriptionBloc = subscriptionBloc ?? SubscriptionBloc(),
         super(key: key, child: child);
 
   @override
@@ -18,7 +18,7 @@ class DescriptionBlocProvider extends InheritedWidget {
     return true;
   }
 
-  static DescriptionBloc of(BuildContext context) =>
-      (context.inheritFromWidgetOfExactType(DescriptionBlocProvider) as DescriptionBlocProvider)
-          .descriptionBloc;
+  static SubscriptionBloc of(BuildContext context) =>
+      (context.inheritFromWidgetOfExactType(SubscriptionBlocProvider) as SubscriptionBlocProvider)
+          .subscriptionBloc;
 }
