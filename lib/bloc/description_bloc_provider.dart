@@ -1,3 +1,5 @@
+import 'package:meta/meta.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:boono_mobile/bloc/description_bloc.dart';
 
@@ -6,10 +8,10 @@ class DescriptionBlocProvider extends InheritedWidget {
 
   DescriptionBlocProvider({
     Key key,
-    Widget child,
     DescriptionBloc descriptionBloc,
-}) : descriptionBloc  = descriptionBloc ?? DescriptionBloc(),
-  super(key: key, child: child)
+    @required Widget child,
+  }) : descriptionBloc  = descriptionBloc ?? DescriptionBloc(),
+        super(key: key, child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
