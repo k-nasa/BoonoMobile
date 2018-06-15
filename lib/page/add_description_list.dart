@@ -25,9 +25,37 @@ class AddSubscriptionItemPage extends StatelessWidget{
 }
 
 class AddSubscriptionForm extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _controller = new TextEditingController();
+  final FocusNode focusNode = new FocusNode();
+
+
   @override
   Widget build(BuildContext context) {
-    return Text('hoge');
+    void _submit() {
+      if (_formKey.currentState.validate()) print('hoge');
+    }
+
+    return new Form(
+      key: _formKey,
+      child: new Padding(
+        padding: new EdgeInsets.all(10.0),
+        child: new Row(
+          children: <Widget>[
+            new Flexible(
+              child: new TextFormField(
+                focusNode: focusNode,
+                decoration: InputDecoration(hintText: '購読リスト追加',),
+                controller: _controller,
+                validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
+                //onSaved: (val) { _content = val; },
+                onFieldSubmitted:(_) => _submit(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
