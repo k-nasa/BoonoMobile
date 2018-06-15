@@ -1,118 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/subscription_item.dart';
 import 'package:boono_mobile/page/widget/type_select_field.dart';
+import 'package:boono_mobile/bloc/description_bloc.dart';
+import 'package:boono_mobile/bloc/description_bloc_provider.dart';
 
-class AddSubscriptionItemPage extends StatefulWidget {
-  @override
-  _AddSubscriptionItemPageState createState() => new _AddSubscriptionItemPageState();
-}
-
-class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
-
-  String _content;
-  String _type = 'TitleItem';
-  bool onCustomKeyboard = false;
-
-  List<SubscriptionItem> subItems;
-  final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
-  final TextEditingController _controller = new TextEditingController();
-  final FocusNode focusNode = new FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-    focusNode.addListener(listener);
-  }
-
-  void listener(){
-    if(focusNode.hasFocus){
-      setState(() {
-        onCustomKeyboard = true;
-      });
-    }
-    else
-      setState(() {
-        onCustomKeyboard = false;
-      });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  void saveSubscriptionItem() async{
-    final SubscriptionItem subscriptionItem = new SubscriptionItem(content: _content, type: _type);
-
-    if (await subscriptionItem.save()){
-      _controller.clear();
-      Scaffold.of(context).showSnackBar(simpleSnackBar('購読リストに追加しました'));
-    }
-    else
-      Scaffold.of(context).showSnackBar(simpleSnackBar('購読リストに追加に失敗しました'));
-
-    //rebuildのために追加
-    setState(() => null);
-  }
-
-
+class AddSubscriptionItemPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-
-    void _submit() {
-      if (_formKey.currentState.validate()) {
-        _formKey.currentState.save();
-        saveSubscriptionItem();
-      }
-    }
-
-    Widget addSubscriptionForm () {
-      return new Form(
-        key: _formKey,
-        child: new Padding(
-          padding: new EdgeInsets.all(10.0),
-          child: new Row(
-            children: <Widget>[
-              new Flexible(
-                child: new TextFormField(
-                  focusNode: focusNode,
-                  decoration: InputDecoration(hintText: '購読リスト追加',),
-                  controller: _controller,
-                  validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
-                  onSaved: (val) { _content = val; },
-                  onFieldSubmitted:(_) => _submit(),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    Widget subscriptionListPage() {
-      SubscriptionItem subItem = new SubscriptionItem();
-
-      return FutureBuilder<List<SubscriptionItem>>(
-          future: subItem.all(),
-          builder: (context, snapshot) => buildSubscriptionList(snapshot)
-      );
-    }
-
-    return new Container(
-      child: new Column(
+    return SubscriptionBlocProvider(
+      child: Column(
         children: <Widget>[
-          new Center(child: addSubscriptionForm(),),
-          subscriptionListPage(),
-          new Offstage(
-            offstage: !onCustomKeyboard,
-            child: new TypeSelectField(),
-          )
+          AddSubscriptionForm(),
+          SubscriptionListView(),
+          TypeSelectField(),
         ],
       ),
     );
   }
+}
 
+class AddSubscriptionForm extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _controller = new TextEditingController();
+  final FocusNode focusNode = new FocusNode();
 
+  Widget SimpleSnackBar(String content) {
+    return SnackBar(
+      content: Text(content),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
+
+    void listener(){
+      if(focusNode.hasFocus)
+        subscriptionBloc.showField.add(ShowSelectField(true));
+      else
+      subscriptionBloc.showField.add(ShowSelectField(false));
+    }
+
+    focusNode.addListener(listener);
+
+    void _submit() async {
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+        _controller.clear();
+
+        if (await subscriptionBloc.subscriptionSave())
+          Scaffold.of(context).showSnackBar(SimpleSnackBar('作成しました'));
+        else
+          Scaffold.of(context).showSnackBar(SimpleSnackBar('作成に失敗しました'));
+      }
+    }
+
+    return new Form(
+      key: _formKey,
+      child: new Padding(
+        padding: new EdgeInsets.all(10.0),
+        child: new Row(
+          children: <Widget>[
+            new Flexible(
+              child: new TextFormField(
+                focusNode: focusNode,
+                decoration: InputDecoration(hintText: '購読リスト追加',),
+                controller: _controller,
+                validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
+                onSaved: (val) => subscriptionBloc.setContent.add(SetContent(val)),
+                onFieldSubmitted:(_) => _submit(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SubscriptionListView extends StatelessWidget {
+  final SubscriptionItem subItem = SubscriptionItem();
+  List<SubscriptionItem> subItems;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<SubscriptionItem>>(
+        future: subItem.all(),
+        builder: (context, snapshot) => Flexible(child: buildSubscriptionList(snapshot))
+    );
+  }
 
   Widget buildSubscriptionList(AsyncSnapshot<List<SubscriptionItem>> snapshot) {
     switch(snapshot.connectionState) {
@@ -121,19 +97,18 @@ class _AddSubscriptionItemPageState extends State<AddSubscriptionItemPage> {
         return new CircularProgressIndicator();
       default:
         if(snapshot.hasError)
-          return new Text("サーバーからの応答がないためリストを取得できません");
+          return ListView(
+            children: <Widget>[
+              Text("サーバーからの応答がないためリストを取得できません"),
+            ],
+          );
+
         subItems = snapshot.data;
-        return new Flexible(
-          child: new ListView.builder(
-              itemBuilder: (BuildContext context, int index) => _createSubscription(index),
-              itemCount: subItems.length
-          ),
+        return ListView.builder(
+            itemBuilder: (BuildContext context, int index) => _createSubscription(index),
+            itemCount: subItems.length
         );
     }
-  }
-
-  Widget simpleSnackBar(String content) {
-    return new SnackBar(content: Text(content));
   }
 
   Widget _createSubscription(int index) {
