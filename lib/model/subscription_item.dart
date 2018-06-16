@@ -24,7 +24,7 @@ class SubscriptionItem {
         }
     ).catchError((Error e) => false );
 
-    if (res.statusCode == 200)
+    if (res.statusCode == 201)
       return true;
     else
       return false;
