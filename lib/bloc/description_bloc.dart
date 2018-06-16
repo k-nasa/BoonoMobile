@@ -43,7 +43,6 @@ class SubscriptionBloc{
   final BehaviorSubject<bool> _rebuildListView= BehaviorSubject<bool>(seedValue: true);
   Stream<bool> get rebuildListView => _rebuildListView.stream;
 
-
   SubscriptionBloc() {
     _typeChangeController.stream.listen(_typeChange);
     _setContentController.stream.listen(_setContent);
