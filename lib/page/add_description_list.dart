@@ -84,9 +84,21 @@ class SubscriptionListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
+
+    return StreamBuilder<bool>(
+      stream: subscriptionBloc.rebuildListView,
+      initialData: true,
+      builder: (_, snapshot) {
+        if(snapshot.data) return SubscriptionListViewContent();
+      },
+    );
+  }
+
+  Widget SubscriptionListViewContent(){
     return FutureBuilder<List<SubscriptionItem>>(
         future: subItem.all(),
-        builder: (context, snapshot) => Flexible(child: buildSubscriptionList(snapshot))
+        builder: (_, snapshot) => Flexible(child: buildSubscriptionList(snapshot))
     );
   }
 
