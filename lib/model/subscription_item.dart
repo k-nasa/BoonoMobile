@@ -22,9 +22,23 @@ class SubscriptionItem {
           'type': type,
           'token': userToken
         }
-    ).catchError((Error e) => null );
+    ).catchError((Error e) => false );
 
-    if (res.statusCode == 201)
+    if (res.statusCode == 200)
+      return true;
+    else
+      return false;
+  }
+
+  Future<bool> delete() async {
+    DBManager db = new  DBManager();
+
+    final res = await http.delete(
+        SubscriptionDeleteURL + '/$id',
+    ).catchError((Error e) => false);
+    print(res.body);
+
+    if (res.statusCode == 200)
       return true;
     else
       return false;
