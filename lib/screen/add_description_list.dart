@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/subscription_item.dart';
-import 'package:boono_mobile/page/widget/type_select_field.dart';
+import 'package:boono_mobile/screen//widget/type_select_field.dart';
 import 'package:boono_mobile/bloc/description_bloc.dart';
 import 'package:boono_mobile/bloc/description_bloc_provider.dart';
 

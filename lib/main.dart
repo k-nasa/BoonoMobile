@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:boono_mobile/config/conf.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:boono_mobile/page/widget/bottom_nav_bar.dart';
+import 'package:boono_mobile/screen/widget/bottom_nav_bar.dart';
 
 String token;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:boono_mobile/page/add_description_list.dart';
+import 'package:boono_mobile/screen//add_description_list.dart';
 
 class BottomNavigation extends StatefulWidget {
 
