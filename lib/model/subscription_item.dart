@@ -7,8 +7,9 @@ import 'dart:async';
 class SubscriptionItem {
   String content;
   String type;
+  int id;
 
-  SubscriptionItem({this.content, this.type});
+  SubscriptionItem({this.content, this.type, this.id});
 
   Future<bool> save() async {
     DBManager db = new  DBManager();
@@ -44,7 +45,8 @@ class SubscriptionItem {
       subItems.add(
           new SubscriptionItem(
               content: subItem['content'],
-              type: subItem['type']
+              type: subItem['type'],
+              id: subItem['id'],
           )
       );
     }
