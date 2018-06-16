@@ -32,6 +32,6 @@ class Config {
 
     print(res.statusCode);
     if(res.statusCode == 200)
-      dbManager.database.insert('config', { 'token': res.body });
+      await dbManager.database.insert('config', { 'token': res.body });
   }
 }
