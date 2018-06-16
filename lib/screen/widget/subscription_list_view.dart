@@ -42,21 +42,39 @@ class SubscriptionListView extends StatelessWidget {
 
         subItems = snapshot.data;
         return ListView.builder(
-            itemBuilder: (BuildContext context, int index) => _createSubscription(index),
+            itemBuilder: (BuildContext context, int index) => _createSubscription(context, index),
             itemCount: subItems.length
         );
     }
   }
 
-  Widget _createSubscription(int index) {
-    return new Column(
-      children: <Widget>[
-        new ListTile(
-          title: new Text(subItems[index].content),
-          subtitle: new Text(subItems[index].type),
-        ),
-        const Divider(height: 5.0,)
-      ],
+  Widget _createSubscription(BuildContext context, int index) {
+    GlobalKey key = GlobalKey();
+
+    return Dismissible(
+      key: key,
+      background: new Container(
+          color: Colors.red,
+          child: const ListTile(
+              leading: const Icon(Icons.delete, color: Colors.white),
+          ),
+      ),
+      onDismissed: (_) async{
+        if(await subItems[index].delete())
+          Scaffold.of(context).showSnackBar(SnackBar(content: new Text("削除しました")));
+        else {
+          Scaffold.of(context).showSnackBar(SnackBar(content: new Text('削除に失敗しました')));
+        }
+      },
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: Text(subItems[index].content),
+            subtitle: Text(subItems[index].type),
+          ),
+          const Divider(height: 5.0,)
+        ],
+      ),
     );
   }
 }
