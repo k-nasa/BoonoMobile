@@ -22,29 +22,29 @@ class TypeSelectFieldContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final subscriptionBloc = SubscriptionBlocProvider.of(context);
-    String type;
 
     return StreamBuilder(
       stream: subscriptionBloc.typeString,
       initialData: 'TitleItem',
       builder: (context, snapshot){
-        type = snapshot.data;
+        final String type = snapshot.data;
+
+        Color titleColor = type == 'TitleItem' ? Colors.blueAccent: Colors.black;
+        Color authorColor = type == 'AuthorItem' ? Colors.blueAccent: Colors.black;
+
         return Container(
+          color: Colors.blueGrey[50],
           child: Row(
             children: <Widget>[
               Text('リストのタイプを選択'),
               Padding(padding: EdgeInsets.all(10.0),),
-              IconButton(
-                tooltip: '本',
-                icon: Icon(Icons.book),
+              FlatButton(
+                child: Text('タイトル', style: TextStyle(color: titleColor)),
                 onPressed: () => subscriptionBloc.typeChange.add(TypeChange('TitleItem')),
-                color: type == 'TitleItem' ? Colors.blueAccent: Colors.black,
               ),
-              IconButton(
-                tooltip: '作者',
-                icon: Icon(Icons.account_circle),
+              FlatButton(
+                child: Text('作者', style: TextStyle(color: authorColor),),
                 onPressed: () => subscriptionBloc.typeChange.add(TypeChange('AuthorItem')),
-                color: type == 'AuthorItem' ? Colors.blueAccent: Colors.black,
               ),
             ],
           ),
