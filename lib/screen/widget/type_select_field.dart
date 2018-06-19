@@ -39,11 +39,21 @@ class TypeSelectFieldContent extends StatelessWidget {
               Text('リストのタイプを選択'),
               Padding(padding: EdgeInsets.all(10.0),),
               FlatButton(
-                child: Text('タイトル', style: TextStyle(color: titleColor)),
+                    child: new Column(
+                      children: <Widget>[
+                        Icon(Icons.library_add, color: titleColor,),
+                        Text('タイトル', style: TextStyle(color: titleColor)),
+                      ],
+                    ),
                 onPressed: () => subscriptionBloc.typeChange.add(TypeChange('TitleItem')),
               ),
               FlatButton(
-                child: Text('作者', style: TextStyle(color: authorColor),),
+                child: new Column(
+                  children: <Widget>[
+                    Icon(Icons.person_add, color: authorColor,),
+                    Text('作者', style: TextStyle(color: authorColor),),
+                  ],
+                ),
                 onPressed: () => subscriptionBloc.typeChange.add(TypeChange('AuthorItem')),
               ),
             ],
