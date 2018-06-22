@@ -6,6 +6,7 @@ dependencies:
   http: any
   rxdart: any
   path_provider: any
+  firebase_messaging: any
   flutter:
     sdk: flutter
 

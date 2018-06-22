@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>328405289118-0opslgku6jsqivhru2jmtkao75j9b2b8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.328405289118-0opslgku6jsqivhru2jmtkao75j9b2b8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAxIPCpP_yz_3amO9Fp5RCDGtY--l9bMy4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>328405289118</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.k-nasa.boonoMobile</string>
+	<key>PROJECT_ID</key>
+	<string>boonomobile</string>
+	<key>STORAGE_BUCKET</key>
+	<string>boonomobile.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:328405289118:ios:7995238bffd8e626</string>
+	<key>DATABASE_URL</key>
+	<string>https://boonomobile.firebaseio.com</string>
+</dict>
+</plist>
