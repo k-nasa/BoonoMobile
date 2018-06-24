@@ -3,19 +3,20 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:boono_mobile/config/db_manager.dart';
 import 'package:boono_mobile/route/api_routes.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class Config {
   final DBManager dbManager = new DBManager();
   String token;
 
   //アプリを開いたときにcall
-  void init() async {
+  Future<bool>init() async {
     await dbManager.openDB();
-    
+
     if (await setToken() == null) {
       await generateToken();
     }
-    setToken();
+    return setToken() != null;
   }
 
   Future<String> setToken() async {
