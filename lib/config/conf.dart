@@ -31,8 +31,30 @@ class Config {
   void generateToken() async {
     final http.Response res = await http.post(UserCreateURL);
 
-    print(res.statusCode);
-    if(res.statusCode == 200)
-      await dbManager.database.insert('config', { 'token': res.body });
+    if(res.statusCode == 200) {
+      await dbManager.database.insert('config', { 'token': res.body});
+      await putDeviceToken();
+    }
+  }
+
+  void putDeviceToken() async {
+    DBManager db = new DBManager();
+    String userToken = await db.fetchUserToken();
+
+    FirebaseMessaging _fm = new FirebaseMessaging();
+    _fm.configure();
+
+    _fm.getToken().then((token) async{
+      print(token);
+      print(userToken);
+      final http.Response res = await http.patch(
+        UserUpdateURL,
+        body: {
+          'token': userToken,
+          'device_token': token,
+        }
+      );
+      print(res.body);
+    });
   }
 }
