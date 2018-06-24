@@ -8,14 +8,11 @@ String token;
 
 void main() async {
   Config config = new Config();
-  await config.init();
-  token = config.token;
-  print(token);
 
-  if(token == null)
-    runApp(new ErrorPage());
-  else
+  if(await config.init())
     runApp(new App());
+  else
+    runApp(new ErrorPage());
 }
 
 class App extends StatelessWidget {
