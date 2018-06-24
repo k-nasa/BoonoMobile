@@ -33,10 +33,9 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: new Center(child: new Text('サーバーとの通信でエラーが起きました'),),
+      home: new Center(
+        child: Text('エラーが出ています。アプリを再起動してから開いてみてください'),
+      )
     );
   }
 
