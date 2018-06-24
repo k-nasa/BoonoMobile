@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:boono_mobile/screen//add_description_list.dart';
+import 'package:boono_mobile/screen/notify_book_list_view.dart';
 
 class BottomNavigation extends StatefulWidget {
 
@@ -59,7 +60,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
   List<Widget> pages (){
     return [
-      new Text('first'),
+      new NotifyBookListViewScreen(),
       new AddSubscriptionItemPage(),
       new Text('third'),
     ];
