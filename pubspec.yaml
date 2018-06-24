@@ -6,7 +6,7 @@ dependencies:
   http: any
   rxdart: any
   path_provider: any
-  firebase_messaging: any
+  firebase_messaging: 1.0.3
   flutter:
     sdk: flutter
 
