@@ -36,8 +36,10 @@ class TypeSelectFieldContent extends StatelessWidget {
           color: Colors.blueGrey[50],
           child: Row(
             children: <Widget>[
-              Text('リストのタイプを選択'),
-              Padding(padding: EdgeInsets.all(10.0),),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text('リストのタイプを選択')
+                ,),
               FlatButton(
                     child: new Column(
                       children: <Widget>[
