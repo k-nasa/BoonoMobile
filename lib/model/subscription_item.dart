@@ -31,8 +31,6 @@ class SubscriptionItem {
   }
 
   Future<bool> delete() async {
-    DBManager db = new  DBManager();
-
     final res = await http.delete(
         SubscriptionDeleteURL + '/$id',
     ).catchError((Error e) => false);
