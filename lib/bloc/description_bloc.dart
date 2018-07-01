@@ -41,6 +41,7 @@ class SubscriptionBloc{
   Stream<String> get contentString => _content.stream;
 
   final BehaviorSubject<bool> _rebuildListView= BehaviorSubject<bool>(seedValue: true);
+  Sink<bool> get rebuild => _rebuildListView.sink;
   Stream<bool> get rebuildListView => _rebuildListView.stream;
 
   SubscriptionBloc() {
