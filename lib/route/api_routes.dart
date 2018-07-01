@@ -1,4 +1,4 @@
-const String API_URL = 'http://b5d897ee.ngrok.io';
+const String API_URL = 'https://boono.herokuapp.com';
 
 const String UserCreateURL = API_URL + '/users';
 const String UserUpdateURL = API_URL + '/users';

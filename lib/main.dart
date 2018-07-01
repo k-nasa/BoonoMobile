@@ -33,6 +33,7 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Flutter Demo',
+      theme: ThemeData(primaryColor: Colors.blue),
       home: new Center(
         child: Text('エラーが出ています。アプリを再起動してから開いてみてください'),
       )
