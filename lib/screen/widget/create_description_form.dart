@@ -40,14 +40,22 @@ class AddSubscriptionForm extends StatelessWidget {
 
     return new Form(
       key: _formKey,
-      child: new Padding(
+      child: Container(
         padding: new EdgeInsets.all(10.0),
         child: new Row(
           children: <Widget>[
             new Flexible(
               child: new TextFormField(
                 focusNode: focusNode,
-                decoration: InputDecoration(hintText: '購読リスト追加',),
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  labelText: '購読リストに追加',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(color: Colors.indigo)
+                  ),
+                ),
                 controller: _controller,
                 validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
                 onSaved: (val) => subscriptionBloc.setContent.add(SetContent(val)),
