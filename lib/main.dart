@@ -20,7 +20,8 @@ class App extends StatelessWidget {
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
+        backgroundColor: Colors.grey[1000]
       ),
       home: new BottomNavigation(),
     );
