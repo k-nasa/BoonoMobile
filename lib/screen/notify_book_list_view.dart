@@ -57,7 +57,7 @@ class NotifyBookListView extends StatelessWidget {
             backgroundImage: NetworkImage(imageUrl),
           ),
           title: Text(title),
-          subtitle: Text('$author\n $publishDate'),
+          subtitle: Text('$author\n$publishDate'),
           //trailing: Text(publishDate),
         ),
       ),
