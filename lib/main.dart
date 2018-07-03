@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:boono_mobile/config/conf.dart';
 
 import 'package:boono_mobile/screen/widget/bottom_nav_bar.dart';
+import 'screen/styles/mainStyle.dart';
 
 String token;
 
@@ -19,10 +20,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.orange,
-        backgroundColor: Colors.grey[1000]
-      ),
+      theme: themeDate,
       home: new BottomNavigation(),
     );
   }
