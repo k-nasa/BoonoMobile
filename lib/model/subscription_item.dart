@@ -12,22 +12,27 @@ class SubscriptionItem {
   SubscriptionItem({this.content, this.type, this.id});
 
   Future<bool> save() async {
-    DBManager db = new  DBManager();
+    DBManager db = new DBManager();
     String userToken = await db.fetchUserToken();
 
-    final res = await http.post(
-        SubscriptionCreateURL,
-        body: {
-          'content': content,
-          'type': type,
-          'token': userToken
-        }
-    ).catchError((Error e) => false );
+    try {
+      final res = await http.post(
+          SubscriptionCreateURL,
+          body: {
+            'content': content,
+            'type': type,
+            'token': userToken,
+          }
+      );
 
-    if (res.statusCode == 201)
-      return true;
-    else
+      if (res.statusCode == 201)
+        return true;
+      else
+        return false;
+    } catch (e) {
+      print(e);
       return false;
+    }
   }
 
   Future<bool> delete() async {
