@@ -48,13 +48,8 @@ class AddSubscriptionForm extends StatelessWidget {
               child: new TextFormField(
                 focusNode: focusNode,
                 decoration: InputDecoration(
-                  fillColor: Colors.white,
                   filled: true,
                   labelText: '購読リストに追加',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                    borderSide: BorderSide(color: Colors.indigo)
-                  ),
                 ),
                 controller: _controller,
                 validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
