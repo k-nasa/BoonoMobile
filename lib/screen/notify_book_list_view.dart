@@ -45,15 +45,22 @@ class NotifyBookListView extends StatelessWidget {
     String publishDate = snapshot.data[index].publish_date;
     String imageUrl = snapshot.data[index].image_url;
 
-    return Column(
-      children: <Widget>[
-        ListTile(
-          title: Text(snapshot.data[index].title),
-          subtitle: Text(snapshot.data[index].author),
-          onTap: () => Scaffold.of(context).showSnackBar(snackbar),
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30.0),
         ),
-        const Divider(height: 5.0,)
-      ],
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(imageUrl),
+          ),
+          title: Text(title),
+          subtitle: Text('$author\n $publishDate'),
+          //trailing: Text(publishDate),
+        ),
+      ),
     );
   }
 }
