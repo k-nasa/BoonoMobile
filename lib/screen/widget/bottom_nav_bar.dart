@@ -27,13 +27,13 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       new NavigationIconView(
         icon: const Icon(Icons.add),
         title: 'リスト追加',
-        color: Colors.indigo,
+        color: Colors.teal,
         vsync: this,
       ),
       new NavigationIconView(
         icon: const Icon(Icons.unarchive),
         title: '設定',
-        color: Colors.pink,
+        color: Colors.teal,
         vsync: this,
       )
     ];
