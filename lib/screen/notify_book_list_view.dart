@@ -40,7 +40,10 @@ class NotifyBookListView extends StatelessWidget {
   }
 
   Widget _createNotifyBook(BuildContext context, int index,AsyncSnapshot snapshot){
-    Widget snackbar = SnackBar(content: Text('hoge'),);
+    String title = snapshot.data[index].title;
+    String author = snapshot.data[index].author;
+    String publishDate = snapshot.data[index].publish_date;
+    String imageUrl = snapshot.data[index].image_url;
 
     return Column(
       children: <Widget>[
