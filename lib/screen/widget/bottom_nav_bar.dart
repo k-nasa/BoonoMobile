@@ -12,6 +12,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> with TickerProviderStateMixin {
   int _currentIndex = 0;
   BottomNavigationBarType _type = BottomNavigationBarType.shifting;
+  final Color navColor = Colors.teal;
   List<NavigationIconView> _navigationViews;
   List<Widget> _pages;
   @override
@@ -21,19 +22,19 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       new NavigationIconView(
         icon: const Icon(Icons.notifications),
         title: 'タイムライン',
-        color: Colors.teal,
+        color: navColor,
         vsync: this,
       ),
       new NavigationIconView(
         icon: const Icon(Icons.add),
         title: 'リスト追加',
-        color: Colors.teal,
+        color: navColor,
         vsync: this,
       ),
       new NavigationIconView(
         icon: const Icon(Icons.unarchive),
         title: '設定',
-        color: Colors.teal,
+        color: navColor,
         vsync: this,
       )
     ];
