@@ -47,7 +47,7 @@ class SubscriptionItem {
       return false;
   }
 
-  Future<List<SubscriptionItem>> all() async{
+  static Future<List<SubscriptionItem>> all() async{
     DBManager db = new DBManager();
     String userToken = await db.fetchUserToken();
 

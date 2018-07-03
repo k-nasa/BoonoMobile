@@ -23,7 +23,7 @@ class SubscriptionListView extends StatelessWidget {
 
   Widget SubscriptionListViewContent(){
     return FutureBuilder<List<SubscriptionItem>>(
-        future: subItem.all(),
+        future: SubscriptionItem.all(),
         builder: (_, snapshot) => Flexible(child: buildSubscriptionList(snapshot))
     );
   }
