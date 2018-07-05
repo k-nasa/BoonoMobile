@@ -89,10 +89,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     return Scaffold(
       appBar: AppBar(title: Text('Boono'),),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 25.0),
-        child: _pages[_currentIndex],
-      ),
+      body: _pages[_currentIndex],
       bottomNavigationBar: botNavBar,
     );
   }
