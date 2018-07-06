@@ -9,9 +9,21 @@ class SubscriptionItem {
   String type;
   int id;
 
+  static const String TABLE_NAME = 'subscription_items';
+
   SubscriptionItem({this.content, this.type, this.id});
 
   Future<bool> save() async {
+    DBManager db = new DBManager();
+    await db.openDB();
+    print(_toMap());
+    try {
+      id = await db.database.insert(TABLE_NAME, _toMap());
+    }catch(e) {
+      return false;
+    }
+
+    return true;
   }
 
   Future<bool> delete() async {
