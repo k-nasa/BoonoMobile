@@ -19,4 +19,10 @@ class SubscriptionItem {
 
   static Future<List<SubscriptionItem>> all() async{
   }
+
+  Map _toMap() =>
+      <String, dynamic>{
+        'type': type,
+        'content': content,
+      };
 }
