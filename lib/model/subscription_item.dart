@@ -26,9 +26,6 @@ class SubscriptionItem {
     return true;
   }
 
-  Future<bool> delete() async {
-  }
-
   static Future<List<SubscriptionItem>> all() async{
     DBManager db = new DBManager();
     await db.openDB();
@@ -42,6 +39,15 @@ class SubscriptionItem {
 
     return subItems;
   }
+
+  Future<bool> delete() async {
+    DBManager db = new DBManager();
+    await db.openDB();
+
+    int count = await db.database.delete(TABLE_NAME, where: 'id= ?', whereArgs: <int>[id]);
+    return count == 1;
+  }
+
 
   Map _toMap() =>
       <String, dynamic>{
