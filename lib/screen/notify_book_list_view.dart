@@ -54,6 +54,7 @@ class NotifyBookListView extends StatelessWidget {
         ),
         child: ListTile(
           leading: CircleAvatar(
+            radius: 35.0,
             backgroundImage: NetworkImage(imageUrl),
           ),
           title: Text(title),
