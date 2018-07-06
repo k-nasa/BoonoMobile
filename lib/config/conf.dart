@@ -32,7 +32,7 @@ class Config {
     final http.Response res = await http.post(UserCreateURL);
 
     if(res.statusCode == 200) {
-      await dbManager.database.insert('config', { 'token': res.body});
+      await dbManager.database.insert('config', <String, dynamic>{ 'token': res.body });
       await putDeviceToken();
     }
   }
