@@ -55,6 +55,28 @@ class SubItemTask {
     }
   }
 
+  void delete() async {
+    DBManager db = new DBManager();
+    await db.openDB();
+
+    await db.database.delete(TABLE_NAME, where: 'sub_id= ?', whereArgs: <int>[sub_id]);
+    print('タスク完了しました');
+  }
+
+  static Future<List<SubItemTask>> all() async{
+    DBManager db = new DBManager();
+    await db.openDB();
+
+    final List<Map> maps =  await db.database.rawQuery("select * from $TABLE_NAME");
+    if (maps.isEmpty) return null;
+    List<SubItemTask> tasks = [];
+
+    for(var task in maps)
+      tasks.add(SubItemTask.fromMap(task));
+
+    return tasks;
+  }
+
   Map<String, dynamic> _toMap() =>
       <String, dynamic> {
         'http_method': http_method,
