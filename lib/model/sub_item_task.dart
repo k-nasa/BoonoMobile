@@ -33,11 +33,17 @@ class SubItemTask {
   Future<bool> exe() async {
     final db = new DBManager();
     String userToken = await db.fetchUserToken();
+    SubscriptionItem subItem = await SubscriptionItem.find(sub_id);
+
+    Map requestBody = <String,dynamic>{ 'token': userToken }..addAll(subItem.toMap());
 
     try {
       final res = await http.post(
           url,
+          body: requestBody
       );
+
+      print(res.body);
 
       if (res.statusCode == 201)
         return true;
