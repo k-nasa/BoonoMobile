@@ -22,6 +22,7 @@ class SubItemTask {
 
   static void execute() async {
     List<SubItemTask> tasks = await all();
+    if(tasks == null) return;
 
     for(SubItemTask task in tasks){
       if(await task.exe()){
