@@ -14,10 +14,11 @@ class DBManager {
 
     Directory directory = await getApplicationDocumentsDirectory();
     database = await openDatabase(
-        join(directory.path, 'Bfisngoiwovneifjvode.db'), //path
+        join(directory.path, 'Bfisngoiovneifjvode.db'), //path
         version: 1,
         onCreate: (Database db, int version) async {
           createConfigTable(db);
+          createSubscriptionItemsTable(db);
           createSubItemTasksTable(db);
         }
     );
@@ -31,6 +32,22 @@ class DBManager {
       '''create table $TABLE_NAME(
         $TOKEN text not null)'''
     );
+  }
+
+  void createSubscriptionItemsTable(Database db){
+    const String TABLE_NAME = 'subscription_items';
+    const String ID = 'id';
+    const String TYPE = 'type';
+    const String CONTENT = 'content';
+
+    db.execute(
+        '''
+        create table $TABLE_NAME(
+        $ID integer PRIMARY KEY AUTOINCREMENT,
+        $TYPE string not null,
+        $CONTENT text not null
+        )
+    ''');
   }
 
   void createSubItemTasksTable(Database db) {
