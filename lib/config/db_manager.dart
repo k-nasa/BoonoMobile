@@ -55,14 +55,12 @@ class DBManager {
     const String HTTP_METHOD = 'http_method';
     const String URL = 'url';
     const String SUB_ID = 'sub_id';
-    const String FLAG = 'flag';
 
     db.execute(
         '''create table $TABLE_NAME(
-        $HTTP_METHOD string not null,
+        $HTTP_METHOD string,
         $URL text not null,
-        $SUB_ID integer not null,
-        $FLAG boolean
+        $SUB_ID integer not null
         )'''
     );
   }
