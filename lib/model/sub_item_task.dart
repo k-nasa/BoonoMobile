@@ -8,7 +8,7 @@ class SubItemTask {
   String url;
   int sub_id;
 
-  SubItemTask({this.url, this.sub_id});
+  SubItemTask({this.http_method, this.url, this.sub_id});
 
   static const String TABLE_NAME = 'subscription_item_tasks';
 
@@ -86,6 +86,27 @@ class SubItemTask {
 
   SubItemTask.fromMap(Map map) {
     sub_id = map['sub_id'];
+    http_method = map['http_method'];
     url = map['url'];
+  }
+
+  Future<http.Response> g_http_request() async {
+    final db = new DBManager();
+    String userToken = await db.fetchUserToken();
+
+    switch(http_method){
+      case 'post':
+        SubscriptionItem subItem = await SubscriptionItem.find(sub_id);
+
+        Map request_body = <String,dynamic>{ 'token': userToken }
+        ..addAll(subItem.toMap())
+        ..addAll(<String,String>{'sub_id': sub_id.toString()});
+
+        print(request_body);
+
+        return http.post(url, body: request_body);
+      case 'delete':
+        return http.delete('$url/$userToken/${sub_id.toString()}');
+    }
   }
 }

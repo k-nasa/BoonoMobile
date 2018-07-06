@@ -18,7 +18,7 @@ class SubscriptionItem {
     try {
       id = await db.database.insert(TABLE_NAME, toMap());
 
-     var task = new SubItemTask(sub_id: id, url: SubscriptionCreateURL);
+     var task = new SubItemTask(http_method: 'post',sub_id: id, url: SubscriptionCreateURL);
      task.save();
      SubItemTask.execute();
     }catch(e) {
