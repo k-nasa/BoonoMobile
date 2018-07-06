@@ -1,12 +1,14 @@
 import 'package:boono_mobile/config/db_manager.dart';
+import 'package:boono_mobile/model/subscription_item.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class SubItemTask {
   String http_method;
   String url;
-  int model_id;
-  bool flag = false;
+  int sub_id;
+
+  SubItemTask({this.url, this.sub_id});
 
   static const String TABLE_NAME = 'subscription_item_tasks';
 
