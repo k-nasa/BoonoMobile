@@ -42,11 +42,9 @@ class _CustomListTileState extends State<CustomListTile> {
     SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
 
     void deleteSubItem () async {
-      if (await subItem.delete())
-        Scaffold.of(context).showSnackBar(SnackBar(content: new Text("削除しました")));
-      else {
+      if(!await subItem.delete())
         Scaffold.of(context).showSnackBar(SnackBar(content: new Text('削除に失敗しました')));
-      }
+
       subscriptionBloc.rebuild.add(true);
     }
 
