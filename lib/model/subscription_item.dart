@@ -1,8 +1,7 @@
 import 'package:boono_mobile/route/api_routes.dart';
-import 'package:http/http.dart'as http ;
 import 'package:boono_mobile/config/db_manager.dart';
-import 'dart:convert';
 import 'dart:async';
+import 'sub_item_task.dart';
 
 class SubscriptionItem {
   String content;
@@ -16,9 +15,12 @@ class SubscriptionItem {
   Future<bool> save() async {
     DBManager db = new DBManager();
     await db.openDB();
-    print(_toMap());
     try {
-      id = await db.database.insert(TABLE_NAME, _toMap());
+      id = await db.database.insert(TABLE_NAME, toMap());
+
+     var task = new SubItemTask(sub_id: id, url: SubscriptionCreateURL);
+     task.save();
+     SubItemTask.execute();
     }catch(e) {
       return false;
     }
