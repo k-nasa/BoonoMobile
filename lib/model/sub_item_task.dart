@@ -81,7 +81,11 @@ class SubItemTask {
       <String, dynamic> {
         'http_method': http_method,
         'url': url,
-        'model_id': model_id,
-        'flag': flag,
+        'sub_id': sub_id,
       };
+
+  SubItemTask.fromMap(Map map) {
+    sub_id = map['sub_id'];
+    url = map['url'];
+  }
 }
