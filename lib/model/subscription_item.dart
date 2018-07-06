@@ -30,6 +30,17 @@ class SubscriptionItem {
   }
 
   static Future<List<SubscriptionItem>> all() async{
+    DBManager db = new DBManager();
+    await db.openDB();
+
+    final List<Map> subItemsMap =  await db.database.rawQuery("select * from $TABLE_NAME");
+    if (subItemsMap.isEmpty) return null;
+    List<SubscriptionItem> subItems = [];
+
+    for(var subItemMap in subItemsMap)
+      subItems.add(SubscriptionItem.fromMap(subItemMap));
+
+    return subItems;
   }
 
   Map _toMap() =>
@@ -37,4 +48,10 @@ class SubscriptionItem {
         'type': type,
         'content': content,
       };
+
+  SubscriptionItem.fromMap(Map map) {
+    id = map['id'];
+    content = map['content'];
+    type = map['type'];
+  }
 }
