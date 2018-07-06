@@ -17,6 +17,17 @@ class SubItemTask {
     await db.openDB();
 
     await db.database.insert(TABLE_NAME, _toMap());
+    print('作成しました！！');
+  }
+
+  static void execute() async {
+    List<SubItemTask> tasks = await all();
+
+    for(SubItemTask task in tasks){
+      if(await task.exe()){
+        await task.delete();
+      }
+    }
   }
 
   Future<bool> exe() async {
