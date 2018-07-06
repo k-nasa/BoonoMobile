@@ -62,4 +62,15 @@ class SubscriptionItem {
     content = map['content'];
     type = map['type'];
   }
+
+  static Future<SubscriptionItem> find(int id) async{
+    DBManager db = new DBManager();
+    await db.openDB();
+
+    List<Map> maps = await db.database.query(TABLE_NAME,
+        where: "id = ?",
+        whereArgs: <int>[id]
+    );
+    return SubscriptionItem.fromMap(maps.first);
+  }
 }
