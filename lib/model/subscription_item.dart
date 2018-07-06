@@ -51,7 +51,7 @@ class SubscriptionItem {
   }
 
 
-  Map _toMap() =>
+  Map toMap() =>
       <String, dynamic>{
         'type': type,
         'content': content,
