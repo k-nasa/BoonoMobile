@@ -62,7 +62,7 @@ class DBManager {
         $HTTP_METHOD string not null,
         $URL text not null,
         $SUB_ID integer not null,
-        $FLAG boolean not null 
+        $FLAG boolean
         )'''
     );
   }
