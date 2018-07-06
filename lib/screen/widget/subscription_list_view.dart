@@ -22,13 +22,13 @@ class SubscriptionListView extends StatelessWidget {
   }
 
   Widget SubscriptionListViewContent(){
-    return FutureBuilder<List<SubscriptionItem>>(
+    return FutureBuilder(
         future: SubscriptionItem.all(),
         builder: (_, snapshot) => Flexible(child: buildSubscriptionList(snapshot))
     );
   }
 
-  Widget buildSubscriptionList(AsyncSnapshot<List<SubscriptionItem>> snapshot) {
+  Widget buildSubscriptionList(AsyncSnapshot snapshot) {
     switch(snapshot.connectionState) {
       case ConnectionState.none:
       case ConnectionState.waiting:
@@ -41,10 +41,21 @@ class SubscriptionListView extends StatelessWidget {
             ],
           );
 
+        if(snapshot.data == null){
+          return ListView(
+            children: <Widget>[
+              Text(
+                  '''まだ購読リストに登録されていません。
+                  \n購読したい本を登録して、新着本情報を受け取りましょう'''
+              )
+            ],
+          );
+        }
+
         subItems = snapshot.data;
         return ListView.builder(
             itemBuilder: (BuildContext context, int index) => _createSubscription(context, index),
-            itemCount: subItems.length
+            itemCount: subItems?.length
         );
     }
   }
