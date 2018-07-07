@@ -86,8 +86,10 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       },
     );
 
+    Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
+
     return Scaffold(
-      appBar: AppBar(title: Text('Boono'),),
+      appBar: appBar,
       backgroundColor: Theme.of(context).backgroundColor,
       body: _pages[_currentIndex],
       bottomNavigationBar: botNavBar,
