@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/notify_book.dart';
+import 'package:boono_mobile/bloc/notify_book_bloc.dart';
 
 class NotifyBookListViewScreen extends StatelessWidget {
   @override
@@ -11,12 +12,22 @@ class NotifyBookListViewScreen extends StatelessWidget {
 }
 
 class NotifyBookListView extends StatelessWidget {
+  NotifyBookBloc notifyBookBloc = NotifyBookBloc();
   @override
   Widget build(BuildContext context) {
     NotifyBook.all();
-    return FutureBuilder(
-      future: NotifyBook.all(),
-      builder: (_, snapshot) => buildNotifyBookList(snapshot),
+    return StreamBuilder<bool>(
+      stream: notifyBookBloc.isRebuildListView,
+      builder: (context, snapshot) => RefreshIndicator(
+        onRefresh: () async {
+          notifyBookBloc.rebuildListView.add(true);
+          return null;
+        },
+        child: FutureBuilder(
+          future: NotifyBook.all(),
+          builder: (_, snapshot) => buildNotifyBookList(snapshot),
+        ),
+      ),
     );
   }
 
