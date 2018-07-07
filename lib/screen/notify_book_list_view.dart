@@ -44,8 +44,11 @@ class NotifyBookListView extends StatelessWidget {
     String author = snapshot.data[index].author;
     String publishDate = snapshot.data[index].publish_date;
     String imageUrl = snapshot.data[index].image_url;
+    int notifyBookId = snapshot.data[index].id;
 
-    return Container(
+    NotifyBook notifyBook = new NotifyBook(id: notifyBookId);
+
+    Widget conteiner = Container(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
@@ -54,14 +57,32 @@ class NotifyBookListView extends StatelessWidget {
         ),
         child: ListTile(
           leading: CircleAvatar(
-            radius: 35.0,
             backgroundImage: NetworkImage(imageUrl),
           ),
           title: Text(title),
           subtitle: Text('$author\n$publishDate'),
+          onTap: () => print('TAP'),
           //trailing: Text(publishDate),
         ),
       ),
+    );
+
+    GlobalKey key = GlobalKey();
+
+    return Dismissible(
+      key: key,
+      direction: DismissDirection.endToStart,
+      background: new Container(
+        color: Colors.red,
+        child: const ListTile(
+          trailing: const Icon(Icons.delete, color: Colors.white),
+        ),
+      ),
+      onDismissed: (_) async{
+        if(!await notifyBook.delete())
+          Scaffold.of(context).showSnackBar(const SnackBar(content: Text('削除に失敗しました')));
+      },
+      child: conteiner
     );
   }
 }
