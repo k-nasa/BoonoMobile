@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 
 final themeDate = new ThemeData(
   primarySwatch: Colors.teal,
-  secondaryHeaderColor: Colors.orange[200],
   backgroundColor: Colors.brown[50],
   accentColor: Colors.orangeAccent,
-  bottomAppBarColor: Colors.teal,
   fontFamily: 'Raleway',
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     body1: TextStyle(color: CustomColors.textColor),
     body2: TextStyle(color: CustomColors.textColor),
     display1: TextStyle(color: CustomColors.textColor),
