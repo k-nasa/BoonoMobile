@@ -5,8 +5,6 @@ import 'package:boono_mobile/screen/widget/bottom_nav_bar.dart';
 import 'screen/styles/mainStyle.dart';
 import 'package:boono_mobile/model/sub_item_task.dart';
 
-String token;
-
 void main() async {
   Config config = new Config();
 
