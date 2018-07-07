@@ -35,7 +35,18 @@ class NotifyBook {
         )
       );
     }
-
     return nBooks;
+  }
+
+  Future<bool> delete() async {
+    final http.Response res = await http.delete(
+      NotifyBookURL + '/$id',
+    );
+
+    print(res.body);
+    if(res?.statusCode == 200)
+      return true;
+
+    return false;
   }
 }
