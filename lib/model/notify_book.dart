@@ -27,11 +27,11 @@ class NotifyBook {
     for(var nBook in jsonArray) {
       nBooks.add(
         new NotifyBook(
-          id: nBook['id'],
-          title:  nBook['title'],
-          author: nBook['author'],
-          image_url: nBook['image_url'],
-          publish_date: nBook['publish_date'],
+          id: nBook['notify_book']['id'],
+          title:  nBook['book']['title'],
+          author: nBook['book']['author'],
+          image_url: nBook['book']['image_url'],
+          publish_date: nBook['book']['publish_date'],
         )
       );
     }
