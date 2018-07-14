@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/subscription_item.dart';
 import 'package:boono_mobile/bloc/description_bloc_provider.dart';
 import 'package:boono_mobile/bloc/description_bloc.dart';
-import 'custom_list_tile.dart';
+import 'package:boono_mobile/screen/widget/add_description_list/custom_list_tile.dart';
 
 class SubscriptionListView extends StatelessWidget {
   final SubscriptionItem subItem = SubscriptionItem();
