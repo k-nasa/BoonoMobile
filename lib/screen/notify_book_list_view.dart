@@ -51,13 +51,7 @@ class NotifyBookListView extends StatelessWidget {
   }
 
   Widget _createNotifyBook(BuildContext context, int index,AsyncSnapshot snapshot){
-    String title = snapshot.data[index].title;
-    String author = snapshot.data[index].author;
-    String publishDate = snapshot.data[index].publish_date;
-    String imageUrl = snapshot.data[index].image_url;
-    int notifyBookId = snapshot.data[index].id;
-
-    NotifyBook notifyBook = new NotifyBook(id: notifyBookId);
+    NotifyBook notifyBook = snapshot.data[index];
 
     Widget conteiner = Container(
       padding: const EdgeInsets.all(8.0),
@@ -68,11 +62,16 @@ class NotifyBookListView extends StatelessWidget {
         ),
         child: ListTile(
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(imageUrl),
+            backgroundImage: NetworkImage(notifyBook.image_url),
           ),
-          title: Text(title),
-          subtitle: Text('$author\n$publishDate'),
-          onTap: () => print('TAP'),
+          title: Text(notifyBook.title),
+          subtitle: Text('${notifyBook.author}\n${notifyBook.publish_date}'),
+          onTap: () {
+            Navigator.push(context, new MaterialPageRoute<Null>(
+                settings: const RouteSettings(name: "/detail"),
+                builder: (BuildContext context) => new Detail(notifyBook)
+            ));
+          },
           //trailing: Text(publishDate),
         ),
       ),
