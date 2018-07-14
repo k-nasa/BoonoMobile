@@ -10,8 +10,20 @@ class NotifyBook {
   String author;
   String publish_date;
   String image_url;
+  String big_image_url;
+  String synopsis;
+  String amount;
 
-  NotifyBook({this.id, this.title, this.author, this.publish_date, this.image_url});
+  NotifyBook({
+    this.id,
+    this.title,
+    this.author,
+    this.publish_date,
+    this.image_url,
+    this.big_image_url,
+    this.synopsis,
+    this.amount
+  });
 
   static Future<List> all() async {
     DBManager db = new DBManager();
@@ -27,13 +39,19 @@ class NotifyBook {
     List<NotifyBook> nBooks = [];
 
     for(var nBook in jsonArray) {
+      String amount = nBook['book']['amount'].toString();
+      amount = amount != '0' ? amount+'円' : '情報なし';
+
       nBooks.add(
         new NotifyBook(
           id: nBook['notify_book']['id'],
           title:  nBook['book']['title'],
           author: nBook['book']['author'],
           image_url: nBook['book']['image_url'],
+          big_image_url: nBook['book']['big_image_url'],
           publish_date: nBook['book']['publish_date'],
+          synopsis: nBook['book']['synopsis'],
+          amount: amount,
         )
       );
     }
