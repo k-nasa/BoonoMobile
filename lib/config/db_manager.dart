@@ -8,13 +8,13 @@ import 'package:path/path.dart';
 class DBManager {
   Database database;
 
-  void openDB() async {
+  Future<void> openDB() async {
     if (database != null)
       return ;
 
     Directory directory = await getApplicationDocumentsDirectory();
     database = await openDatabase(
-        join(directory.path, 'Bfigifboegeiorgheoghwoewioehbfdsioodg.db'), //path
+        join(directory.path, 'Bfigifgeiorgheogwioehbfdsioodg.db'), //path
         version: 1,
         onCreate: (Database db, int version) async {
           createConfigTable(db);

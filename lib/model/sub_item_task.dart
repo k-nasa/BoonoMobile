@@ -46,7 +46,7 @@ class SubItemTask {
     }
   }
 
-  void delete() async {
+  Future<void> delete() async {
     DBManager db = new DBManager();
     await db.openDB();
 
@@ -58,7 +58,7 @@ class SubItemTask {
     DBManager db = new DBManager();
     await db.openDB();
 
-    final List<Map> maps =  await db.database.rawQuery("select * from $TABLE_NAME");
+    final List<Map> maps =  await db.database.rawQuery('select * from $TABLE_NAME');
     if (maps.isEmpty) return null;
     List<SubItemTask> tasks = [];
 

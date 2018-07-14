@@ -26,7 +26,7 @@ class TypeSelectFieldContent extends StatelessWidget {
     return StreamBuilder(
       stream: subscriptionBloc.typeString,
       initialData: 'TitleItem',
-      builder: (context, snapshot){
+      builder: (BuildContext context, snapshot){
         final String type = snapshot.data;
 
         final Color titleColor = type == 'TitleItem' ? Colors.blueAccent: Colors.black;
@@ -36,7 +36,7 @@ class TypeSelectFieldContent extends StatelessWidget {
           color: Colors.blueGrey[50],
           child: Row(
             children: <Widget>[
-              Padding(
+              const Padding(
                 padding: EdgeInsets.all(10.0),
                 child: Text('リストのタイプを選択')
                 ,),
