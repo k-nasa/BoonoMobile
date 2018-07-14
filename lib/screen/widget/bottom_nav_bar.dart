@@ -31,12 +31,12 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
         color: navColor,
         vsync: this,
       ),
-      new NavigationIconView(
-        icon: const Icon(Icons.unarchive),
-        title: '設定',
-        color: navColor,
-        vsync: this,
-      )
+      //new NavigationIconView(
+      //  icon: const Icon(Icons.unarchive),
+      //  title: '設定',
+      //  color: navColor,
+      //  vsync: this,
+      //)
     ];
 
     _pages = pages();
@@ -63,7 +63,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     return [
       new NotifyBookListViewScreen(),
       new AddSubscriptionItemPage(),
-      new Text('third'),
+      //new Text('third'),
     ];
   }
 

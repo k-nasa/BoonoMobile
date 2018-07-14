@@ -21,6 +21,8 @@ class NotifyBook {
       NotifyBookURL + '/$userToken',
     );
 
+    print(res.body);
+
     final List jsonArray = json.decode(res.body);
     List<NotifyBook> nBooks = [];
 
