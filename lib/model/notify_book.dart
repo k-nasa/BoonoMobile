@@ -1,8 +1,13 @@
 import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:boono_mobile/route/api_routes.dart';
 import 'package:boono_mobile/config/db_manager.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:boono_mobile/model/new_info.dart';
 
 class NotifyBook {
   int id;
@@ -26,6 +31,16 @@ class NotifyBook {
   });
 
   static Future<List> all() async {
+    if(await NewInfo.new_info()){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if(await prefs.clear())
+        return getBookDateFromServer();
+    }
+    else
+      return getBookDateFromLocal();
+  }
+
+  static Future<List<NotifyBook>> getBookDateFromServer() async {
     DBManager db = new DBManager();
     String userToken = await db.fetchUserToken();
 
@@ -40,23 +55,47 @@ class NotifyBook {
       String amount = nBook['book']['amount'].toString();
       amount = amount != '0' ? amount+'円' : '情報なし';
 
-      nBooks.add(
-        new NotifyBook(
-          id: nBook['notify_book']['id'],
-          title:  nBook['book']['title'],
-          author: nBook['book']['author'],
-          image_url: nBook['book']['image_url'],
-          big_image_url: nBook['book']['big_image_url'],
-          publish_date: nBook['book']['publish_date'],
-          synopsis: nBook['book']['synopsis'],
-          amount: amount,
-        )
+      NotifyBook notifyBook = new NotifyBook(
+        id: nBook['notify_book']['id'],
+        title:  nBook['book']['title'],
+        author: nBook['book']['author'],
+        image_url: nBook['book']['image_url'],
+        big_image_url: nBook['book']['big_image_url'],
+        publish_date: nBook['book']['publish_date'],
+        synopsis: nBook['book']['synopsis'],
+        amount: amount,
       );
+
+      notifyBook.save();
+      NewInfo.updateNewInfo(false);
+      nBooks.add(notifyBook);
     }
     return nBooks;
   }
 
+  static Future<List<NotifyBook>> getBookDateFromLocal() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> ids = prefs.getStringList('ids') ?? [];
+    List<NotifyBook> nBooks = [];
+
+    for(var id in ids) {
+      NotifyBook notifyBook = NotifyBook.fromStringList(prefs.getStringList('notifyBook$id'), int.parse(id));
+      nBooks.add(notifyBook);
+    }
+
+    return nBooks;
+  }
+
   Future<bool> delete() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List ids = await prefs.getStringList('ids');
+
+    if(ids.remove(id.toString())){
+      await prefs.setStringList('ids', ids);
+      await prefs.remove('notifyBook$id');
+    }
+
+
     final http.Response res = await http.delete(
       NotifyBookURL + '/$id',
     );
@@ -67,4 +106,34 @@ class NotifyBook {
 
     return false;
   }
+
+  Future<bool> save() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> ids = prefs.getStringList('ids') ?? [];
+
+    ids.add(id.toString());
+    await prefs.setStringList('ids', ids);
+    await prefs.setStringList('notifyBook$id', toStringList());
+  }
+
+  NotifyBook.fromStringList(List<String> list, int notifyBookId){
+    id =            notifyBookId;
+    title =         list[0];
+    author =        list[1];
+    image_url =     list[2];
+    big_image_url = list[3];
+    publish_date =  list[4];
+    synopsis =      list[5];
+    amount =        list[6];
+  }
+  List<String> toStringList() =>
+      [
+        title,
+        author,
+        image_url,
+        big_image_url,
+        publish_date,
+        synopsis,
+        amount,
+      ];
 }
