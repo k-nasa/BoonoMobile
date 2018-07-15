@@ -4,6 +4,7 @@ import 'package:boono_mobile/bloc/notify_book_bloc.dart';
 import 'package:boono_mobile/screen/notify_book_detail.dart';
 
 class NotifyBookListViewScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return new Center(

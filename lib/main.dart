@@ -9,8 +9,6 @@ void main() async {
   Config config = new Config();
 
   if(await config.init()){
-    SubItemTask.execute();
-
     runApp(new App());
   }
   else
@@ -20,6 +18,7 @@ void main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SubItemTask.execute();
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: themeDate,
