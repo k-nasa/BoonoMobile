@@ -5,6 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:boono_mobile/route/api_routes.dart';
 import 'package:boono_mobile/config/db_manager.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:boono_mobile/model/new_info.dart';
+
 class NotifyBook {
   int id;
   String title;
@@ -27,6 +31,15 @@ class NotifyBook {
   });
 
   static Future<List> all() async {
+    if(await NewInfo.new_info()){
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      if(await prefs.clear())
+        return getBookDateFromServer();
+    }
+    else
+      return getBookDateFromLocal();
+  }
+
     DBManager db = new DBManager();
     String userToken = await db.fetchUserToken();
 
