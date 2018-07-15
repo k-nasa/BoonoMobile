@@ -3,30 +3,34 @@ import 'package:boono_mobile/model/notify_book.dart';
 import 'package:boono_mobile/bloc/notify_book_bloc.dart';
 import 'package:boono_mobile/screen/notify_book_detail.dart';
 import 'package:boono_mobile/model/new_info.dart';
+import 'package:boono_mobile/bloc/notify_book_bloc_provider.dart';
 
 class NotifyBookListViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Center(
-      child: new NotifyBookListView(),
+    return NotifyBookBlocProvider(
+      key: GlobalKey(),
+      notifyBookBloc: new NotifyBookBloc(),
+      child: new Center(
+        child: new NotifyBookListView(),
+      ),
     );
   }
 }
 
 class NotifyBookListView extends StatelessWidget {
-  NotifyBookBloc notifyBookBloc = NotifyBookBloc();
-
   @override
   Widget build(BuildContext context) {
+    final NotifyBookBloc notifyBookBloc = NotifyBookBlocProvider.of(context);
+
     return StreamBuilder<bool>(
       stream: notifyBookBloc.isRebuildListView,
       builder: (BuildContext context, AsyncSnapshot snapshot) =>
           RefreshIndicator(
             onRefresh: () async {
               await NewInfo.fetchNewInfo();
-              if(await NewInfo.new_info())
-                notifyBookBloc.rebuildListView.add(true);
+              notifyBookBloc.rebuildListView.add(true);
               return null;
             },
             child: FutureBuilder(
