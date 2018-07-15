@@ -7,6 +7,7 @@ dependencies:
   rxdart: any
   path_provider: any
   firebase_messaging: 1.0.3
+  shared_preferences: any
   flutter:
     sdk: flutter
 
