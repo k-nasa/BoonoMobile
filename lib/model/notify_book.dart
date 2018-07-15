@@ -116,4 +116,24 @@ class NotifyBook {
     await prefs.setStringList('notifyBook$id', toStringList());
   }
 
+  NotifyBook.fromStringList(List<String> list, int notifyBookId){
+    id =            notifyBookId;
+    title =         list[0];
+    author =        list[1];
+    image_url =     list[2];
+    big_image_url = list[3];
+    publish_date =  list[4];
+    synopsis =      list[5];
+    amount =        list[6];
+  }
+  List<String> toStringList() =>
+      [
+        title,
+        author,
+        image_url,
+        big_image_url,
+        publish_date,
+        synopsis,
+        amount,
+      ];
 }
