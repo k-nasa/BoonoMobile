@@ -35,24 +35,26 @@ class NotifyBookListView extends StatelessWidget {
             },
             child: FutureBuilder(
               future: NotifyBook.all(),
-              builder: (_, snapshot) => buildNotifyBookList(snapshot),
+              builder: (context, snapshot) => buildNotifyBookList(context, snapshot),
             ),
           ),
     );
   }
 
-  Widget buildNotifyBookList(AsyncSnapshot snapshot) {
+  Widget buildNotifyBookList(BuildContext context,AsyncSnapshot snapshot) {
     switch(snapshot.connectionState) {
       case ConnectionState.none:
       case ConnectionState.waiting:
         return const CircularProgressIndicator();
       default:
-        if(snapshot.hasError)
-          return ListView(
-            children: <Widget>[
-              Text("サーバーからの応答がないためリストを取得できません"),
-            ],
-          );
+        if(snapshot.hasError){
+          ()async {
+            await NewInfo.updateNewInfo(true);
+            final NotifyBookBloc notifyBookBloc = NotifyBookBlocProvider.of(context);
+            Scaffold.of(context).showSnackBar(const SnackBar(content: Text('エラーのため再読込します')));
+            notifyBookBloc.rebuildListView.add(true);
+          };
+        }
         return ListView.builder(
             itemBuilder: (BuildContext context, int index) => _createNotifyBook(context, index, snapshot),
             itemCount: snapshot.data.length
