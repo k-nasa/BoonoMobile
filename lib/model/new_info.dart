@@ -15,7 +15,7 @@ class NewInfo {
   //shared_preferencesのnew_infoを返す
   static Future<bool> new_info() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('new_info');
+    return prefs.getBool('new_info') ?? true;
   }
 
   // new_infoをサーバーからもらう
