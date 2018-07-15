@@ -89,18 +89,20 @@ class NotifyBook {
   Future<bool> delete() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List ids = await prefs.getStringList('ids');
+    http.Response res;
 
     if(ids.remove(id.toString())){
       await prefs.setStringList('ids', ids);
       await prefs.remove('notifyBook$id');
+
+
+      res = await http.delete(
+        NotifyBookURL + '/$id',
+      );
+
+      print(res.body);
     }
 
-
-    final http.Response res = await http.delete(
-      NotifyBookURL + '/$id',
-    );
-
-    print(res.body);
     if(res?.statusCode == 200)
       return true;
 
