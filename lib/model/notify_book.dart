@@ -40,6 +40,7 @@ class NotifyBook {
       return getBookDateFromLocal();
   }
 
+  static Future<List<NotifyBook>> getBookDateFromServer() async {
     DBManager db = new DBManager();
     String userToken = await db.fetchUserToken();
 
@@ -54,18 +55,20 @@ class NotifyBook {
       String amount = nBook['book']['amount'].toString();
       amount = amount != '0' ? amount+'円' : '情報なし';
 
-      nBooks.add(
-        new NotifyBook(
-          id: nBook['notify_book']['id'],
-          title:  nBook['book']['title'],
-          author: nBook['book']['author'],
-          image_url: nBook['book']['image_url'],
-          big_image_url: nBook['book']['big_image_url'],
-          publish_date: nBook['book']['publish_date'],
-          synopsis: nBook['book']['synopsis'],
-          amount: amount,
-        )
+      NotifyBook notifyBook = new NotifyBook(
+        id: nBook['notify_book']['id'],
+        title:  nBook['book']['title'],
+        author: nBook['book']['author'],
+        image_url: nBook['book']['image_url'],
+        big_image_url: nBook['book']['big_image_url'],
+        publish_date: nBook['book']['publish_date'],
+        synopsis: nBook['book']['synopsis'],
+        amount: amount,
       );
+
+      notifyBook.save();
+      NewInfo.updateNewInfo(false);
+      nBooks.add(notifyBook);
     }
     return nBooks;
   }
