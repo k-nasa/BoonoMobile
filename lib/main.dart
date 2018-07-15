@@ -8,9 +8,8 @@ import 'package:boono_mobile/model/sub_item_task.dart';
 void main() async {
   Config config = new Config();
 
-  if(await config.init()){
+  if(await config.init())
     runApp(new App());
-  }
   else
     runApp(new ErrorPage());
 }
