@@ -9,8 +9,11 @@ import 'model/new_info.dart';
 void main() async {
   Config config = new Config();
 
-  if(await config.init())
+  if(await config.init()){
+    await NewInfo.fetchNewInfo();
+
     runApp(new App());
+  }
   else
     runApp(new ErrorPage());
 }
@@ -18,7 +21,9 @@ void main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     SubItemTask.execute();
+
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: themeDate,
