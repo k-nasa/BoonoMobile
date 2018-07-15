@@ -26,6 +26,6 @@ class NewInfo {
     var res = await http.get(NewInfoURL + '/$userToken');
     bool new_info = res.body == 'true';
 
-    NewInfo.updateNewInfo(new_info);
+    await NewInfo.updateNewInfo(new_info);
   }
 }
