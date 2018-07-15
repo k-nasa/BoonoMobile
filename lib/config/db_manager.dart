@@ -14,7 +14,7 @@ class DBManager {
 
     Directory directory = await getApplicationDocumentsDirectory();
     database = await openDatabase(
-        join(directory.path, 'Bfigifgeio99oehbfdsioodg.db'), //path
+        join(directory.path, 'hogedg.db'), //path
         version: 1,
         onCreate: (Database db, int version) async {
           createConfigTable(db);
