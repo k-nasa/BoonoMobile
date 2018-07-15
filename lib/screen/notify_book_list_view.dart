@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/notify_book.dart';
 import 'package:boono_mobile/bloc/notify_book_bloc.dart';
 import 'package:boono_mobile/screen/notify_book_detail.dart';
+import 'package:boono_mobile/model/new_info.dart';
 
 class NotifyBookListViewScreen extends StatelessWidget {
 
@@ -23,7 +24,9 @@ class NotifyBookListView extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) =>
           RefreshIndicator(
             onRefresh: () async {
-              notifyBookBloc.rebuildListView.add(true);
+              await NewInfo.fetchNewInfo();
+              if(await NewInfo.new_info())
+                notifyBookBloc.rebuildListView.add(true);
               return null;
             },
             child: FutureBuilder(

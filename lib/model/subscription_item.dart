@@ -2,6 +2,7 @@ import 'package:boono_mobile/route/api_routes.dart';
 import 'package:boono_mobile/config/db_manager.dart';
 import 'dart:async';
 import 'sub_item_task.dart';
+import 'package:boono_mobile/model/new_info.dart';
 
 class SubscriptionItem {
   String content;
@@ -24,6 +25,8 @@ class SubscriptionItem {
     }catch(e) {
       return false;
     }
+
+    NewInfo.updateNewInfo(true);
 
     return true;
   }
@@ -52,6 +55,7 @@ class SubscriptionItem {
     task.save();
     SubItemTask.execute();
 
+    NewInfo.updateNewInfo(true);
     return count == 1;
   }
 
