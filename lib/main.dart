@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/config/conf.dart';
-
-import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
-import 'screen/styles/mainStyle.dart';
 import 'package:boono_mobile/model/sub_item_task.dart';
+import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
+
+import 'screen/styles/mainStyle.dart';
+import 'model/new_info.dart';
 
 void main() async {
   Config config = new Config();
