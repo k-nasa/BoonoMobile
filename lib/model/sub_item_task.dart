@@ -1,6 +1,6 @@
+import 'dart:async';
 import 'package:boono_mobile/config/db_manager.dart';
 import 'package:boono_mobile/model/subscription_item.dart';
-import 'dart:async';
 import 'package:http/http.dart' as http;
 
 class SubItemTask {

@@ -14,21 +14,22 @@ class NotifyBookListViewScreen extends StatelessWidget {
 
 class NotifyBookListView extends StatelessWidget {
   NotifyBookBloc notifyBookBloc = NotifyBookBloc();
+
   @override
   Widget build(BuildContext context) {
-    NotifyBook.all();
     return StreamBuilder<bool>(
       stream: notifyBookBloc.isRebuildListView,
-      builder: (context, snapshot) => RefreshIndicator(
-        onRefresh: () async {
-          notifyBookBloc.rebuildListView.add(true);
-          return null;
-        },
-        child: FutureBuilder(
-          future: NotifyBook.all(),
-          builder: (_, snapshot) => buildNotifyBookList(snapshot),
-        ),
-      ),
+      builder: (BuildContext context, AsyncSnapshot snapshot) =>
+          RefreshIndicator(
+            onRefresh: () async {
+              notifyBookBloc.rebuildListView.add(true);
+              return null;
+            },
+            child: FutureBuilder(
+              future: NotifyBook.all(),
+              builder: (_, snapshot) => buildNotifyBookList(snapshot),
+            ),
+          ),
     );
   }
 
@@ -36,7 +37,7 @@ class NotifyBookListView extends StatelessWidget {
     switch(snapshot.connectionState) {
       case ConnectionState.none:
       case ConnectionState.waiting:
-        return new CircularProgressIndicator();
+        return const CircularProgressIndicator();
       default:
         if(snapshot.hasError)
           return ListView(
