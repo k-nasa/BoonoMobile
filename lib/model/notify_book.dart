@@ -106,4 +106,14 @@ class NotifyBook {
 
     return false;
   }
+
+  Future<bool> save() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> ids = prefs.getStringList('ids') ?? [];
+
+    ids.add(id.toString());
+    await prefs.setStringList('ids', ids);
+    await prefs.setStringList('notifyBook$id', toStringList());
+  }
+
 }
