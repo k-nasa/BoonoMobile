@@ -73,6 +73,19 @@ class NotifyBook {
     return nBooks;
   }
 
+  static Future<List<NotifyBook>> getBookDateFromLocal() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> ids = prefs.getStringList('ids') ?? [];
+    List<NotifyBook> nBooks = [];
+
+    for(var id in ids) {
+      NotifyBook notifyBook = NotifyBook.fromStringList(prefs.getStringList('notifyBook$id'), int.parse(id));
+      nBooks.add(notifyBook);
+    }
+
+    return nBooks;
+  }
+
   Future<bool> delete() async {
     final http.Response res = await http.delete(
       NotifyBookURL + '/$id',
