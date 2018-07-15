@@ -99,8 +99,11 @@ class NotifyBookListView extends StatelessWidget {
         ),
       ),
       onDismissed: (_) async{
-        if(!await notifyBook.delete())
+        if(!await notifyBook.delete()){
+          final NotifyBookBloc notifyBookBloc = NotifyBookBlocProvider.of(context);
           Scaffold.of(context).showSnackBar(const SnackBar(content: Text('削除に失敗しました')));
+          notifyBookBloc.rebuildListView.add(true);
+        }
       },
       child: conteiner
     );
