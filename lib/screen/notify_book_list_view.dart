@@ -56,15 +56,30 @@ class NotifyBookListView extends StatelessWidget {
           };
         }
         return ListView.builder(
-            itemBuilder: (BuildContext context, int index) => _createNotifyBook(context, index, snapshot),
+            itemBuilder: (BuildContext context, int index) => NotifyBookListItem(snapshot.data[index]),
             itemCount: snapshot.data.length
         );
     }
   }
+}
 
-  Widget _createNotifyBook(BuildContext context, int index,AsyncSnapshot snapshot){
-    NotifyBook notifyBook = snapshot.data[index];
+class NotifyBookListItem extends StatefulWidget {
+  NotifyBook notifyBook;
 
+  NotifyBookListItem(this.notifyBook);
+  @override
+  _NotifyBookListItemState createState() => new _NotifyBookListItemState(notifyBook);
+}
+
+class _NotifyBookListItemState extends State<NotifyBookListItem> {
+
+  NotifyBook notifyBook;
+  bool onDisplay = true;
+
+  _NotifyBookListItemState(this.notifyBook);
+
+  @override
+  Widget build(BuildContext context) {
     Widget conteiner = Container(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -92,22 +107,27 @@ class NotifyBookListView extends StatelessWidget {
     GlobalKey key = GlobalKey();
 
     return Dismissible(
-      key: key,
-      direction: DismissDirection.endToStart,
-      background: new Container(
-        color: Colors.red,
-        child: const ListTile(
-          trailing: const Icon(Icons.delete, color: Colors.white),
+        key: key,
+        direction: DismissDirection.endToStart,
+        background: new Container(
+          color: Colors.red,
+          child: const ListTile(
+            trailing: const Icon(Icons.delete, color: Colors.white),
+          ),
         ),
-      ),
-      onDismissed: (_) async{
-        if(!await notifyBook.delete()){
-          final NotifyBookBloc notifyBookBloc = NotifyBookBlocProvider.of(context);
-          Scaffold.of(context).showSnackBar(const SnackBar(content: Text('削除に失敗しました')));
-          notifyBookBloc.rebuildListView.add(true);
-        }
-      },
-      child: conteiner
+        onDismissed: (_) async{
+          setState(() { onDisplay = false; });
+
+          if(!await notifyBook.delete()){
+            final NotifyBookBloc notifyBookBloc = NotifyBookBlocProvider.of(context);
+            Scaffold.of(context).showSnackBar(const SnackBar(content: Text('削除に失敗しました')));
+            notifyBookBloc.rebuildListView.add(true);
+          }
+          setState(() {
+            onDisplay = false;
+          });
+        },
+        child: onDisplay ? conteiner : Container()
     );
   }
 }
