@@ -6,7 +6,6 @@ import 'package:boono_mobile/route/api_routes.dart';
 import 'package:boono_mobile/config/db_manager.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:queries/collections.dart';
 
 import 'package:boono_mobile/model/new_info.dart';
 
@@ -113,8 +112,7 @@ class NotifyBook {
   Future<bool> save() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> ids = prefs.getStringList('ids') ?? [];
-    var uniqIds = Collection(ids).distinct();
-    ids = uniqIds.toList();
+    ids.remove(id.toString()); //ダブリを消すため
 
     ids.add(id.toString());
     await prefs.setStringList('ids', ids);
