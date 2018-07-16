@@ -23,9 +23,14 @@ class NewInfo {
     DBManager db = new DBManager();
     final String userToken = await db.fetchUserToken();
 
-    var res = await http.get(NewInfoURL + '/$userToken');
-    bool new_info = res.body == 'true';
+    try {
+      var res = await http.get(NewInfoURL + '/$userToken');
+      bool new_info = res.body == 'true';
 
-    await NewInfo.updateNewInfo(new_info);
+      await NewInfo.updateNewInfo(new_info);
+    } catch (e){
+      print(e);
+      await NewInfo.updateNewInfo(false);
+    };
   }
 }
