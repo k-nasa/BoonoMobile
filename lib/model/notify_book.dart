@@ -32,15 +32,24 @@ class NotifyBook {
 
   static Future<List> all() async {
     if(await NewInfo.new_info()){
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      if(await prefs.clear())
+      try {
         return getBookDateFromServer();
+      }
+
+      catch (e){
+        print(e);
+        return getBookDateFromLocal();
+      }
     }
     else
       return getBookDateFromLocal();
   }
 
   static Future<List<NotifyBook>> getBookDateFromServer() async {
+    // 保存されているローカルデータを削除
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+
     DBManager db = new DBManager();
     String userToken = await db.fetchUserToken();
 
