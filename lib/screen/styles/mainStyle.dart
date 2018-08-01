@@ -16,6 +16,7 @@ final themeData = new ThemeData(
   secondaryHeaderColor: Colors.white,
   accentColor: Colors.orangeAccent,
   fontFamily: 'Raleway',
+  dialogBackgroundColor: Colors.white,
   textTheme: const TextTheme(
     body1: TextStyle(color: CustomColors.textColor),
     body2: TextStyle(color: CustomColors.textColor),
@@ -61,6 +62,7 @@ final themeDataDark = new ThemeData(
   // CardなどのBackgroundColor用途で使用
   secondaryHeaderColor: const Color.fromRGBO(64, 75, 96, 0.8),
   accentColor: Colors.orangeAccent,
+  dialogBackgroundColor: const Color.fromRGBO(64, 75, 96, 0.8),
   fontFamily: 'Raleway',
   textTheme: const TextTheme(
     body1: TextStyle(color: CustomColors.textColorDark),
