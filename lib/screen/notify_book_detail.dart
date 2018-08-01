@@ -27,9 +27,10 @@ class Detail extends StatelessWidget{
                     backgroundColor: themeDate.backgroundColor,
                     expandedHeight: 510.0,
                     flexibleSpace: new FlexibleSpaceBar(
+                      // TODO オフライン時になにかに差し替える
+                      // それかServerが画像データを返すようにしておく
                       background: Image.network(
                           notifyBook.big_image_url,
-                          //fit: BoxFit.cover
                       ),
                     ),
                   ),
