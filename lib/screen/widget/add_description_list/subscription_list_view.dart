@@ -42,11 +42,14 @@ class SubscriptionListView extends StatelessWidget {
           );
 
         if(snapshot.data == null){
+          // MEMO カスタムメニューを画面下に出したいのでListViewにして返している
           return ListView(
             children: <Widget>[
-              Text(
-                  '''まだ購読リストに登録されていません。
-                  \n購読したい本を登録して、新着本情報を受け取りましょう'''
+              const Center(
+                child: Text(
+                    '''まだ購読リストに登録されていません。
+                    \n購読したい本を登録して、新着本情報を受け取りましょう'''
+                ),
               )
             ],
           );
