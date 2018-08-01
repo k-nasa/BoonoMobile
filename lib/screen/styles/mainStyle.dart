@@ -14,24 +14,25 @@ final themeData = new ThemeData(
     display1: TextStyle(color: CustomColors.textColor),
     display2: TextStyle(color: CustomColors.textColor),
     display3: TextStyle(color: CustomColors.textColor),
+
     // ちょっとした見出しに使う
     display4: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 15.0),
+
     caption: TextStyle(color: CustomColors.textColor),
     subhead: TextStyle(color: CustomColors.textColor),
     headline: TextStyle(color: CustomColors.textColor),
     title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: CustomColors.textColor),
   ),
+
   iconTheme: const IconThemeData(
   ),
-  inputDecorationTheme: InputDecorationTheme(
+
+  inputDecorationTheme: const InputDecorationTheme(
     fillColor: Colors.white,
     filled: true,
     labelStyle: TextStyle(
         fontWeight: FontWeight.bold,
         color: CustomColors.textColor,
-    ),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20.0),
     ),
   ),
 );
