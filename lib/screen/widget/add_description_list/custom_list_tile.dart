@@ -51,9 +51,9 @@ class _CustomListTileState extends State<CustomListTile> {
     Widget defaultTile(){
       return ListTile(
         title: Text(content),
-        leading: Icon(tileIcon,color: Colors.blue,),
+        leading: Icon(tileIcon, color: Theme.of(context).accentIconTheme.color,),
         trailing: IconButton(
-          icon: Icon(Icons.close, color: Colors.red,),
+          icon: Icon(Icons.close, color: Colors.redAccent,),
           onPressed: () => openMenu(),
         ),
       );
@@ -63,8 +63,7 @@ class _CustomListTileState extends State<CustomListTile> {
       return ListTile(
         title: Text(content),
         leading: IconButton(
-            icon: Icon(Icons.close),
-            color: Colors.lightBlue,
+            icon: Icon(Icons.close, color: Theme.of(context).accentIconTheme.color, ),
             onPressed: () => closeMenu()
         ),
         trailing: IconButton(

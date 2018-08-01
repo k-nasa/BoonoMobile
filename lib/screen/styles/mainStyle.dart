@@ -31,7 +31,8 @@ final themeData = new ThemeData(
     title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: CustomColors.textColor),
   ),
 
-  iconTheme: const IconThemeData(
+  accentIconTheme: const IconThemeData(
+      color: Colors.blueAccent,
   ),
 
   inputDecorationTheme: const InputDecorationTheme(
@@ -51,7 +52,7 @@ final themeDataDark = new ThemeData(
 
   // HeaderとFooterの色
   primaryColor: const Color.fromRGBO(58, 66, 86, 1.0),
-  backgroundColor: const Color.fromRGBO(58, 66, 86, 1.0),
+  backgroundColor: const Color.fromRGBO(38, 46, 66, 1.0),
 
   // MEMO 定義されている用途ではないけどいいのか？
   // CardなどのBackgroundColor用途で使用
@@ -74,9 +75,9 @@ final themeDataDark = new ThemeData(
     title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: CustomColors.textColorDark),
   ),
 
-  iconTheme: const IconThemeData(
+  accentIconTheme: const IconThemeData(
+      color: Colors.cyanAccent,
   ),
-
   inputDecorationTheme: const InputDecorationTheme(
     fillColor: const Color.fromRGBO(64, 75, 96, 0.9),
     filled: true,
