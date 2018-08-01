@@ -33,7 +33,7 @@ class TypeSelectFieldContent extends StatelessWidget {
         final Color authorColor = type == 'AuthorItem' ? Colors.blueAccent: Colors.black;
 
         return Container(
-          color: Colors.blueGrey[50],
+          color: Theme.of(context).secondaryHeaderColor,
           child: Row(
             children: <Widget>[
               const Padding(
