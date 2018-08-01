@@ -40,28 +40,28 @@ class Detail extends StatelessWidget{
                           [
                             Text(
                               notifyBook.title,
-                              style: themeDate.textTheme.title,
+                              style: Theme.of(context).textTheme.title,
                             ),
 
-                            Text('著者', style: themeDate.textTheme.display4),
+                            Text('著者', style: Theme.of(context).textTheme.display4),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(notifyBook.author),
                             ),
 
-                            Text('発売日', style: themeDate.textTheme.display4,),
+                            Text('発売日', style: Theme.of(context).textTheme.display4,),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(notifyBook.publish_date),
                             ),
 
-                            Text('金額', style: themeDate.textTheme.display4,),
+                            Text('金額', style: Theme.of(context).textTheme.display4,),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(notifyBook.amount),
                             ),
 
-                            Text('あらすじ', style: themeDate.textTheme.display4),
+                            Text('あらすじ', style: Theme.of(context).textTheme.display4),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(notifyBook.synopsis),
