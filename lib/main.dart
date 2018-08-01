@@ -25,7 +25,7 @@ class App extends StatelessWidget {
     SubItemTask.execute();
 
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Boono!',
       theme: themeDate,
       home: new BottomNavigation(),
     );
@@ -36,7 +36,7 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Boono',
       theme: ThemeData(primaryColor: Colors.blue),
       home: Scaffold(
         //TODO 後からちゃんとしたエラーページに差し替える
