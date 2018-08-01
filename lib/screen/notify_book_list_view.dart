@@ -82,6 +82,7 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
   Widget build(BuildContext context) {
 
     Widget conteiner = Card(
+      color: Theme.of(context).secondaryHeaderColor,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
       child: ListTile(
         leading: CircleAvatar(
