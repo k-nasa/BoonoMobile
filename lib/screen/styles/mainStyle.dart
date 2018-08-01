@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+// MEMO ものと用途として使用していないプロパティが多いと思う
+// 自分で定義してしまって各Widgetでいい感じに適用するやり方が無難な気がする
 final themeData = new ThemeData(
+  // 画像がないときの背景色として使われている
   primarySwatch: Colors.teal,
+
+  // HeaderとFotterの色
   primaryColor: Colors.teal,
   backgroundColor: Colors.brown[50],
+
   // MEMO 定義されている用途ではないけどいいのか？
+  // CardなどのBackgroundColor用途で使用
   secondaryHeaderColor: Colors.white,
   accentColor: Colors.orangeAccent,
   fontFamily: 'Raleway',
