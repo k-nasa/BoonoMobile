@@ -39,8 +39,10 @@ class ErrorPage extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(primaryColor: Colors.blue),
       home: Scaffold(
+        //TODO 後からちゃんとしたエラーページに差し替える
+        // 優先度は結構低い
         body: new Center(
-          child: Text('エラーが出ています。アプリを再起動してから開いてみてください'),
+          child: Text('初期設定にネットワーク環境が必要です\nネットに繋いだ状態でアプリを再起動してください'),
         ),
       )
     );
