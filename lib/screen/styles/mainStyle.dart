@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 final themeDate = new ThemeData(
   primarySwatch: Colors.teal,
+  primaryColor: Colors.teal,
   backgroundColor: Colors.brown[50],
   // MEMO 定義されている用途ではないけどいいのか？
   secondaryHeaderColor: Colors.white,
