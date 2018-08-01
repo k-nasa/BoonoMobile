@@ -9,6 +9,9 @@ dependencies:
   queries: ^0.0.15
   firebase_messaging: 1.0.3
   shared_preferences: 0.4.2
+  dynamic_theme:
+      git:
+        url: git://github.com/Norbert515/dynamic_theme.git
   flutter:
     sdk: flutter
 
