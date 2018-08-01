@@ -20,10 +20,10 @@ final themeData = new ThemeData(
     body2: TextStyle(color: CustomColors.textColor),
     display1: TextStyle(color: CustomColors.textColor),
     display2: TextStyle(color: CustomColors.textColor),
-    display3: TextStyle(color: CustomColors.textColor),
+    display3: TextStyle(color: CustomColors.textColor, fontSize: 18.0),
 
     // ちょっとした見出しに使う
-    display4: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 15.0),
+    display4: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 20.0),
 
     caption: TextStyle(color: CustomColors.textColor),
     subhead: TextStyle(color: CustomColors.textColor),

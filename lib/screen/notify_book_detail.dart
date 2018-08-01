@@ -11,12 +11,16 @@ class Detail extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+
+    TextStyle captionTextStyle = Theme.of(context).textTheme.display4;
+    TextStyle defaultTextStyle = Theme.of(context).textTheme.display3;
+
     if (notifyBook.synopsis.isEmpty)
       notifyBook.synopsis = '情報なし';
 
     return new MaterialApp(
         title: 'Flutter Demo',
-        theme: themeData,
+        theme: Theme.of(context),
         home: new Scaffold(
             appBar: appBar,
             backgroundColor: Theme.of(context).backgroundColor,
@@ -36,35 +40,35 @@ class Detail extends StatelessWidget{
                   ),
                   // FIXME リファクタ
                   new SliverList(
-                      delegate: new SliverChildListDelegate(
+                      delegate: SliverChildListDelegate(
                           [
                             Text(
                               notifyBook.title,
                               style: Theme.of(context).textTheme.title,
                             ),
 
-                            Text('著者', style: Theme.of(context).textTheme.display4),
+                            Text('著者', style: captionTextStyle),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(notifyBook.author),
+                              child: Text(notifyBook.author, style: defaultTextStyle),
                             ),
 
-                            Text('発売日', style: Theme.of(context).textTheme.display4,),
+                            Text('発売日', style: captionTextStyle,),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(notifyBook.publish_date),
+                              child: Text(notifyBook.publish_date, style: defaultTextStyle,),
                             ),
 
-                            Text('金額', style: Theme.of(context).textTheme.display4,),
+                            Text('金額', style: captionTextStyle,),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(notifyBook.amount),
+                              child: Text(notifyBook.amount, style: defaultTextStyle),
                             ),
 
-                            Text('あらすじ', style: Theme.of(context).textTheme.display4),
+                            Text('あらすじ', style: captionTextStyle),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(notifyBook.synopsis),
+                              child: Text(notifyBook.synopsis, style: defaultTextStyle),
                             ),
                           ]
                       )
