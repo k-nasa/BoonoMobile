@@ -16,15 +16,15 @@ class Detail extends StatelessWidget{
 
     return new MaterialApp(
         title: 'Flutter Demo',
-        theme: themeDate,
+        theme: themeData,
         home: new Scaffold(
             appBar: appBar,
-            backgroundColor: themeDate.backgroundColor,
+            backgroundColor: Theme.of(context).backgroundColor,
             body: new CustomScrollView(
                 slivers: <Widget>[
                   new SliverAppBar(
                     pinned: true,
-                    backgroundColor: themeDate.backgroundColor,
+                    backgroundColor: Theme.of(context).backgroundColor,
                     expandedHeight: 510.0,
                     flexibleSpace: new FlexibleSpaceBar(
                       // TODO オフライン時になにかに差し替える
