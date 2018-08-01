@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 final themeDate = new ThemeData(
   primarySwatch: Colors.teal,
   backgroundColor: Colors.brown[50],
+  // MEMO 定義されている用途ではないけどいいのか？
+  secondaryHeaderColor: Colors.white,
   accentColor: Colors.orangeAccent,
   fontFamily: 'Raleway',
   textTheme: const TextTheme(

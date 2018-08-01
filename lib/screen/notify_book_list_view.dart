@@ -84,7 +84,7 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).secondaryHeaderColor,
           borderRadius: BorderRadius.circular(30.0),
         ),
         child: ListTile(
