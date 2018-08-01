@@ -21,6 +21,8 @@ final themeDate = new ThemeData(
     headline: TextStyle(color: CustomColors.textColor),
     title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: CustomColors.textColor),
   ),
+  iconTheme: const IconThemeData(
+  ),
   inputDecorationTheme: InputDecorationTheme(
     fillColor: Colors.white,
     filled: true,
