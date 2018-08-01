@@ -64,6 +64,9 @@ class SubscriptionListView extends StatelessWidget {
   }
 
   Widget _createSubscription(BuildContext context, int index) {
-    return CustomListTile(subItem: subItems[index]);
+    return Card(
+        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        child: CustomListTile(subItem: subItems[index])
+    );
   }
 }

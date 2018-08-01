@@ -49,46 +49,28 @@ class _CustomListTileState extends State<CustomListTile> {
     }
 
     Widget defaultTile(){
-      return Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          child: ListTile(
-            title: Text(content),
-            leading: Icon(tileIcon,color: Colors.blue,),
-            trailing: IconButton(
-              icon: Icon(Icons.close, color: Colors.red,),
-              onPressed: () => openMenu(),
-            ),
-          ),
+      return ListTile(
+        title: Text(content),
+        leading: Icon(tileIcon,color: Colors.blue,),
+        trailing: IconButton(
+          icon: Icon(Icons.close, color: Colors.red,),
+          onPressed: () => openMenu(),
         ),
       );
     }
 
     Widget customTile(){
-      return Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          child: ListTile(
-            title: Text(content),
-            leading: IconButton(
-                icon: Icon(Icons.close),
-                color: Colors.lightBlue,
-                onPressed: () => closeMenu()
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              color: Colors.redAccent,
-              onPressed: () => deleteSubItem(),
-            ),
-          ),
+      return ListTile(
+        title: Text(content),
+        leading: IconButton(
+            icon: Icon(Icons.close),
+            color: Colors.lightBlue,
+            onPressed: () => closeMenu()
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.delete),
+          color: Colors.redAccent,
+          onPressed: () => deleteSubItem(),
         ),
       );
     }
