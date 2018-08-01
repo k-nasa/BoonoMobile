@@ -3,7 +3,8 @@ import 'package:boono_mobile/config/conf.dart';
 import 'package:boono_mobile/model/sub_item_task.dart';
 import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
 import 'screen/styles/mainStyle.dart';
 import 'model/new_info.dart';
 
@@ -13,13 +14,17 @@ void main() async {
   if(await config.init()){
     await NewInfo.fetchNewInfo();
 
-    runApp(new App());
+    runApp(new App(currentTheme: await getCurrentThemeData()));
   }
   else
     runApp(new ErrorPage());
 }
 
 class App extends StatelessWidget {
+  App({this.currentTheme});
+
+  ThemeData currentTheme;
+
   @override
   Widget build(BuildContext context) {
 
@@ -27,8 +32,8 @@ class App extends StatelessWidget {
 
     return new DynamicTheme(
         defaultBrightness: Brightness.light,
-        data: (brightness) => themeData,
-        themedWidgetBuilder: (context, theme) {
+        data: (brightness) => currentTheme ?? themeData,
+        themedWidgetBuilder: (context, theme){
           return new MaterialApp(
             title: 'Boono!',
             theme: theme,
@@ -37,6 +42,15 @@ class App extends StatelessWidget {
         }
     );
   }
+}
+
+Future<ThemeData> getCurrentThemeData() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  final String currentThemeString = await prefs.getString('themeData');
+  if(currentThemeString == null) return themeData;
+
+  return currentThemeString == 'dark'? themeDataDark : themeData;
 }
 
 class ErrorPage extends StatelessWidget {
@@ -54,5 +68,4 @@ class ErrorPage extends StatelessWidget {
       )
     );
   }
-
 }
