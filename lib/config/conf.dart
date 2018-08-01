@@ -28,7 +28,13 @@ class Config {
   }
 
   void generateToken() async {
-    final http.Response res = await http.post(UserCreateURL);
+    http.Response res;
+    try{
+      res = await http.post(UserCreateURL);
+    }catch(e) {
+      print(e);
+      return ;
+    };
 
     if(res.statusCode == 200) {
       await dbManager.database.insert('config', <String, dynamic>{ 'token': res.body });
