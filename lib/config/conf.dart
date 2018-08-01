@@ -13,19 +13,18 @@ class Config {
   Future<bool>init() async {
     await dbManager.openDB();
 
-    if (await setToken() == null) {
+    if (!await isTokenSetted()) {
       await generateToken();
     }
-    return setToken() != null;
+
+    return isTokenSetted();
   }
 
-  Future<String> setToken() async {
+  Future<bool> isTokenSetted() async {
     final List config =  await dbManager.database.rawQuery("select * from config");
-    if (config.isEmpty) return null;
+    if (config.isEmpty) return false;
 
-    token = config.first['token'];
-
-    return config.first['token'];
+    return config?.first['token'] != null;
   }
 
   void generateToken() async {
