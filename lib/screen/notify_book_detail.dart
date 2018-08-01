@@ -34,7 +34,7 @@ class Detail extends StatelessWidget{
                       ),
                     ),
                   ),
-                  // todo リファクタ
+                  // FIXME リファクタ
                   new SliverList(
                       delegate: new SliverChildListDelegate(
                           [
