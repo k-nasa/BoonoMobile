@@ -29,8 +29,15 @@ class TypeSelectFieldContent extends StatelessWidget {
       builder: (BuildContext context, snapshot){
         final String type = snapshot.data;
 
-        final Color titleColor = type == 'TitleItem' ? Colors.blueAccent: Colors.black;
-        final Color authorColor = type == 'AuthorItem' ? Colors.blueAccent: Colors.black;
+        final Color titleColor =
+          type == 'TitleItem' ?
+            Theme.of(context).accentIconTheme.color :
+            Colors.black;
+
+        final Color authorColor =
+          type == 'AuthorItem' ?
+            Theme.of(context).accentIconTheme.color :
+            Colors.black;
 
         return Container(
           color: Theme.of(context).secondaryHeaderColor,
