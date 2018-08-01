@@ -44,10 +44,53 @@ final themeData = new ThemeData(
   ),
 );
 
+// ダークモード用のThemeData
+final themeDataDark = new ThemeData(
+  // 画像がないときの背景色として使われている
+  primarySwatch: Colors.grey,
+
+  // HeaderとFooterの色
+  primaryColor: const Color.fromRGBO(58, 66, 86, 1.0),
+  backgroundColor: const Color.fromRGBO(58, 66, 86, 1.0),
+
+  // MEMO 定義されている用途ではないけどいいのか？
+  // CardなどのBackgroundColor用途で使用
+  secondaryHeaderColor: const Color.fromRGBO(64, 75, 96, 0.8),
+  accentColor: Colors.orangeAccent,
+  fontFamily: 'Raleway',
+  textTheme: const TextTheme(
+    body1: TextStyle(color: CustomColors.textColorDark),
+    body2: TextStyle(color: CustomColors.textColorDark),
+    display1: TextStyle(color: CustomColors.textColorDark),
+    display2: TextStyle(color: CustomColors.textColorDark),
+    display3: TextStyle(color: CustomColors.textColorDark, fontSize: 18.0),
+
+    // ちょっとした見出しに使う
+    display4: TextStyle(color: CustomColors.textColorDark, fontWeight: FontWeight.bold,fontSize: 20.0),
+
+    caption: TextStyle(color: CustomColors.textColorDark),
+    subhead: TextStyle(color: CustomColors.textColorDark),
+    headline: TextStyle(color: CustomColors.textColorDark),
+    title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: CustomColors.textColorDark),
+  ),
+
+  iconTheme: const IconThemeData(
+  ),
+
+  inputDecorationTheme: const InputDecorationTheme(
+    fillColor: const Color.fromRGBO(64, 75, 96, 0.9),
+    filled: true,
+    labelStyle: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: CustomColors.textColorDark,
+    ),
+  ),
+);
 class CustomColors{
   static const Map<int, Color> theme = const <int, Color>{
     100: Color(0xFF3C4A60),
   };
 
   static const textColor = Color(0xFF3C4A60);
+  static const textColorDark = Colors.white70;
 }
