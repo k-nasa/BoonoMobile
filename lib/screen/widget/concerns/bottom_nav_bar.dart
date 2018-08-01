@@ -12,12 +12,13 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> with TickerProviderStateMixin {
   int _currentIndex = 0;
   BottomNavigationBarType _type = BottomNavigationBarType.shifting;
-  final Color navColor = Colors.teal;
+  Color navColor;
   List<NavigationIconView> _navigationViews;
   List<Widget> _pages;
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    navColor = Theme.of(context).primaryColor;
+
     _navigationViews = <NavigationIconView>[
       new NavigationIconView(
         icon: const Icon(Icons.notifications),
