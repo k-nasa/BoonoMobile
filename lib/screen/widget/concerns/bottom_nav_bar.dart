@@ -15,50 +15,6 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
   Color navColor;
   List<NavigationIconView> _navigationViews;
   List<Widget> _pages;
-  @override
-  Widget build(BuildContext context) {
-    navColor = Theme.of(context).primaryColor;
-
-    _navigationViews = <NavigationIconView>[
-      new NavigationIconView(
-        icon: const Icon(Icons.notifications),
-        title: 'タイムライン',
-        color: navColor,
-        vsync: this,
-      ),
-      new NavigationIconView(
-        icon: const Icon(Icons.add),
-        title: 'リスト追加',
-        color: navColor,
-        vsync: this,
-      ),
-      //new NavigationIconView(
-      //  icon: const Icon(Icons.unarchive),
-      //  title: '設定',
-      //  color: navColor,
-      //  vsync: this,
-      //)
-    ];
-
-    _pages = pages();
-
-    for (NavigationIconView view in _navigationViews)
-      view.controller.addListener(_rebuild);
-
-    _navigationViews[_currentIndex].controller.value = 1.0;
-  }
-
-  @override
-  void dispose() {
-    for (NavigationIconView view in _navigationViews)
-      view.controller.dispose();
-    super.dispose();
-  }
-
-  void _rebuild() {
-    setState(() {
-    });
-  }
 
   List<Widget> pages (){
     return [
@@ -70,6 +26,30 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
+    navColor = Theme.of(context).primaryColor;
+
+    _navigationViews = <NavigationIconView>[
+      new NavigationIconView(
+        icon: const Icon(Icons.notifications),
+        title: 'タイムライン',
+        color: navColor,
+      ),
+      new NavigationIconView(
+        icon: const Icon(Icons.add),
+        title: 'リスト追加',
+        color: navColor,
+      ),
+      // TODO 設定画面をあとから足す予定なのでコメントアウトして残しておく
+      //new NavigationIconView(
+      //  icon: const Icon(Icons.unarchive),
+      //  title: '設定',
+      //  color: navColor,
+      //  vsync: this,
+      //)
+    ];
+
+    _pages = pages();
+
     List <BottomNavigationBarItem> botNavBarList = _navigationViews
         .map((NavigationIconView navigationView) => navigationView.item)
         .toList();
@@ -80,9 +60,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       type: _type,
       onTap: (int index) {
         setState(() {
-          _navigationViews[_currentIndex].controller.reverse();
           _currentIndex = index;
-          _navigationViews[_currentIndex].controller.forward();
         });
       },
     );
@@ -103,25 +81,12 @@ class NavigationIconView {
     Widget icon,
     String title,
     Color color,
-    TickerProvider vsync
-  }) : _color = color,
-        item = new BottomNavigationBarItem(
-          icon: icon,
-          title: new Text(title),
-          backgroundColor: color,
-        ),
-        controller = new AnimationController(
-          duration: kThemeAnimationDuration,
-          vsync: vsync,
-        ) {
-    _animation = new CurvedAnimation(
-      parent: controller,
-      curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
-    );
-  }
+  }) : item = new BottomNavigationBarItem(
+    icon: icon,
+    title: new Text(title),
+    backgroundColor: color,
+  );
 
   final BottomNavigationBarItem item;
-  final Color _color;
   final AnimationController controller;
-  CurvedAnimation _animation;
 }
