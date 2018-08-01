@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final themeDate = new ThemeData(
+final themeData = new ThemeData(
   primarySwatch: Colors.teal,
   primaryColor: Colors.teal,
   backgroundColor: Colors.brown[50],

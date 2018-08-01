@@ -26,7 +26,7 @@ class App extends StatelessWidget {
 
     return new MaterialApp(
       title: 'Boono!',
-      theme: themeDate,
+      theme: themeData,
       home: new BottomNavigation(),
     );
   }
