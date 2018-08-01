@@ -106,7 +106,8 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
     return Dismissible(
         key: key,
         direction: DismissDirection.endToStart,
-        background: new Container(
+        background: Card(
+          margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
           color: Colors.red,
           child: const ListTile(
             trailing: const Icon(Icons.delete, color: Colors.white),
