@@ -80,27 +80,23 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
 
   @override
   Widget build(BuildContext context) {
-    Widget conteiner = Container(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).secondaryHeaderColor,
-          borderRadius: BorderRadius.circular(30.0),
+
+    Widget conteiner = Card(
+      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(notifyBook.image_url),
         ),
-        child: ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(notifyBook.image_url),
-          ),
-          title: Text(notifyBook.title),
-          subtitle: Text('${notifyBook.author}\n${notifyBook.publish_date}'),
-          onTap: () {
-            Navigator.push(context, new MaterialPageRoute<Null>(
-                settings: const RouteSettings(name: "/detail"),
-                builder: (BuildContext context) => new Detail(notifyBook)
-            ));
-          },
-          //trailing: Text(publishDate),
-        ),
+        title: Text(notifyBook.title),
+        subtitle: Text('${notifyBook.author}\n${notifyBook.publish_date}'),
+        trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey, size: 30.0),
+        onTap: () {
+          Navigator.push(context, new MaterialPageRoute<Null>(
+              settings: const RouteSettings(name: "/detail"),
+              builder: (BuildContext context) => new Detail(notifyBook)
+          ));
+        },
+        //trailing: Text(publishDate),
       ),
     );
 
@@ -123,9 +119,6 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
             Scaffold.of(context).showSnackBar(const SnackBar(content: Text('削除に失敗しました')));
             notifyBookBloc.rebuildListView.add(true);
           }
-          setState(() {
-            onDisplay = false;
-          });
         },
         child: onDisplay ? conteiner : Container()
     );
