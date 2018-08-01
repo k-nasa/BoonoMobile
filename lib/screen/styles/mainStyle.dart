@@ -6,7 +6,7 @@ final themeData = new ThemeData(
   // 画像がないときの背景色として使われている
   primarySwatch: Colors.teal,
 
-  // HeaderとFotterの色
+  // HeaderとFooterの色
   primaryColor: Colors.teal,
   backgroundColor: Colors.brown[50],
 
