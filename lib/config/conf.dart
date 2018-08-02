@@ -21,7 +21,7 @@ class Config {
   }
 
   Future<bool> isTokenSetting() async {
-    final List<Map<String, String>> config =  await dbManager.database.rawQuery('select * from config');
+    final List<Map<String, dynamic>> config =  await dbManager.database.rawQuery('select * from config');
     if (config.isEmpty)
       return false;
 
@@ -55,7 +55,7 @@ class Config {
       print(userToken);
       final http.Response res = await http.patch(
         UserUpdateURL,
-        body: <String, dynamic>{
+        body: {
           'token': userToken,
           'device_token': token,
         }
