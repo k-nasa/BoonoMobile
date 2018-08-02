@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:boono_mobile/bloc/notify_book_bloc.dart';
 
 class NotifyBookBlocProvider extends InheritedWidget {
-  final NotifyBookBloc notifyBookBloc;
 
   NotifyBookBlocProvider({
     Key key,
@@ -12,6 +11,8 @@ class NotifyBookBlocProvider extends InheritedWidget {
     @required Widget child,
   }) : notifyBookBloc = notifyBookBloc ?? NotifyBookBloc(),
         super(key: key, child: child);
+
+  final NotifyBookBloc notifyBookBloc;
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget){

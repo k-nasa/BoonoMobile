@@ -13,21 +13,22 @@ class Config {
   Future<bool>init() async {
     await dbManager.openDB();
 
-    if (!await isTokenSetted()) {
+    if (!await isTokenSetting()) {
       await generateToken();
     }
 
-    return isTokenSetted();
+    return isTokenSetting();
   }
 
-  Future<bool> isTokenSetted() async {
-    final List config =  await dbManager.database.rawQuery("select * from config");
-    if (config.isEmpty) return false;
+  Future<bool> isTokenSetting() async {
+    final List<Map<String, String>> config =  await dbManager.database.rawQuery("select * from config");
+    if (config.isEmpty)
+      return false;
 
     return config?.first['token'] != null;
   }
 
-  void generateToken() async {
+  Future<void> generateToken() async {
     http.Response res;
     try{
       res = await http.post(UserCreateURL);
@@ -42,14 +43,14 @@ class Config {
     }
   }
 
-  void putDeviceToken() async {
+  Future<void> putDeviceToken() async {
     DBManager db = new DBManager();
-    String userToken = await db.fetchUserToken();
+    final String userToken = await db.fetchUserToken();
 
-    FirebaseMessaging _fm = new FirebaseMessaging();
+    final FirebaseMessaging _fm = new FirebaseMessaging();
     _fm.configure();
 
-    _fm.getToken().then((token) async{
+    _fm.getToken().then((String token) async{
       print(token);
       print(userToken);
       final http.Response res = await http.patch(
