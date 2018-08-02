@@ -31,6 +31,12 @@ class App extends StatelessWidget {
 
     SubItemTask.execute();
 
+    /* FIXME InheritedWidgetが効いてないのかMainBlocProviderを子Widgetから参照できなかったので
+     * 今のような外部ライブラリを使う実装になっている
+     * MainBlocを使用した形に書き直したい。　今のままだとライブラリ内の無駄が多い
+     * https://github.com/Norbert515/dynamic_theme このコードを参考に行けるはず
+     */
+
     return new DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (_) => currentTheme ?? themeData,
