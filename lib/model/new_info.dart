@@ -7,8 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class NewInfo {
   // shared_preferencesのnew_infoを更新する
-  static void updateNewInfo(bool new_info) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  static Future<void> updateNewInfo(bool new_info) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('new_info', new_info);
   }
 
@@ -19,18 +19,18 @@ class NewInfo {
   }
 
   // new_infoをサーバーからもらう
-  static void  fetchNewInfo() async {
-    DBManager db = new DBManager();
+  static Future<void>  fetchNewInfo() async {
+    final DBManager db = new DBManager();
     final String userToken = await db.fetchUserToken();
 
     try {
-      var res = await http.get(NewInfoURL + '/$userToken');
-      bool new_info = res.body == 'true';
+      final http.Response res = await http.get(NewInfoURL + '/$userToken');
+      final bool newInfo = res.body == 'true';
 
-      await NewInfo.updateNewInfo(new_info);
+      await NewInfo.updateNewInfo(newInfo);
     } catch (e){
       print(e);
       await NewInfo.updateNewInfo(false);
-    };
+    }
   }
 }
