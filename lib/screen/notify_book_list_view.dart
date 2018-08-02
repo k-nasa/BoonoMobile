@@ -90,7 +90,7 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
         ),
         title: Text(notifyBook.title),
         subtitle: Text('${notifyBook.author}\n${notifyBook.publish_date}'),
-        trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey, size: 30.0),
+        trailing: Icon(Icons.keyboard_arrow_right, color: Theme.of(context).accentColor, size: 30.0),
         onTap: () {
           Navigator.push(context, new MaterialPageRoute<Null>(
               settings: const RouteSettings(name: "/detail"),
