@@ -3,16 +3,18 @@ import 'package:rxdart/rxdart.dart';
 
 class NotifyBookBloc {
 
+  // TODO Stream, Sinkについて見直そう！
+  // listenerなしでも実装できるはず
   NotifyBookBloc() {
-    _rebuildListViewController.stream.listen( (i) {
+    _rebuildListViewController.stream.listen( (_) {
       _rebuild.add(true);
     });
   }
 
-  StreamController<bool> _rebuildListViewController = StreamController<bool>();
+  final StreamController<bool> _rebuildListViewController = StreamController<bool>();
   Sink<bool> get rebuildListView => _rebuildListViewController.sink;
 
-  BehaviorSubject<bool> _rebuild = BehaviorSubject(seedValue: true);
+  final BehaviorSubject<bool> _rebuild = BehaviorSubject<bool>(seedValue: true);
   Stream<bool> get isRebuildListView => _rebuild.stream;
 
 }

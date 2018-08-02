@@ -62,7 +62,7 @@ class SubscriptionBloc{
   }
 
   Future<bool> subscriptionSave() async {
-    SubscriptionItem subItem = SubscriptionItem(content: content, type: type);
+    final SubscriptionItem subItem = SubscriptionItem(content: content, type: type);
     final bool isSaved = await subItem.save();
 
     _rebuildListView.add(true);

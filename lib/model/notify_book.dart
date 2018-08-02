@@ -13,9 +13,9 @@ class NotifyBook {
   int id;
   String title;
   String author;
-  String publish_date;
-  String image_url;
-  String big_image_url;
+  String publishDate;
+  String imageUrl;
+  String bigImageUrl;
   String synopsis;
   String amount;
 
@@ -23,15 +23,26 @@ class NotifyBook {
     this.id,
     this.title,
     this.author,
-    this.publish_date,
-    this.image_url,
-    this.big_image_url,
+    this.publishDate,
+    this.imageUrl,
+    this.bigImageUrl,
     this.synopsis,
     this.amount
   });
 
+  NotifyBook.fromStringList(List<String> list, int notifyBookId){
+    id =            notifyBookId.toInt();
+    title =         list[0];
+    author =        list[1];
+    imageUrl=       list[2];
+    bigImageUrl =   list[3];
+    publishDate =   list[4];
+    synopsis =      list[5];
+    amount =        list[6];
+  }
+
   static Future<List> all() async {
-    if(await NewInfo.new_info()){
+    if(await NewInfo.newInfo()){
       try {
         return getBookDateFromServer();
       }
@@ -47,18 +58,18 @@ class NotifyBook {
 
   static Future<List<NotifyBook>> getBookDateFromServer() async {
     // 保存されているローカルデータを削除
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
 
     DBManager db = new DBManager();
-    String userToken = await db.fetchUserToken();
+    final String userToken = await db.fetchUserToken();
 
     final http.Response res = await http.get(
       NotifyBookURL + '/$userToken',
     );
 
     final List jsonArray = json.decode(res.body);
-    List<NotifyBook> nBooks = [];
+    final List<NotifyBook> nBooks = [];
 
     for(var nBook in jsonArray) {
       String amount = nBook['book']['amount'].toString();
@@ -68,9 +79,9 @@ class NotifyBook {
         id: nBook['notify_book']['id'],
         title:  nBook['book']['title'],
         author: nBook['book']['author'],
-        image_url: nBook['book']['image_url'],
-        big_image_url: nBook['book']['big_image_url'],
-        publish_date: nBook['book']['publish_date'],
+        imageUrl: nBook['book']['image_url'],
+        bigImageUrl: nBook['book']['big_image_url'],
+        publishDate: nBook['book']['publish_date'],
         synopsis: nBook['book']['synopsis'],
         amount: amount,
       );
@@ -118,7 +129,7 @@ class NotifyBook {
     return false;
   }
 
-  Future<bool> save() async {
+  Future<void> save() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> ids = prefs.getStringList('ids') ?? [];
     ids.remove(id.toString()); //ダブリを消すため
@@ -128,23 +139,13 @@ class NotifyBook {
     await prefs.setStringList('notifyBook$id', toStringList());
   }
 
-  NotifyBook.fromStringList(List<String> list, int notifyBookId){
-    id =            notifyBookId;
-    title =         list[0];
-    author =        list[1];
-    image_url =     list[2];
-    big_image_url = list[3];
-    publish_date =  list[4];
-    synopsis =      list[5];
-    amount =        list[6];
-  }
   List<String> toStringList() =>
       [
         title,
         author,
-        image_url,
-        big_image_url,
-        publish_date,
+        imageUrl,
+        bigImageUrl,
+        publishDate,
         synopsis,
         amount,
       ];

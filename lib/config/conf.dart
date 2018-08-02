@@ -21,7 +21,7 @@ class Config {
   }
 
   Future<bool> isTokenSetting() async {
-    final List<Map<String, String>> config =  await dbManager.database.rawQuery("select * from config");
+    final List<Map<String, String>> config =  await dbManager.database.rawQuery('select * from config');
     if (config.isEmpty)
       return false;
 
@@ -35,7 +35,7 @@ class Config {
     }catch(e) {
       print(e);
       return ;
-    };
+    }
 
     if(res.statusCode == 200) {
       await dbManager.database.insert('config', <String, dynamic>{ 'token': res.body });
@@ -44,7 +44,7 @@ class Config {
   }
 
   Future<void> putDeviceToken() async {
-    DBManager db = new DBManager();
+    final DBManager db = new DBManager();
     final String userToken = await db.fetchUserToken();
 
     final FirebaseMessaging _fm = new FirebaseMessaging();
@@ -55,7 +55,7 @@ class Config {
       print(userToken);
       final http.Response res = await http.patch(
         UserUpdateURL,
-        body: {
+        body: <String, dynamic>{
           'token': userToken,
           'device_token': token,
         }
