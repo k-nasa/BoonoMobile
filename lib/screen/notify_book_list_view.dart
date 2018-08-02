@@ -89,7 +89,12 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
         leading: CircleAvatar(
           backgroundImage: NetworkImage(notifyBook.imageUrl),
         ),
-        title: Text(notifyBook.title),
+
+        // FIXME (hogeoge)を消すのであればServer側でやるべき
+        // 設定に応じて切り替えるか、どうするか決まってないのでとりあえずアプリ側で処理しておいて
+        // 不都合がないか確かめる
+        title: Text(notifyBook.title.replaceAll(RegExp(r'\(\D.*\)'), '')),
+
         subtitle: Text('${notifyBook.author}\n${notifyBook.publishDate}'),
         trailing: Icon(Icons.keyboard_arrow_right, color: Theme.of(context).accentColor, size: 30.0),
         onTap: () {
