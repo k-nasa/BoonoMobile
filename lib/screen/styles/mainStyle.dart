@@ -72,12 +72,12 @@ final themeDataDark = new ThemeData(
     display3: TextStyle(color: CustomColors.textColorDark, fontSize: 18.0),
 
     // ちょっとした見出しに使う
-    display4: TextStyle(color: CustomColors.textColorDark, fontWeight: FontWeight.bold,fontSize: 20.0),
+    display4: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20.0),
 
     caption: TextStyle(color: CustomColors.textColorDark),
-    subhead: TextStyle(color: CustomColors.textColorDark),
-    headline: TextStyle(color: CustomColors.textColorDark),
-    title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: CustomColors.textColorDark),
+    subhead: TextStyle(color: Colors.white),
+    headline: TextStyle(color: Colors.white),
+    title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
   ),
 
   accentIconTheme: const IconThemeData(
