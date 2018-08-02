@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:boono_mobile/model/new_info.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mockito/mockito.dart';
 
 void main() {
   group('NewInfo', (){
