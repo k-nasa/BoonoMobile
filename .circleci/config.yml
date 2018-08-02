@@ -11,5 +11,8 @@ jobs:
           name: Install Flutter SDK
           command: git clone -b beta https://github.com/flutter/flutter.git ~/flutter
       - run:
+          name: run Lint
+          command: ~/flutter/bin/flutter analyze --preview-dart-2
+      - run:
           name: run tests
           command: ~/flutter/bin/flutter test
