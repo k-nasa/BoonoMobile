@@ -63,10 +63,11 @@ class NotifyBookListView extends StatelessWidget {
   }
 }
 
+@immutable
 class NotifyBookListItem extends StatefulWidget {
-  NotifyBook notifyBook;
+  final NotifyBook notifyBook;
 
-  NotifyBookListItem(this.notifyBook);
+  const NotifyBookListItem(this.notifyBook);
   @override
   _NotifyBookListItemState createState() => new _NotifyBookListItemState(notifyBook);
 }
@@ -81,19 +82,19 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
   @override
   Widget build(BuildContext context) {
 
-    Widget conteiner = Card(
+    Widget container  = Card(
       color: Theme.of(context).secondaryHeaderColor,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
       child: ListTile(
         leading: CircleAvatar(
-          backgroundImage: NetworkImage(notifyBook.image_url),
+          backgroundImage: NetworkImage(notifyBook.imageUrl),
         ),
         title: Text(notifyBook.title),
-        subtitle: Text('${notifyBook.author}\n${notifyBook.publish_date}'),
+        subtitle: Text('${notifyBook.author}\n${notifyBook.publishDate}'),
         trailing: Icon(Icons.keyboard_arrow_right, color: Theme.of(context).accentColor, size: 30.0),
         onTap: () {
           Navigator.push(context, new MaterialPageRoute<Null>(
-              settings: const RouteSettings(name: "/detail"),
+              settings: const RouteSettings(name: '/detail'),
               builder: (BuildContext context) => new Detail(notifyBook)
           ));
         },
@@ -122,7 +123,7 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
             notifyBookBloc.rebuildListView.add(true);
           }
         },
-        child: onDisplay ? conteiner : Container()
+        child: onDisplay ? container : Container()
     );
   }
 }

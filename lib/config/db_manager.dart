@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'dart:async';
+import 'dart:io';
 
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,7 +12,7 @@ class DBManager {
     if (database != null)
       return ;
 
-    Directory directory = await getApplicationDocumentsDirectory();
+    final Directory directory = await getApplicationDocumentsDirectory();
     database = await openDatabase(
         join(directory.path, 'hogedg.db'), //path
         version: 1,
@@ -70,7 +70,8 @@ class DBManager {
 
     final config =  await database.rawQuery('select * from config');
 
-    if (config.isEmpty) return null ;
+    if (config.isEmpty)
+      return null ;
 
     return config.first['token'];
   }

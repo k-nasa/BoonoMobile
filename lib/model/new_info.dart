@@ -7,14 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class NewInfo {
   // shared_preferencesのnew_infoを更新する
-  static Future<void> updateNewInfo(bool new_info) async {
+  static Future<void> updateNewInfo(bool newInfo) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('new_info', new_info);
+    await prefs.setBool('new_info', newInfo);
   }
 
   //shared_preferencesのnew_infoを返す
-  static Future<bool> new_info() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  static Future<bool> newInfo() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('new_info') ?? true;
   }
 

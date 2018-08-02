@@ -11,8 +11,10 @@ class TypeSelectField extends StatelessWidget{
       stream: subscriptionBloc.showSelectField,
       initialData: false,
       builder: (_, snapshot){
-        if (snapshot.data == true ) return TypeSelectFieldContent();
-        else return Container();
+        if (snapshot.data == true )
+          return TypeSelectFieldContent();
+        else
+          return Container();
       },
     );
   }

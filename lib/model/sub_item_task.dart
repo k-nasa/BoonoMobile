@@ -4,11 +4,17 @@ import 'package:boono_mobile/model/subscription_item.dart';
 import 'package:http/http.dart' as http;
 
 class SubItemTask {
-  String http_method;
+  String httpMethod;
   String url;
-  int sub_id;
+  int subId;
 
-  SubItemTask({this.http_method, this.url, this.sub_id});
+  SubItemTask({this.httpMethod, this.url, this.subId});
+
+  SubItemTask.fromMap(Map map) {
+    subId = map['sub_id'];
+    httpMethod = map['http_method'];
+    url = map['url'];
+  }
 
   static const String TABLE_NAME = 'subscription_item_tasks';
 
@@ -22,7 +28,8 @@ class SubItemTask {
 
   static void execute() async {
     List<SubItemTask> tasks = await all();
-    if(tasks == null) return;
+    if(tasks == null)
+      return;
 
     for(SubItemTask task in tasks){
       if(await task.exe()){
@@ -33,7 +40,7 @@ class SubItemTask {
 
   Future<bool> exe() async {
     try {
-      final res = await g_http_request();
+      final res = await gHttpRequest();
       print(res.body);
 
       if (res.statusCode == 200)
@@ -50,7 +57,7 @@ class SubItemTask {
     DBManager db = new DBManager();
     await db.openDB();
 
-    await db.database.delete(TABLE_NAME, where: 'sub_id= ?', whereArgs: <int>[sub_id]);
+    await db.database.delete(TABLE_NAME, where: 'sub_id= ?', whereArgs: <int>[subId]);
     print('タスク完了しました');
   }
 
@@ -59,7 +66,10 @@ class SubItemTask {
     await db.openDB();
 
     final List<Map> maps =  await db.database.rawQuery('select * from $TABLE_NAME');
-    if (maps.isEmpty) return null;
+
+    if (maps.isEmpty)
+      return null;
+
     List<SubItemTask> tasks = [];
 
     for(var task in maps)
@@ -70,34 +80,28 @@ class SubItemTask {
 
   Map<String, dynamic> _toMap() =>
       <String, dynamic> {
-        'http_method': http_method,
+        'http_method': httpMethod,
         'url': url,
-        'sub_id': sub_id,
+        'sub_id': subId,
       };
 
-  SubItemTask.fromMap(Map map) {
-    sub_id = map['sub_id'];
-    http_method = map['http_method'];
-    url = map['url'];
-  }
-
-  Future<http.Response> g_http_request() async {
+  Future<http.Response> gHttpRequest() async {
     final db = new DBManager();
     String userToken = await db.fetchUserToken();
 
-    switch(http_method){
+    switch(httpMethod){
       case 'post':
-        SubscriptionItem subItem = await SubscriptionItem.find(sub_id);
+        SubscriptionItem subItem = await SubscriptionItem.find(subId);
 
-        Map request_body = <String,dynamic>{ 'token': userToken }
-        ..addAll(subItem.toMap())
-        ..addAll(<String,String>{'sub_id': sub_id.toString()});
+        Map requestBody = <String,dynamic>{ 'token': userToken }
+          ..addAll(subItem.toMap())
+          ..addAll(<String,String>{'sub_id': subId.toString()});
 
-        print(request_body);
-
-        return http.post(url, body: request_body);
+        return http.post(url, body: requestBody);
       case 'delete':
-        return http.delete('$url/$userToken/${sub_id.toString()}');
+        return http.delete('$url/$userToken/${subId.toString()}');
+      default:
+        return http.get(url);
     }
   }
 }

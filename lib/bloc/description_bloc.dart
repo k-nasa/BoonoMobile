@@ -19,6 +19,12 @@ class ShowSelectField {
 }
 
 class SubscriptionBloc{
+  SubscriptionBloc() {
+    _typeChangeController.stream.listen(_typeChange);
+    _setContentController.stream.listen(_setContent);
+    _showSelectFieldController.stream.listen(_showSelect);
+  }
+
   String content;
   String type = 'TitleItem';
 
@@ -44,12 +50,6 @@ class SubscriptionBloc{
   Sink<bool> get rebuild => _rebuildListView.sink;
   Stream<bool> get rebuildListView => _rebuildListView.stream;
 
-  SubscriptionBloc() {
-    _typeChangeController.stream.listen(_typeChange);
-    _setContentController.stream.listen(_setContent);
-    _showSelectFieldController.stream.listen(_showSelect);
-  }
-
   void _typeChange(TypeChange typeChange) {
     type = typeChange.type;
     _type.add(type);
@@ -62,8 +62,8 @@ class SubscriptionBloc{
   }
 
   Future<bool> subscriptionSave() async {
-    SubscriptionItem subItem = SubscriptionItem(content: content, type: type);
-    bool isSaved = await subItem.save();
+    final SubscriptionItem subItem = SubscriptionItem(content: content, type: type);
+    final bool isSaved = await subItem.save();
 
     _rebuildListView.add(true);
     return isSaved;

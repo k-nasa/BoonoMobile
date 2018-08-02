@@ -3,10 +3,12 @@ import 'package:boono_mobile/model/subscription_item.dart';
 import 'package:boono_mobile/bloc/description_bloc.dart';
 import 'package:boono_mobile/bloc/description_bloc_provider.dart';
 
+@immutable
 class CustomListTile extends StatefulWidget {
-  CustomListTile({this.subItem});
 
-  SubscriptionItem subItem;
+  const CustomListTile({this.subItem});
+
+  final SubscriptionItem subItem;
   @override
   _CustomListTileState createState() => new _CustomListTileState(subItem: subItem);
 }
@@ -20,10 +22,6 @@ class _CustomListTileState extends State<CustomListTile> {
   String type;
   bool isLongTap = false;
   IconData tileIcon;
-
-  initState() {
-    tileIcon = type == 'AuthorItem' ? Icons.account_circle : Icons.book;
-  }
 
   void openMenu(){
     setState(() {
@@ -39,11 +37,13 @@ class _CustomListTileState extends State<CustomListTile> {
 
   @override
   Widget build(BuildContext context) {
+    tileIcon = type == 'AuthorItem' ? Icons.account_circle : Icons.book;
+
     SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
 
     void deleteSubItem () async {
       if(!await subItem.delete())
-        Scaffold.of(context).showSnackBar(SnackBar(content: new Text('削除に失敗しました')));
+        Scaffold.of(context).showSnackBar(const SnackBar(content: Text('削除に失敗しました')));
 
       subscriptionBloc.rebuild.add(true);
     }
@@ -53,7 +53,7 @@ class _CustomListTileState extends State<CustomListTile> {
         title: Text(content),
         leading: Icon(tileIcon, color: Theme.of(context).accentIconTheme.color,),
         trailing: IconButton(
-          icon: Icon(Icons.close, color: Colors.redAccent,),
+          icon: const Icon(Icons.close, color: Colors.redAccent,),
           onPressed: () => openMenu(),
         ),
       );
@@ -67,7 +67,7 @@ class _CustomListTileState extends State<CustomListTile> {
             onPressed: () => closeMenu()
         ),
         trailing: IconButton(
-          icon: Icon(Icons.delete),
+          icon: const Icon(Icons.delete),
           color: Colors.redAccent,
           onPressed: () => deleteSubItem(),
         ),
