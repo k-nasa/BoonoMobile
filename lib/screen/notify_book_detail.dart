@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/notify_book.dart';
-import 'package:boono_mobile/screen/styles/mainStyle.dart';
 
+@immutable
 class Detail extends StatelessWidget{
   final NotifyBook notifyBook;
 
-  Detail(this.notifyBook);
+  const Detail(this.notifyBook);
 
-  Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
 
   @override
   Widget build(BuildContext context) {
+    Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
 
     TextStyle captionTextStyle = Theme.of(context).textTheme.display4;
     TextStyle defaultTextStyle = Theme.of(context).textTheme.display3;
@@ -34,12 +34,12 @@ class Detail extends StatelessWidget{
                       // TODO オフライン時になにかに差し替える
                       // それかServerが画像データを返すようにしておく
                       background: Image.network(
-                          notifyBook.big_image_url,
+                          notifyBook.bigImageUrl,
                       ),
                     ),
                   ),
                   // FIXME リファクタ
-                  new SliverList(
+                  SliverList(
                       delegate: SliverChildListDelegate(
                           [
                             Text(
@@ -56,7 +56,7 @@ class Detail extends StatelessWidget{
                             Text('発売日', style: captionTextStyle,),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Text(notifyBook.publish_date, style: defaultTextStyle,),
+                              child: Text(notifyBook.publishDate, style: defaultTextStyle,),
                             ),
 
                             Text('金額', style: captionTextStyle,),

@@ -7,7 +7,7 @@ class AddSubscriptionForm extends StatelessWidget {
   final TextEditingController _controller = new TextEditingController();
   final FocusNode focusNode = new FocusNode();
 
-  Widget SimpleSnackBar(String content) {
+  Widget simpleSnackBar(String content) {
     return SnackBar(
       content: Text(content),
     );
@@ -32,22 +32,22 @@ class AddSubscriptionForm extends StatelessWidget {
         _controller.clear();
 
         if (await subscriptionBloc.subscriptionSave())
-          Scaffold.of(context).showSnackBar(SimpleSnackBar('作成しました'));
+          Scaffold.of(context).showSnackBar(simpleSnackBar('作成しました'));
         else
-          Scaffold.of(context).showSnackBar(SimpleSnackBar('作成に失敗しました'));
+          Scaffold.of(context).showSnackBar(simpleSnackBar('作成に失敗しました'));
       }
     }
 
     return new Form(
       key: _formKey,
       child: Container(
-        padding: new EdgeInsets.all(10.0),
-        child: new Row(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
           children: <Widget>[
-            new Flexible(
+            Flexible(
               child: new TextFormField(
                 focusNode: focusNode,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   filled: true,
                   labelText: '購読リストに追加',
                 ),

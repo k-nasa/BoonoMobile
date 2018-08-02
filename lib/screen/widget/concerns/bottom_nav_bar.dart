@@ -17,9 +17,9 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
   List<Widget> pages (){
     return [
-      new NotifyBookListViewScreen(),
-      new AddSubscriptionItemPage(),
-      new SettingScreen(),
+      NotifyBookListViewScreen(),
+      AddSubscriptionItemPage(),
+      const SettingScreen(),
     ];
   }
 
@@ -55,6 +55,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
       },
     );
 
+    // ignore: prefer_const_constructors
     Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
 
     return Scaffold(

@@ -22,9 +22,9 @@ void main() async {
 }
 
 class App extends StatelessWidget {
-  App({this.currentTheme});
+  const App({this.currentTheme});
 
-  ThemeData currentTheme;
+  final ThemeData currentTheme;
 
   @override
   Widget build(BuildContext context) {
