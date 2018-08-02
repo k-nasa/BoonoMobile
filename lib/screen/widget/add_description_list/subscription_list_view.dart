@@ -66,7 +66,7 @@ class SubscriptionListView extends StatelessWidget {
   Widget _createSubscription(BuildContext context, int index) {
     return Card(
         color: Theme.of(context).secondaryHeaderColor,
-        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
         child: CustomListTile(subItem: subItems[index])
     );
   }
