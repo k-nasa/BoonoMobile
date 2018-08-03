@@ -15,6 +15,9 @@ dependencies:
   shared_preferences: 0.4.2
   #テスト用のモック
   mockito: any
+
+  collection: any
+
   # Theme切り替えのため
   dynamic_theme:
       git:
