@@ -15,14 +15,12 @@ void main() {
 
     setUp(() async {
       channel.setMockMethodCallHandler((MethodCall methodCall) async {
-        log.add(methodCall);
         if (methodCall.method == 'getAll') {
           return <String, dynamic>{};
         }
         return null;
       });
       prefs = await SharedPreferences.getInstance();
-      log.clear();
     });
 
     tearDown((){
