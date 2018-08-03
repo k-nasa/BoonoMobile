@@ -35,7 +35,20 @@ void main() {
     test('toStringList', (){
       Function eq = const ListEquality<dynamic>().equals;
 
-      expect(true, eq(stringList,nBook.toStringList()));
+      expect(eq(stringList,nBook.toStringList()), isTrue);
+    });
+
+    test('save', () async {
+      SharedPreferences prefs = await prefsMock();
+      var id = nBook.id;
+
+      expect(prefs.getStringList('ids'), null);
+      expect(prefs.getStringList('notifyBook$id'), null);
+
+      await nBook.save();
+
+      expect([id.toString()], prefs.getStringList('ids'));
+      expect(nBook.toStringList(), prefs.getStringList('notifyBook$id'));
     });
   });
 }
