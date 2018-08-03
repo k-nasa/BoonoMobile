@@ -1,26 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:boono_mobile/model/new_info.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../helper/shared_preferences_helper.dart';
 
 void main() {
   group('NewInfo', (){
-
-    const MethodChannel channel = MethodChannel(
-      'plugins.flutter.io/shared_preferences',
-    );
-
-    final List<MethodCall> log = <MethodCall>[];
     SharedPreferences prefs;
 
     setUp(() async {
-      channel.setMockMethodCallHandler((MethodCall methodCall) async {
-        if (methodCall.method == 'getAll') {
-          return <String, dynamic>{};
-        }
-        return null;
-      });
-      prefs = await SharedPreferences.getInstance();
+      prefs = await prefsMock();
     });
 
     tearDown((){
