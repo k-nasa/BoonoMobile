@@ -29,12 +29,12 @@ class Detail extends StatelessWidget{
                   new SliverAppBar(
                     pinned: true,
                     backgroundColor: Theme.of(context).backgroundColor,
-                    expandedHeight: 510.0,
+                    expandedHeight: 500.0,
                     flexibleSpace: new FlexibleSpaceBar(
-                      // TODO オフライン時になにかに差し替える
-                      // それかServerが画像データを返すようにしておく
-                      background: Image.network(
-                          notifyBook.bigImageUrl,
+                      background: FadeInImage(
+                        // TODO アッセと画像に差し替え
+                        placeholder: NetworkImage('https://cdn.arstechnica.net/wp-content/uploads/2018/06/7-2-1.jpg'),
+                        image: NetworkImage(notifyBook.bigImageUrl),
                       ),
                     ),
                   ),
