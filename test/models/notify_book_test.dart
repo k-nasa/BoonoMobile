@@ -50,5 +50,20 @@ void main() {
       expect([id.toString()], prefs.getStringList('ids'));
       expect(nBook.toStringList(), prefs.getStringList('notifyBook$id'));
     });
+
+    test('delete', () async {
+      SharedPreferences prefs = await prefsMock();
+      var id = nBook.id;
+
+      await nBook.save();
+
+      expect([nBook.id.toString()], prefs.getStringList('ids'));
+      expect(nBook.toStringList(), prefs.getStringList('notifyBook$id'));
+
+      await nBook.delete();
+
+      expect(prefs.getStringList('ids'), isEmpty);
+      expect(prefs.getStringList('notifyBook$id'), null);
+    });
   });
 }
