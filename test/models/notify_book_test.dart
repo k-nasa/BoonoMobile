@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:boono_mobile/model/notify_book.dart';
 import 'package:collection/collection.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../helper/shared_preferences_helper.dart';
 
 void main() {
   group('NotifyBook', () {
@@ -26,8 +28,8 @@ void main() {
     );
 
     test('fromStringList',() {
-      expect(true, NotifyBook.fromStringList(stringList, 12) == nBook);
-      expect(false, NotifyBook.fromStringList(stringList, 13) == nBook);
+      expect(NotifyBook.fromStringList(stringList, 12) == nBook, isTrue);
+      expect(NotifyBook.fromStringList(stringList, 13) == nBook, isFalse);
     });
 
     test('toStringList', (){
