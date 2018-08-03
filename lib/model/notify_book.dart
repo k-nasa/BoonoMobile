@@ -149,4 +149,17 @@ class NotifyBook {
         synopsis,
         amount,
       ];
+
+  @override
+  // ignore: hash_and_equals
+  bool operator == (Object other) {
+    return
+      other is NotifyBook
+          && other.id == id
+          && other.title == title
+          && other.imageUrl == imageUrl
+          && other.bigImageUrl == bigImageUrl
+          && other.synopsis == synopsis
+          && other.amount == amount;
+  }
 }
