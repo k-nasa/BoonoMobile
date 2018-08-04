@@ -32,8 +32,7 @@ class Detail extends StatelessWidget{
                     expandedHeight: 500.0,
                     flexibleSpace: new FlexibleSpaceBar(
                       background: FadeInImage(
-                        // TODO アッセと画像に差し替え
-                        placeholder: NetworkImage('https://cdn.arstechnica.net/wp-content/uploads/2018/06/7-2-1.jpg'),
+                        placeholder: AssetImage('assets/images/now-loading.png') ,
                         image: NetworkImage(notifyBook.bigImageUrl),
                       ),
                     ),
