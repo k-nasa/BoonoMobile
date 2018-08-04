@@ -5,10 +5,10 @@ import 'package:boono_mobile/config/conf.dart';
 import 'package:boono_mobile/model/sub_item_task.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 import 'model/new_info.dart';
 import 'screen/styles/mainStyle.dart';
 import 'screen/widget/concerns/splash_screen.dart';
-import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 
 void main() async {
   final Config config = Config();
