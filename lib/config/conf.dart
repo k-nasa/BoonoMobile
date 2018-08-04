@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:boono_mobile/config/db_manager.dart';
 import 'package:boono_mobile/route/api_routes.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Config {
   final DBManager dbManager = new DBManager();
@@ -14,6 +15,8 @@ class Config {
     await dbManager.openDB();
 
     if (!await isTokenSetting()) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
       await generateToken();
     }
 
