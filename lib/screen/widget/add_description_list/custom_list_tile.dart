@@ -35,7 +35,7 @@ class _CustomListTileState extends State<CustomListTile> {
   }
 
   void focusOutKeybord(BuildContext context) {
-    FocusScope.of(context).requestFocus(FocusNode());
+    FocusScope.of(context).requestFocus(new FocusNode());
   }
 
   @override

@@ -30,7 +30,7 @@ class Detail extends StatelessWidget{
                     pinned: true,
                     backgroundColor: Theme.of(context).backgroundColor,
                     expandedHeight: 500.0,
-                    flexibleSpace: new FlexibleSpaceBar(
+                    flexibleSpace: FlexibleSpaceBar(
                       background: FadeInImage(
                         placeholder: AssetImage('assets/images/now-loading.png') ,
                         image: NetworkImage(notifyBook.bigImageUrl),
