@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'bottom_nav_bar.dart';
+import 'package:boono_mobile/main.dart';
 
 class MySplashScreen extends StatefulWidget {
   @override
@@ -11,11 +11,12 @@ class _MySplashScreenState extends State<MySplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () =>
-        Navigator.of(context).push<Object>(MaterialPageRoute<dynamic>(
-            builder: (BuildContext context) => BottomNavigation())
-        )
-    );
+
+    Timer(Duration(seconds: 2), () async {
+      ThemeData currentTheme = await getCurrentThemeData();
+
+      runApp(App(currentTheme: currentTheme));
+    });
   }
 
   @override
