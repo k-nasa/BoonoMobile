@@ -34,12 +34,12 @@ class TypeSelectFieldContent extends StatelessWidget {
         final Color titleColor =
           type == 'TitleItem' ?
             Theme.of(context).accentIconTheme.color :
-            Colors.black;
+            Colors.grey;
 
         final Color authorColor =
           type == 'AuthorItem' ?
             Theme.of(context).accentIconTheme.color :
-            Colors.black;
+            Colors.grey;
 
         return Container(
           color: Theme.of(context).secondaryHeaderColor,

@@ -49,7 +49,7 @@ class AddSubscriptionForm extends StatelessWidget {
                 focusNode: focusNode,
                 decoration: const InputDecoration(
                   filled: true,
-                  labelText: '購読リストに追加',
+                  hintText: '購読リストに追加',
                 ),
                 controller: _controller,
                 validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',

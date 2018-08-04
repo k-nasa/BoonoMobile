@@ -40,7 +40,7 @@ final themeData = new ThemeData(
   inputDecorationTheme: const InputDecorationTheme(
     fillColor: Colors.white,
     filled: true,
-    labelStyle: TextStyle(
+    hintStyle: TextStyle(
         fontWeight: FontWeight.bold,
         color: CustomColors.textColor,
     ),
@@ -86,7 +86,7 @@ final themeDataDark = new ThemeData(
   inputDecorationTheme: const InputDecorationTheme(
     fillColor: const Color.fromRGBO(64, 75, 96, 0.9),
     filled: true,
-    labelStyle: TextStyle(
+    hintStyle: TextStyle(
       fontWeight: FontWeight.bold,
       color: CustomColors.textColorDark,
     ),
