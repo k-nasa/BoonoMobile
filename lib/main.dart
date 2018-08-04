@@ -3,21 +3,30 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/config/conf.dart';
 import 'package:boono_mobile/model/sub_item_task.dart';
-import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 import 'model/new_info.dart';
 import 'screen/styles/mainStyle.dart';
+import 'screen/widget/concerns/splash_screen.dart';
 
 void main() async {
-  final Config config = new Config();
+  final Config config = Config();
 
+  // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
   if(await config.init()){
     await NewInfo.fetchNewInfo();
+    var currentTheme = await getCurrentThemeData();
 
-    runApp(new App(currentTheme: await getCurrentThemeData()));
+    runApp(
+        MaterialApp(
+          theme: currentTheme,
+          home: MySplashScreen(),
+        )
+    );
   }
   else
+    // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
     runApp(new ErrorPage());
 }
 
@@ -37,11 +46,11 @@ class App extends StatelessWidget {
      * https://github.com/Norbert515/dynamic_theme このコードを参考に行けるはず
      */
 
-    return new DynamicTheme(
+    return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (_) => currentTheme ?? themeData,
         themedWidgetBuilder: (BuildContext context, ThemeData theme){
-          return new MaterialApp(
+          return MaterialApp(
             title: 'Boono!',
             theme: theme,
             home: BottomNavigation(),
@@ -49,16 +58,6 @@ class App extends StatelessWidget {
         }
     );
   }
-}
-
-Future<ThemeData> getCurrentThemeData() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  final String currentThemeString = prefs.getString('themeData');
-  if(currentThemeString == null)
-    return themeData;
-
-  return currentThemeString == 'dark'? themeDataDark : themeData;
 }
 
 class ErrorPage extends StatelessWidget {
@@ -76,4 +75,14 @@ class ErrorPage extends StatelessWidget {
       )
     );
   }
+}
+
+Future<ThemeData> getCurrentThemeData() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  final String currentThemeString = prefs.getString('themeData');
+  if(currentThemeString == null)
+    return themeData;
+
+  return currentThemeString == 'dark'? themeDataDark : themeData;
 }
