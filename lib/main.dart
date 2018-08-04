@@ -22,27 +22,6 @@ void main() async {
     runApp(new ErrorPage());
 }
 
-class MySplashScreen extends StatefulWidget {
-  @override
-  _MySplashScreenState createState() => new _MySplashScreenState();
-}
-
-class _MySplashScreenState extends State<MySplashScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen(
-        seconds: 1,
-        navigateAfterSeconds: App(),
-        title: Text(''),
-        imageNetwork: '',
-        backgroundColor: Colors.white,
-        styleTextUnderTheLoader: TextStyle(),
-        photoSize: 100.0,
-        loaderColor: Colors.red
-    );
-  }
-}
-
 class App extends StatelessWidget {
   const App({this.currentTheme});
 
