@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:boono_mobile/model/notify_book.dart';
 import 'package:collection/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../helper/shared_preferences_helper.dart';
 import 'package:boono_mobile/model/new_info.dart';
+import '../helper/shared_preferences_helper.dart';
 
 void main() {
   group('NotifyBook', () {
@@ -28,19 +28,40 @@ void main() {
       amount: '400',
     );
 
+    NotifyBook nBook2 = NotifyBook(
+      id: 13,
+      title: 'ブラックリスト',
+      author: 'レイモンド・レディントン',
+      imageUrl: 'dummyUrl',
+      bigImageUrl: 'dummyUrl',
+      publishDate: '2017-1-9',
+      synopsis: 'あらすじ',
+      amount: '400',
+    );
+
+    SharedPreferences prefs;
+    Function eq;
+
+    setUp( () async {
+      eq = const ListEquality<dynamic>().equals;
+      prefs = await prefsMock();
+    });
+
+    tearDown((){
+      prefs.clear();
+    });
+
     test('fromStringList',() {
       expect(NotifyBook.fromStringList(stringList, 12) == nBook, isTrue);
       expect(NotifyBook.fromStringList(stringList, 13) == nBook, isFalse);
     });
 
     test('toStringList', (){
-      Function eq = const ListEquality<dynamic>().equals;
 
       expect(eq(stringList,nBook.toStringList()), isTrue);
     });
 
     test('save', () async {
-      SharedPreferences prefs = await prefsMock();
       var id = nBook.id;
 
       expect(prefs.getStringList('ids'), null);
@@ -53,7 +74,6 @@ void main() {
     });
 
     test('delete', () async {
-      SharedPreferences prefs = await prefsMock();
       var id = nBook.id;
 
       await nBook.save();
