@@ -51,7 +51,7 @@ class ThemeSwitcher extends StatelessWidget {
   void setThemeData(ThemeData currentThemeData, BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String themeDataString = currentThemeData== themeData ? 'light' : 'dark';
+    String themeDataString = currentThemeData == themeData ? 'light' : 'dark';
 
     await prefs.setString('themeData', themeDataString);
 
