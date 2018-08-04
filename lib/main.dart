@@ -13,6 +13,7 @@ import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 void main() async {
   final Config config = Config();
 
+  // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
   if(await config.init()){
     await NewInfo.fetchNewInfo();
     var currentTheme = await getCurrentThemeData();
@@ -25,6 +26,7 @@ void main() async {
     );
   }
   else
+    // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
     runApp(new ErrorPage());
 }
 

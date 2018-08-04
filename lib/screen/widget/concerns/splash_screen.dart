@@ -12,6 +12,8 @@ class _MySplashScreenState extends State<MySplashScreen> {
   void initState() {
     super.initState();
 
+    // TODO 2秒固定でなく初期設定が終わったかどうかでScreenを切り替えるように変更すべき
+    // 結構めんどくさそうなので後で
     Timer(Duration(seconds: 2), () async {
       ThemeData currentTheme = await getCurrentThemeData();
 
