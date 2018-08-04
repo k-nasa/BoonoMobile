@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MySplashScreen extends StatelessWidget{
-  Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
+  final Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
 
   @override
   Widget build(BuildContext context) {
