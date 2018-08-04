@@ -100,7 +100,7 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
         onTap: () {
           Navigator.push(context, new MaterialPageRoute<Null>(
               settings: const RouteSettings(name: '/detail'),
-              builder: (BuildContext context) => new Detail(notifyBook)
+              builder: (BuildContext context) => Detail(notifyBook)
           ));
         },
         //trailing: Text(publishDate),
