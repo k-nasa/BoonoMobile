@@ -58,16 +58,6 @@ class App extends StatelessWidget {
   }
 }
 
-Future<ThemeData> getCurrentThemeData() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  final String currentThemeString = prefs.getString('themeData');
-  if(currentThemeString == null)
-    return themeData;
-
-  return currentThemeString == 'dark'? themeDataDark : themeData;
-}
-
 class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -83,4 +73,14 @@ class ErrorPage extends StatelessWidget {
       )
     );
   }
+}
+
+Future<ThemeData> getCurrentThemeData() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  final String currentThemeString = prefs.getString('themeData');
+  if(currentThemeString == null)
+    return themeData;
+
+  return currentThemeString == 'dark'? themeDataDark : themeData;
 }
