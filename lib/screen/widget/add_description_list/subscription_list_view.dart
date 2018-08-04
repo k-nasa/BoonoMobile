@@ -26,7 +26,10 @@ class SubscriptionListView extends StatelessWidget {
   Widget subscriptionListViewContent(){
     return FutureBuilder(
         future: SubscriptionItem.all(),
-        builder: (_, snapshot) => Flexible(child: buildSubscriptionList(snapshot))
+        builder: (BuildContext context, AsyncSnapshot snapshot) => Flexible(child: GestureDetector(
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+            child: buildSubscriptionList(snapshot))
+        )
     );
   }
 
