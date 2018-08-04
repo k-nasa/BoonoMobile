@@ -11,19 +11,20 @@ import 'screen/styles/mainStyle.dart';
 import 'screen/widget/concerns/splash_screen.dart';
 
 void main() async {
+  var currentTheme = await getCurrentThemeData();
+  runApp(
+      MaterialApp(
+        theme: currentTheme,
+        home: MySplashScreen(),
+      )
+  );
+
   final Config config = Config();
 
   // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
   if(await config.init()){
     await NewInfo.fetchNewInfo();
-    var currentTheme = await getCurrentThemeData();
-
-    runApp(
-        MaterialApp(
-          theme: currentTheme,
-          home: MySplashScreen(),
-        )
-    );
+    runApp(App(currentTheme: currentTheme));
   }
   else
     // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
