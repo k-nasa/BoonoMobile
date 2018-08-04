@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'model/new_info.dart';
 import 'screen/styles/mainStyle.dart';
 import 'screen/widget/concerns/splash_screen.dart';
+import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 
 void main() async {
   final Config config = Config();
@@ -16,7 +17,12 @@ void main() async {
     await NewInfo.fetchNewInfo();
     var currentTheme = await getCurrentThemeData();
 
-    runApp(App(currentTheme: currentTheme,));
+    runApp(
+        MaterialApp(
+          theme: currentTheme,
+          home: MySplashScreen(),
+        )
+    );
   }
   else
     runApp(new ErrorPage());
@@ -45,7 +51,7 @@ class App extends StatelessWidget {
           return MaterialApp(
             title: 'Boono!',
             theme: theme,
-            home: MySplashScreen(),
+            home: BottomNavigation(),
           );
         }
     );
