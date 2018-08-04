@@ -36,39 +36,25 @@ class SubscriptionListView extends StatelessWidget {
   }
 
   Widget buildSubscriptionList(AsyncSnapshot snapshot) {
-    switch(snapshot.connectionState) {
-      case ConnectionState.none:
-      case ConnectionState.waiting:
-        return const CircularProgressIndicator();
-      default:
-        if(snapshot.hasError)
-          // FIXME
-          return ListView(
-            children: const <Widget>[
-              Text('サーバーからの応答がないためリストを取得できません'),
-            ],
-          );
-
-        if(snapshot.data == null){
-          // MEMO カスタムメニューを画面下に出したいのでListViewにして返している
-          return ListView(
-            children: const <Widget>[
-              Center(
-                child: Text(
-                    '''まだ購読リストに登録されていません。
+    if(snapshot.data == null){
+      // MEMO カスタムメニューを画面下に出したいのでListViewにして返している
+      return ListView(
+        children: const <Widget>[
+          Center(
+            child: Text(
+                '''まだ購読リストに登録されていません。
                     \n購読したい本を登録して、新着本情報を受け取りましょう'''
-                ),
-              )
-            ],
-          );
-        }
-
-        subItems = snapshot.data;
-        return ListView.builder(
-            itemBuilder: (BuildContext context, int index) => _createSubscription(context, index),
-            itemCount: subItems?.length
-        );
+            ),
+          )
+        ],
+      );
     }
+
+    subItems = snapshot.data;
+    return ListView.builder(
+        itemBuilder: (BuildContext context, int index) => _createSubscription(context, index),
+        itemCount: subItems?.length
+    );
   }
 
   Widget _createSubscription(BuildContext context, int index) {
