@@ -45,7 +45,6 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
     final BottomNavigationBar botNavBar = new BottomNavigationBar(
       items: botNavBarList,
-      fixedColor: Colors.red,
       currentIndex: _currentIndex,
       type: _type,
       onTap: (int index) {
