@@ -1,19 +1,14 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:boono_mobile/main.dart';
 
-class MySplashScreen extends StatefulWidget {
-  @override
-  _MySplashScreenState createState() => new _MySplashScreenState();
-}
+class MySplashScreen extends StatelessWidget{
+  Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
 
-class _MySplashScreenState extends State<MySplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body:
-      Stack(
+      appBar: appBar,
+      body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
           Column(
