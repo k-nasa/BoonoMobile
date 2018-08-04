@@ -37,6 +37,7 @@ class SubscriptionListView extends StatelessWidget {
         return const CircularProgressIndicator();
       default:
         if(snapshot.hasError)
+          // FIXME
           return ListView(
             children: const <Widget>[
               Text('サーバーからの応答がないためリストを取得できません'),
