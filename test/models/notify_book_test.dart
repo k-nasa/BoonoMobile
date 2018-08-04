@@ -3,6 +3,7 @@ import 'package:boono_mobile/model/notify_book.dart';
 import 'package:collection/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../helper/shared_preferences_helper.dart';
+import 'package:boono_mobile/model/new_info.dart';
 
 void main() {
   group('NotifyBook', () {
@@ -64,6 +65,29 @@ void main() {
 
       expect(prefs.getStringList('ids'), isEmpty);
       expect(prefs.getStringList('notifyBook$id'), null);
+    });
+
+    test('getBookDateFromLocal', () async {
+      expect(await NotifyBook.getBookDateFromLocal(), isEmpty);
+
+      await nBook.save();
+      await nBook2.save();
+
+      expect(eq(await NotifyBook.getBookDateFromLocal(), [nBook, nBook2]), isTrue);
+    });
+
+    group('all', (){
+      test('サーバー上のデータに変更がない時', () async {
+        NewInfo.updateNewInfo(false);
+        await nBook.save();
+        await nBook2.save();
+
+        expect(eq(await NotifyBook.all(), [nBook, nBook2]), isTrue);
+      });
+
+      test('サーバ城のデータに変更があった時', () async {
+        //TODO Mockの実装が必要
+      });
     });
   });
 }
