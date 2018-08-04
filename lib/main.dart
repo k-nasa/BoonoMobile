@@ -6,6 +6,7 @@ import 'package:boono_mobile/model/sub_item_task.dart';
 import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:splashscreen/splashscreen.dart';
 import 'model/new_info.dart';
 import 'screen/styles/mainStyle.dart';
 
@@ -15,10 +16,31 @@ void main() async {
   if(await config.init()){
     await NewInfo.fetchNewInfo();
 
-    runApp(new App(currentTheme: await getCurrentThemeData()));
+    runApp(MaterialApp(home: MySplashScreen()));
   }
   else
     runApp(new ErrorPage());
+}
+
+class MySplashScreen extends StatefulWidget {
+  @override
+  _MySplashScreenState createState() => new _MySplashScreenState();
+}
+
+class _MySplashScreenState extends State<MySplashScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return SplashScreen(
+        seconds: 1,
+        navigateAfterSeconds: App(),
+        title: Text(''),
+        imageNetwork: '',
+        backgroundColor: Colors.white,
+        styleTextUnderTheLoader: TextStyle(),
+        photoSize: 100.0,
+        loaderColor: Colors.red
+    );
+  }
 }
 
 class App extends StatelessWidget {
