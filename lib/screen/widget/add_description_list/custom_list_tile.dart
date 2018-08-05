@@ -34,7 +34,7 @@ class _CustomListTileState extends State<CustomListTile> {
     });
   }
 
-  void focusOutKeybord(BuildContext context) {
+  void focusOutKeyboard(BuildContext context) {
     FocusScope.of(context).requestFocus(new FocusNode());
   }
 
@@ -58,7 +58,7 @@ class _CustomListTileState extends State<CustomListTile> {
         trailing: IconButton(
           icon: const Icon(Icons.close, color: Colors.redAccent,),
           onPressed: () {
-            focusOutKeybord(context);
+            focusOutKeyboard(context);
             openMenu();
           },
         ),
@@ -71,7 +71,7 @@ class _CustomListTileState extends State<CustomListTile> {
         leading: IconButton(
             icon: Icon(Icons.close, color: Theme.of(context).accentIconTheme.color, ),
             onPressed: () {
-              focusOutKeybord(context);
+              focusOutKeyboard(context);
               closeMenu();
             }
         ),
@@ -79,7 +79,7 @@ class _CustomListTileState extends State<CustomListTile> {
           icon: const Icon(Icons.delete),
           color: Colors.redAccent,
           onPressed: () {
-            focusOutKeybord(context);
+            focusOutKeyboard(context);
             deleteSubItem();
           },
         ),

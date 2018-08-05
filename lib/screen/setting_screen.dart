@@ -11,7 +11,7 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Column(
+    return ListView(
       children: <Widget>[
         ThemeSwitcher(),
       ],
@@ -28,6 +28,7 @@ class ThemeSwitcher extends StatelessWidget {
     return SimpleDialog(
         title: const Text('テーマ選択'),
         children: <Widget>[
+          // MEMO トグルスイッチでいいのでは？
           new RadioListTile<Color>(
             value: themeData.primaryColor,
             groupValue: currentTheme.primaryColor,
