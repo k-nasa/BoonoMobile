@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:boono_mobile/screen/notify_book_detail.dart';
 import 'package:boono_mobile/model/notify_book.dart';
-import '../helper/http_client_helper.dart';
+import 'package:mockery/mock_http_image.dart';
 
 void main() {
   testWidgets('NotifyBookDetail', (WidgetTester tester) async {
