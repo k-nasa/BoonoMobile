@@ -15,8 +15,6 @@ dependencies:
   shared_preferences: 0.4.2
   #テスト用のモック
   mockito: any
-  # image.network用のモックプラグイン
-  mockery: any
 
   collection: any
 
