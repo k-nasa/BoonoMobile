@@ -28,6 +28,7 @@ class AddSubscriptionForm extends StatelessWidget {
 
     void _submit() async {
       if (_formKey.currentState.validate()) {
+        // ignore: use_of_void_result
         await _formKey.currentState.save();
         _controller.clear();
 

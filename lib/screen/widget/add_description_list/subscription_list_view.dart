@@ -19,6 +19,8 @@ class SubscriptionListView extends StatelessWidget {
       builder: (_, snapshot) {
         if(snapshot.data)
           return subscriptionListViewContent();
+        else
+          return Container();
       },
     );
   }
