@@ -37,10 +37,17 @@ void main() {
     group('init',() {
       test('prefsに初期データが有る時cleaする', () async {
         prefs.setBool('hoge', false);
-        expect(await prefs.getBool('hoge'), false);
+        expect(await prefs.getBool('hoge'), isFalse);
 
         await config.init();
-        expect(await prefs.getBool('hoge'), null);
+        expect(await prefs.getBool('hoge'), isNull);
+      });
+
+      test('user tokenがセットされる', () async {
+        expect(await config.isTokenSetting(), isFalse);
+
+        await config.init();
+        //expect(await config.isTokenSetting(), isTrue);
       });
     });
   });
