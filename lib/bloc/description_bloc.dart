@@ -17,7 +17,6 @@ class SubscriptionBloc{
   final BehaviorSubject<String> _type = BehaviorSubject<String>(seedValue: 'TitleItem');
   Stream<String> get typeString => _type.stream;
 
-
   final BehaviorSubject<bool> _showSelectField = BehaviorSubject<bool>(seedValue: false);
   Stream<bool> get showSelectField => _showSelectField.stream;
   Sink<bool> get showField => _showSelectField.sink;
