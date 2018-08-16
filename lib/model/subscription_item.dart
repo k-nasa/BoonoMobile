@@ -59,11 +59,13 @@ class SubscriptionItem {
 
     int count = await db.database.delete(TABLE_NAME, where: 'id= ?', whereArgs: <int>[id]);
 
-    var task = new SubItemTask(httpMethod: 'delete', subId: id, url: SubscriptionDeleteURL);
-    task.save();
-    SubItemTask.execute();
+    if(count == 1){
+      var task = new SubItemTask(httpMethod: 'delete', subId: id, url: SubscriptionDeleteURL);
+      task.save();
+      SubItemTask.execute();
+      NewInfo.updateNewInfo(true);
+    }
 
-    NewInfo.updateNewInfo(true);
     return count == 1;
   }
 
