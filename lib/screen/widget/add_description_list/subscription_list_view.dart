@@ -6,9 +6,6 @@ import 'package:boono_mobile/screen/widget/add_description_list/custom_list_tile
 
 // ignore: must_be_immutable
 class SubscriptionListView extends StatelessWidget {
-  final SubscriptionItem subItem = SubscriptionItem();
-  List<SubscriptionItem> subItems;
-
   @override
   Widget build(BuildContext context) {
     SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
@@ -17,53 +14,68 @@ class SubscriptionListView extends StatelessWidget {
       stream: subscriptionBloc.rebuildListView,
       initialData: true,
       builder: (_, snapshot) {
-        if(snapshot.data)
-          return subscriptionListViewContent();
-        else
-          return Container();
+          return new SubscriptionListViewContent();
       },
     );
   }
 
-  Widget subscriptionListViewContent(){
-    return FutureBuilder(
+}
+
+class SubscriptionListViewContent extends StatefulWidget {
+  @override
+  _SubscriptionListViewContentState createState() => new _SubscriptionListViewContentState();
+}
+
+class _SubscriptionListViewContentState extends State<SubscriptionListViewContent> {
+  List<SubscriptionItem> subItems;
+
+  @override
+  Widget build(BuildContext context) {
+    return new FutureBuilder(
         future: SubscriptionItem.all(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) =>
-            Flexible(
-                child: GestureDetector(
-                    onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
-                    child: buildSubscriptionList(snapshot))
+        builder: (_, AsyncSnapshot snapshot) => new Flexible(
+            child: GestureDetector(
+                onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
+                child: buildSubscriptionList(snapshot))
         )
     );
   }
 
   Widget buildSubscriptionList(AsyncSnapshot snapshot) {
-    if(snapshot.data == null){
-      // MEMO カスタムメニューを画面下に出したいのでListViewにして返している
-      return ListView(
-        children: const <Widget>[
-          Center(
-            child: Text(
-                '''まだ購読リストに登録されていません。
+    switch(snapshot.connectionState){
+      case ConnectionState.none:
+      case ConnectionState.waiting:
+        return CircularProgressIndicator();
+      default:
+        if(snapshot.data == null){
+          // MEMO カスタムメニューを画面下に出したいのでListViewにして返している
+          return ListView(
+            children: const <Widget>[
+              Center(
+                child: Text(
+                    '''まだ購読リストに登録されていません。
                     \n購読したい本を登録して、新着本情報を受け取りましょう'''
-            ),
-          )
-        ],
-      );
+                ),
+              )
+            ],
+          );
+        }
+
+        subItems = snapshot.data;
+        print(subItems.length);
+        return new ListView.builder(
+            itemBuilder: (BuildContext context, int index) => _createSubscription(context, index),
+            itemCount: subItems.length
+        );
     }
 
-    subItems = snapshot.data;
-    return ListView.builder(
-        itemBuilder: (BuildContext context, int index) => _createSubscription(context, index),
-        itemCount: subItems?.length
-    );
-  }
+    }
 
   Widget _createSubscription(BuildContext context, int index) {
-    return Card(
+    return new Card(
         color: Theme.of(context).secondaryHeaderColor,
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
-        child: CustomListTile(subItem: subItems[index])
+        child: new CustomListTile(subItem: subItems[index])
     );
   }
 }
