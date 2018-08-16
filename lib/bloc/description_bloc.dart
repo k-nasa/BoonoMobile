@@ -8,11 +8,6 @@ class TypeChange{
   TypeChange(this.type);
 }
 
-class SetContent {
-  final String content;
-  SetContent(this.content);
-}
-
 class ShowSelectField {
   final bool isShow;
   ShowSelectField(this.isShow);
@@ -21,7 +16,6 @@ class ShowSelectField {
 class SubscriptionBloc{
   SubscriptionBloc() {
     _typeChangeController.stream.listen(_typeChange);
-    _setContentController.stream.listen(_setContent);
     _showSelectFieldController.stream.listen(_showSelect);
   }
 
@@ -30,9 +24,6 @@ class SubscriptionBloc{
 
   final StreamController<TypeChange> _typeChangeController =  StreamController<TypeChange>();
   Sink<TypeChange> get typeChange => _typeChangeController.sink;
-
-  final StreamController<SetContent> _setContentController = StreamController<SetContent>();
-  Sink<SetContent> get setContent => _setContentController.sink;
 
   final StreamController<ShowSelectField> _showSelectFieldController = StreamController<ShowSelectField>();
   Sink<ShowSelectField> get showField => _showSelectFieldController.sink;
@@ -55,7 +46,6 @@ class SubscriptionBloc{
     _type.add(type);
   }
 
-  void _setContent(SetContent setContent) { content = setContent.content; }
 
   void _showSelect(ShowSelectField showSelectField) {
     _showSelectField.add(showSelectField.isShow);
