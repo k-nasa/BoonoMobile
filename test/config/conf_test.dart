@@ -8,17 +8,13 @@ import '../helper/shared_preferences_helper.dart';
 void main() {
   group('Config', (){
     SharedPreferences prefs;
-    Config config;
+    Config config = Config();
 
-    const MethodChannel channel = MethodChannel('plugins.flutter.io/path_provider');
-    String response = '/dummy/path';
-
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return response;
+    const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
+      return '/dummy/path';
     });
 
-    const MethodChannel('com.tekartik.sqflite')
-        .setMockMethodCallHandler((MethodCall methodCall) async {
+    const MethodChannel('com.tekartik.sqflite').setMockMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == 'openDatabase') {
         Database db;
         return db;
@@ -26,9 +22,12 @@ void main() {
       return null;
     });
 
+    const MethodChannel('plugins.flutter.io/firebase_messaging').setMockMethodCallHandler((MethodCall methodCall) async {
+      return null;
+    });
+
     setUp(() async {
       prefs = await prefsMock();
-      config = Config();
     });
 
     tearDown((){
