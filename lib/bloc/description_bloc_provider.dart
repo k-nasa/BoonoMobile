@@ -14,9 +14,7 @@ class SubscriptionBlocProvider extends InheritedWidget {
         super(key: key, child: child);
 
   @override
-  bool updateShouldNotify(InheritedWidget oldWidget){
-    return true;
-  }
+  bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
   static SubscriptionBloc of(BuildContext context) =>
       (context.inheritFromWidgetOfExactType(SubscriptionBlocProvider) as SubscriptionBlocProvider)
