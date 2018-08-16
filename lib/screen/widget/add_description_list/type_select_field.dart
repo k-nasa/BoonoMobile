@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/bloc/description_bloc_provider.dart';
-import 'package:boono_mobile/bloc/description_bloc.dart';
 
 class TypeSelectField extends StatelessWidget{
 

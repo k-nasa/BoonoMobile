@@ -46,6 +46,7 @@ class Config {
     }
   }
 
+  // FIXME iOS,Android両者のDeviceKeyを使えるようになればこの処理は不要になる
   Future<void> putDeviceToken() async {
     final DBManager db = new DBManager();
     final String userToken = await db.fetchUserToken();
