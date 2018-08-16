@@ -25,7 +25,7 @@ class Config {
 
   Future<bool> isTokenSetting() async {
     final List<Map<String, dynamic>> config =  await dbManager.database.rawQuery('select * from config');
-    if (config.isEmpty)
+    if(config == null || config.isEmpty)
       return false;
 
     return config?.first['token'] != null;
