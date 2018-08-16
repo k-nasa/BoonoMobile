@@ -70,7 +70,7 @@ class DBManager {
 
     final config =  await database.rawQuery('select * from config');
 
-    if (config.isEmpty)
+    if (config == null || config.isEmpty)
       return null ;
 
     return config.first['token'];

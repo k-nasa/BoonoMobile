@@ -13,6 +13,7 @@ Future<SharedPreferences> prefsMock() async {
     }
     return null;
   });
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs;
 }
