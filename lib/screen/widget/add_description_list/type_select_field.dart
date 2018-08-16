@@ -72,5 +72,4 @@ class TypeSelectFieldContent extends StatelessWidget {
       },
     );
   }
-
 }
