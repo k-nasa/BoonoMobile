@@ -46,9 +46,9 @@ class SubscriptionBloc{
   final BehaviorSubject<String> _content = BehaviorSubject<String>(seedValue: '');
   Stream<String> get contentString => _content.stream;
 
-  final BehaviorSubject<bool> _rebuildListView= BehaviorSubject<bool>(seedValue: true);
-  Sink<bool> get rebuild => _rebuildListView.sink;
-  Stream<bool> get rebuildListView => _rebuildListView.stream;
+  final StreamController<bool> _rebuildListView = StreamController();
+  Sink get rebuild => _rebuildListView.sink;
+  Stream get rebuildListView => _rebuildListView.stream;
 
   void _typeChange(TypeChange typeChange) {
     type = typeChange.type;
