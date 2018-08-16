@@ -15,9 +15,7 @@ class NotifyBookBlocProvider extends InheritedWidget {
   final NotifyBookBloc notifyBookBloc;
 
   @override
-  bool updateShouldNotify(InheritedWidget oldWidget){
-    return true;
-  }
+  bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
   static NotifyBookBloc of(BuildContext context) =>
       (context.inheritFromWidgetOfExactType(NotifyBookBlocProvider) as NotifyBookBlocProvider)

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/bloc/description_bloc_provider.dart';
-import 'package:boono_mobile/bloc/description_bloc.dart';
 
 class TypeSelectField extends StatelessWidget{
 
@@ -56,7 +55,7 @@ class TypeSelectFieldContent extends StatelessWidget {
                         Text('タイトル', style: TextStyle(color: titleColor)),
                       ],
                     ),
-                onPressed: () => subscriptionBloc.typeChange.add(TypeChange('TitleItem')),
+                onPressed: () => subscriptionBloc.typeChange.add('TitleItem'),
               ),
               FlatButton(
                 child: new Column(
@@ -65,7 +64,7 @@ class TypeSelectFieldContent extends StatelessWidget {
                     Text('作者', style: TextStyle(color: authorColor),),
                   ],
                 ),
-                onPressed: () => subscriptionBloc.typeChange.add(TypeChange('AuthorItem')),
+                onPressed: () => subscriptionBloc.typeChange.add('AuthorItem'),
               ),
             ],
           ),
@@ -73,5 +72,4 @@ class TypeSelectFieldContent extends StatelessWidget {
       },
     );
   }
-
 }

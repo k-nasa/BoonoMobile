@@ -20,12 +20,11 @@ void main() async {
   );
 
   final Config config = Config();
+  await NewInfo.fetchNewInfo();
 
   // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
-  if(await config.init()){
-    await NewInfo.fetchNewInfo();
+  if(await config.init())
     runApp(App(currentTheme: currentTheme));
-  }
   else
     // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
     runApp(new ErrorPage());

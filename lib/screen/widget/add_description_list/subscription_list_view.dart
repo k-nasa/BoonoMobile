@@ -14,7 +14,7 @@ class SubscriptionListView extends StatelessWidget {
       stream: subscriptionBloc.rebuildListView,
       initialData: true,
       builder: (_, snapshot) {
-          return new SubscriptionListViewContent();
+        return new SubscriptionListViewContent();
       },
     );
   }
@@ -68,8 +68,7 @@ class _SubscriptionListViewContentState extends State<SubscriptionListViewConten
             itemCount: subItems.length
         );
     }
-
-    }
+  }
 
   Widget _createSubscription(BuildContext context, int index) {
     return new Card(

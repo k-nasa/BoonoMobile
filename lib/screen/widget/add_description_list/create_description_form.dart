@@ -19,9 +19,9 @@ class AddSubscriptionForm extends StatelessWidget {
 
     void listener(){
       if(focusNode.hasFocus)
-        subscriptionBloc.showField.add(ShowSelectField(true));
+        subscriptionBloc.showField.add(true);
       else
-        subscriptionBloc.showField.add(ShowSelectField(false));
+        subscriptionBloc.showField.add(false);
     }
 
     focusNode.addListener(listener);
