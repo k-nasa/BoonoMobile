@@ -28,8 +28,7 @@ class AddSubscriptionForm extends StatelessWidget {
 
     void _submit() async {
       if (_formKey.currentState.validate()) {
-        // ignore: use_of_void_result
-        await _formKey.currentState.save();
+        subscriptionBloc.content = _controller.text;
         _controller.clear();
 
         if (await subscriptionBloc.subscriptionSave())
@@ -54,7 +53,6 @@ class AddSubscriptionForm extends StatelessWidget {
                 ),
                 controller: _controller,
                 validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
-                onSaved: (val) => subscriptionBloc.setContent.add(SetContent(val)),
                 onFieldSubmitted:(_) => _submit(),
               ),
             ),
