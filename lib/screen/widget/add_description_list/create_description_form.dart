@@ -58,7 +58,10 @@ class AddSubscriptionForm extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.send),
-              onPressed: () => _submit(),
+              onPressed: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+                _submit();
+              },
               color: Theme.of(context).accentColor,
             ),
           ],
