@@ -56,6 +56,11 @@ class AddSubscriptionForm extends StatelessWidget {
                 onFieldSubmitted:(_) => _submit(),
               ),
             ),
+            IconButton(
+              icon: Icon(Icons.send),
+              onPressed: () => _submit(),
+              color: Theme.of(context).accentColor,
+            ),
           ],
         ),
       ),
