@@ -15,7 +15,7 @@ jobs:
           command: ~/flutter/bin/flutter packages get
       - run:
           name: run Lint
-          command: ~/flutter/bin/flutter analyze --preview-dart-2
+          command: ~/flutter/bin/flutter analyze
       - run:
           name: run tests
           command: ~/flutter/bin/flutter test --coverage --coverage-path=lcov.info && bash <(curl -s https://codecov.io/bash)
