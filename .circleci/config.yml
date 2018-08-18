@@ -9,16 +9,13 @@ jobs:
       - checkout
       - run:
           name: Install Flutter SDK
-          command: git clone -b beta https://github.com/flutter/flutter.git ~/flutter
-      - run:
-          name: Flutter Update
-          command: ~/flutter/bin/flutter upgrade
+          command: git clone -b v0.5.8 https://github.com/flutter/flutter.git ~/flutter
       - run:
           name: Flutter packages get
           command: ~/flutter/bin/flutter packages get
       - run:
           name: run Lint
-          command: ~/flutter/bin/flutter analyze --preview-dart-2
+          command: ~/flutter/bin/flutter analyze
       - run:
           name: run tests
           command: ~/flutter/bin/flutter test --coverage --coverage-path=lcov.info && bash <(curl -s https://codecov.io/bash)
