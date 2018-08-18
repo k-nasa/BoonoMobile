@@ -11,9 +11,6 @@ jobs:
           name: Install Flutter SDK
           command: git clone -b v0.5.8 https://github.com/flutter/flutter.git ~/flutter
       - run:
-          name: Flutter Update
-          command: ~/flutter/bin/flutter upgrade
-      - run:
           name: Flutter packages get
           command: ~/flutter/bin/flutter packages get
       - run:
