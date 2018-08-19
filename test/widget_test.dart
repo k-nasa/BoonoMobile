@@ -4,5 +4,6 @@ import 'package:boono_mobile/main.dart';
 void main() {
   testWidgets('app test', (WidgetTester tester) async {
     await tester.pumpWidget(new App());
+    await tester.pumpWidget(new ErrorPage());
   });
 }

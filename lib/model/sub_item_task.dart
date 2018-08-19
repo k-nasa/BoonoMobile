@@ -23,7 +23,6 @@ class SubItemTask {
     await db.openDB();
 
     await db.database.insert(TABLE_NAME, _toMap());
-    print('作成しました！！');
   }
 
   static void execute() async {
@@ -67,12 +66,9 @@ class SubItemTask {
 
     final List<Map> maps =  await db.database.rawQuery('select * from $TABLE_NAME');
 
-    if (maps.isEmpty)
-      return null;
-
     List<SubItemTask> tasks = [];
 
-    for(var task in maps)
+    for(var task in maps ?? <List>[])
       tasks.add(SubItemTask.fromMap(task));
 
     return tasks;

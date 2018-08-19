@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/services.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:boono_mobile/screen/add_description_list.dart';
 import 'package:boono_mobile/screen/widget/add_description_list/type_select_field.dart';
 import 'package:boono_mobile/screen/widget/add_description_list/subscription_list_view.dart';
@@ -13,6 +15,22 @@ void main() {
             )
         )
     );
+
+    const MethodChannel('com.tekartik.sqflite').setMockMethodCallHandler((MethodCall methodCall) async {
+      if (methodCall.method == 'openDatabase') {
+        Database db;
+        return db;
+      }
+      if(methodCall.method == 'query') {
+        return <List>[];
+      }
+
+      return null;
+    });
+
+    const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
+      return '/dummy/path';
+    });
 
     final Finder inputText = find.byType(TextFormField);
     final Finder submitButton = find.byIcon(Icons.send);
@@ -39,5 +57,22 @@ void main() {
     await tester.tap(submitButton);
     await tester.pump(const Duration(milliseconds: 1000));
     expect(typeSelect, findsNothing);
+
+    // アイコンボタンを押すとタイプ変更する
+    final Finder titleIcon = find.byIcon(Icons.library_add);
+    final Finder authorIcon = find.byIcon(Icons.person_add);
+
+    await tester.showKeyboard(inputText);
+    expect(titleIcon, findsOneWidget);
+    expect(authorIcon, findsOneWidget);
+
+    await tester.tap(authorIcon);
+    await tester.pump(const Duration(milliseconds: 1000));
+    // TODO テストコード追加
+
+
+    await tester.tap(titleIcon);
+    await tester.pump(const Duration(milliseconds: 1000));
+    // TODO テストコード追加
   });
 }
