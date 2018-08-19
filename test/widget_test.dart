@@ -3,7 +3,6 @@ import 'package:boono_mobile/main.dart' as app;
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/services.dart';
 import 'helper/shared_preferences_helper.dart';
-import 'package:boono_mobile/config/conf.dart';
 
 void main() async {
   await prefsMock();
