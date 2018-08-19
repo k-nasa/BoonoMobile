@@ -40,6 +40,12 @@ void main() {
       await tester.pump(const Duration(milliseconds: 1000));
       final Finder listItem = find.byType(Card);
       expect(listItem, findsWidgets);
+
+      final TestGesture gesture = await tester.startGesture(tester.getTopRight(listItem));
+      await gesture.moveTo(tester.getTopLeft(listItem));
+
+      await gesture.up();
+      await tester.pump(const Duration(seconds: 1));
     }, createHttpClient: createMockImageHttpClient);
   });
 }
