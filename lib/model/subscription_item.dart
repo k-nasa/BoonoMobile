@@ -87,4 +87,14 @@ class SubscriptionItem {
     );
     return SubscriptionItem.fromMap(maps.first);
   }
+
+  @override
+  // ignore: hash_and_equals
+  bool operator == (Object other) {
+    return
+      other is SubscriptionItem
+          && other.id == id
+          && other.type == type
+          && other.content == content;
+  }
 }
