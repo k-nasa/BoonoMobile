@@ -5,7 +5,6 @@ MethodChannel sqfliteMock() {
   const MethodChannel sqfliteChannel = MethodChannel('com.tekartik.sqflite');
 
   sqfliteChannel.setMockMethodCallHandler((MethodCall methodCall) async {
-    print(methodCall.method);
     if (methodCall.method == 'openDatabase') {
       Database db;
       return db;

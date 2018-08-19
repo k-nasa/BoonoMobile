@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:boono_mobile/model/subscription_item.dart';
+import '../helper/sqflite_helper.dart';
 
 SubscriptionItem subscriptionItem = SubscriptionItem(
   id: 12,
@@ -18,20 +18,13 @@ Map subItemMap = <String, dynamic> {
 
 void main() {
   group('SubItemTask', () {
-    const MethodChannel('com.tekartik.sqflite').setMockMethodCallHandler((MethodCall methodCall) async {
-      if (methodCall.method == 'openDatabase') {
-        Database db;
-        return db;
-      }
+    MethodChannel sqflite = sqfliteMock();
+
+    sqflite.setMockMethodCallHandler((MethodCall methodCall) async {
       if(methodCall.method == 'query') {
         return [subItemMap];
       }
-
       return null;
-    });
-
-    const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
-      return '/dummy/path';
     });
 
     test('toMap', (){
