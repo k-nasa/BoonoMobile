@@ -90,7 +90,8 @@ class SubItemTask {
 
         Map requestBody = <String,dynamic>{ 'token': userToken }
           ..addAll(subItem.toMap())
-          ..addAll(<String,String>{'sub_id': subId.toString()});
+          ..remove('id')
+          ..addAll(<String, dynamic>{'sub_id': subId.toString()});
 
         return http.post(url, body: requestBody);
       case 'delete':
