@@ -48,23 +48,20 @@ class Config {
 
   // FIXME iOS,Android両者のDeviceKeyを使えるようになればこの処理は不要になる
   Future<void> putDeviceToken() async {
-    final DBManager db = new DBManager();
+    final DBManager db = DBManager();
     final String userToken = await db.fetchUserToken();
 
-    final FirebaseMessaging _fm = new FirebaseMessaging();
+    final FirebaseMessaging _fm = FirebaseMessaging();
     _fm.configure();
 
     _fm.getToken().then((String token) async{
-      print(token);
-      print(userToken);
-      final http.Response res = await http.patch(
+      http.patch(
         UserUpdateURL,
         body: {
           'token': userToken,
           'device_token': token,
         }
       );
-      print(res.body);
     });
   }
 }
