@@ -36,7 +36,6 @@ class Config {
     try{
       res = await http.post(UserCreateURL);
     }catch(e) {
-      print(e);
       return ;
     }
 
