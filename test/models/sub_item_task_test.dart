@@ -40,7 +40,15 @@ void main() {
    });
 
    test('fromMap', (){
-     expect(SubItemTask.fromMap(subItemTaskMap) == subItemTask , isTrue);
+     expect(SubItemTask.fromMap(subItemTaskMap), subItemTask);
+   });
+
+   test('all', () async {
+     expect(await SubItemTask.all(), [subItemTask]);
+   });
+
+   test('execute', () async{
+     SubItemTask.execute();
    });
   });
 }
