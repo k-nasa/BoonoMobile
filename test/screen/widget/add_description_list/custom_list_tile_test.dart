@@ -29,7 +29,7 @@ void main() {
       type: 'TitleItem',
     );
 
-    tester.pumpWidget(
+    await tester.pumpWidget(
         MaterialApp(
             home: Scaffold(
               body: SubscriptionBlocProvider(
@@ -38,5 +38,17 @@ void main() {
             )
         )
     );
+
+    final Finder openMenuButton = find.byIcon(Icons.close);
+    final Finder deleteButton = find.byIcon(Icons.delete);
+    expect(openMenuButton, findsOneWidget);
+    expect(deleteButton, findsNothing);
+
+    await tester.tap(openMenuButton);
+    await tester.pump(const Duration(milliseconds: 1000));
+    expect(deleteButton, findsOneWidget);
+
+    await tester.tap(deleteButton);
+    await tester.pump(const Duration(milliseconds: 1000));
   });
 }
