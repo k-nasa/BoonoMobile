@@ -1,9 +1,29 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:boono_mobile/main.dart' as app;
+import 'package:sqflite/sqflite.dart';
+import 'package:flutter/services.dart';
 import 'helper/shared_preferences_helper.dart';
+import 'package:boono_mobile/config/conf.dart';
 
 void main() async {
   await prefsMock();
+
+  const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
+    return '/dummy/path';
+  });
+
+  const MethodChannel('com.tekartik.sqflite').setMockMethodCallHandler((MethodCall methodCall) async {
+    if (methodCall.method == 'openDatabase') {
+      Database db;
+      return db;
+    }
+    return null;
+  });
+
+
+  const MethodChannel('plugins.flutter.io/firebase_messaging').setMockMethodCallHandler((MethodCall methodCall) async {
+    return null;
+  });
 
   testWidgets('app test', (WidgetTester tester) async {
     app.main();
