@@ -2,10 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:boono_mobile/model/new_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../helper/shared_preferences_helper.dart';
+import '../helper/sqflite_helper.dart';
 
 void main() {
   group('NewInfo', (){
     SharedPreferences prefs;
+    sqfliteMock();
 
     setUp(() async {
       prefs = await prefsMock();
@@ -37,8 +39,11 @@ void main() {
       expect(await NewInfo.newInfo(), false);
     });
 
-    //test('fetchNewInfo', (){
-    //  // TODO ServerMockが必要
-    //});
+    test('fetchNewInfo', () async {
+      expect(await prefs.getBool('new_info'), isNull);
+
+      await NewInfo.fetchNewInfo();
+      expect(await prefs.getBool('new_info'), isNotNull);
+    });
   });
 }
