@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:boono_mobile/model/sub_item_task.dart';
 import 'package:flutter/services.dart';
+import '../helper/sqflite_helper.dart';
 
 SubItemTask subItemTask = SubItemTask(
   subId: 12,
@@ -18,21 +19,15 @@ Map subItemTaskMap = <String, dynamic> {
 
 void main() {
   group('SubItemTask', () {
-    const MethodChannel('com.tekartik.sqflite').setMockMethodCallHandler((MethodCall methodCall) async {
-      print(methodCall.method);
-      if (methodCall.method == 'openDatabase') {
-        Database db;
-        return db;
-      }
+
+    MethodChannel sqfliteChannel = sqfliteMock();
+
+    sqfliteChannel.setMockMethodCallHandler((MethodCall methodCall) async {
       if(methodCall.method == 'query') {
         return [subItemTaskMap];
       }
 
       return null;
-    });
-
-    const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
-      return '/dummy/path';
     });
 
    test('toMap', (){
