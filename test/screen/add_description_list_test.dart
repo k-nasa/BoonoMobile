@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/services.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:boono_mobile/screen/add_description_list.dart';
 import 'package:boono_mobile/screen/widget/add_description_list/type_select_field.dart';
 import 'package:boono_mobile/screen/widget/add_description_list/subscription_list_view.dart';
+import '../helper/sqflite_helper.dart';
 
 void main() {
   testWidgets('AddSubscriptionItemPage', (WidgetTester tester) async {
@@ -16,21 +15,7 @@ void main() {
         )
     );
 
-    const MethodChannel('com.tekartik.sqflite').setMockMethodCallHandler((MethodCall methodCall) async {
-      if (methodCall.method == 'openDatabase') {
-        Database db;
-        return db;
-      }
-      if(methodCall.method == 'query') {
-        return <List>[];
-      }
-
-      return null;
-    });
-
-    const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
-      return '/dummy/path';
-    });
+    sqfliteMock();
 
     final Finder inputText = find.byType(TextFormField);
     final Finder submitButton = find.byIcon(Icons.send);

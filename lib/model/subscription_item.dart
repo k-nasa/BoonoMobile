@@ -72,6 +72,7 @@ class SubscriptionItem {
 
   Map toMap() =>
       <String, dynamic>{
+        'id': id,
         'type': type,
         'content': content,
       };
@@ -85,5 +86,15 @@ class SubscriptionItem {
         whereArgs: <int>[id]
     );
     return SubscriptionItem.fromMap(maps.first);
+  }
+
+  @override
+  // ignore: hash_and_equals
+  bool operator == (Object other) {
+    return
+      other is SubscriptionItem
+          && other.id == id
+          && other.type == type
+          && other.content == content;
   }
 }

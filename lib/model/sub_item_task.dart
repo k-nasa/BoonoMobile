@@ -22,7 +22,7 @@ class SubItemTask {
     final db = new DBManager();
     await db.openDB();
 
-    await db.database.insert(TABLE_NAME, _toMap());
+    await db.database.insert(TABLE_NAME, toMap());
   }
 
   static void execute() async {
@@ -74,7 +74,7 @@ class SubItemTask {
     return tasks;
   }
 
-  Map<String, dynamic> _toMap() =>
+  Map<String, dynamic> toMap() =>
       <String, dynamic> {
         'http_method': httpMethod,
         'url': url,
@@ -99,5 +99,15 @@ class SubItemTask {
       default:
         return http.get(url);
     }
+  }
+
+  @override
+  // ignore: hash_and_equals
+  bool operator == (Object other) {
+    return
+      other is SubItemTask
+          && other.httpMethod == httpMethod
+          && other.subId == subId
+          && other.url == url;
   }
 }
