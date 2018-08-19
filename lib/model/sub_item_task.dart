@@ -23,7 +23,6 @@ class SubItemTask {
     await db.openDB();
 
     await db.database.insert(TABLE_NAME, _toMap());
-    print('作成しました！！');
   }
 
   static void execute() async {
