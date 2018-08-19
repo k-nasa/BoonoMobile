@@ -100,4 +100,14 @@ class SubItemTask {
         return http.get(url);
     }
   }
+
+  @override
+  // ignore: hash_and_equals
+  bool operator == (Object other) {
+    return
+      other is SubItemTask
+          && other.httpMethod == httpMethod
+          && other.subId == subId
+          && other.url == url;
+  }
 }
