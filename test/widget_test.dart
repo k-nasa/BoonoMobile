@@ -1,13 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:boono_mobile/screen/styles/mainStyle.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:boono_mobile/main.dart' as app;
+import 'package:boono_mobile/main.dart';
 import 'helper/shared_preferences_helper.dart';
 
 
 void main() async {
-  await prefsMock();
+  SharedPreferences prefs = await prefsMock();
 
   const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
     return '/dummy/path';
@@ -26,9 +29,16 @@ void main() async {
     return null;
   });
 
+  await prefs.setString('themeData', 'dark');
+
   testWidgets('app test', (WidgetTester tester) async {
-    app.main();
-    await tester.pumpWidget(new app.App(currentTheme: themeData,));
-    await tester.pumpWidget(new app.ErrorPage());
+    await tester.pumpWidget(App(currentTheme: themeData,));
+
+    final Finder dynamicTheme = find.byType(DynamicTheme);
+    expect(dynamicTheme, findsOneWidget);
+  });
+
+  testWidgets('error page test', (WidgetTester tester) async {
+    await tester.pumpWidget(new ErrorPage());
   });
 }
