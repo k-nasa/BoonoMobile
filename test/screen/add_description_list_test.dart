@@ -57,5 +57,22 @@ void main() {
     await tester.tap(submitButton);
     await tester.pump(const Duration(milliseconds: 1000));
     expect(typeSelect, findsNothing);
+
+    // アイコンボタンを押すとタイプ変更する
+    final Finder titleIcon = find.byIcon(Icons.library_add);
+    final Finder authorIcon = find.byIcon(Icons.person_add);
+
+    await tester.showKeyboard(inputText);
+    expect(titleIcon, findsOneWidget);
+    expect(authorIcon, findsOneWidget);
+
+    await tester.tap(authorIcon);
+    await tester.pump(const Duration(milliseconds: 1000));
+    // TODO テストコード追加
+
+
+    await tester.tap(titleIcon);
+    await tester.pump(const Duration(milliseconds: 1000));
+    // TODO テストコード追加
   });
 }
