@@ -3,6 +3,7 @@ import 'package:boono_mobile/main.dart' as app;
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/services.dart';
 import 'helper/shared_preferences_helper.dart';
+import 'package:boono_mobile/screen/styles/mainStyle.dart';
 
 void main() async {
   await prefsMock();
@@ -26,7 +27,7 @@ void main() async {
 
   testWidgets('app test', (WidgetTester tester) async {
     app.main();
-    await tester.pumpWidget(new app.App());
+    await tester.pumpWidget(new app.App(currentTheme: themeData,));
     await tester.pumpWidget(new app.ErrorPage());
   });
 }
