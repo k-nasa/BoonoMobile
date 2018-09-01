@@ -9,14 +9,15 @@ MethodChannel sqfliteMock() {
       Database db;
       return db;
     }
-    if(methodCall.method == 'query') {
+    if (methodCall.method == 'query') {
       return <List>[];
     }
 
     return null;
   });
 
-  const MethodChannel('plugins.flutter.io/path_provider').setMockMethodCallHandler((MethodCall methodCall) async {
+  const MethodChannel('plugins.flutter.io/path_provider')
+      .setMockMethodCallHandler((MethodCall methodCall) async {
     return '/dummy/path';
   });
 

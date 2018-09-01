@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-class MySplashScreen extends StatelessWidget{
-  final Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
+class MySplashScreen extends StatelessWidget {
+  final Widget appBar =
+      PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,8 @@ class MySplashScreen extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).accentColor),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          Theme.of(context).accentColor),
                     ),
                   ],
                 ),

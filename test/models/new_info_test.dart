@@ -5,7 +5,7 @@ import '../helper/shared_preferences_helper.dart';
 import '../helper/sqflite_helper.dart';
 
 void main() {
-  group('NewInfo', (){
+  group('NewInfo', () {
     SharedPreferences prefs;
     sqfliteMock();
 
@@ -13,11 +13,11 @@ void main() {
       prefs = await prefsMock();
     });
 
-    tearDown((){
+    tearDown(() {
       prefs.clear();
     });
 
-    test('updateNewInfo', ()  async {
+    test('updateNewInfo', () async {
       bool beforeValue = prefs.getBool('new_info');
 
       expect(beforeValue, null);

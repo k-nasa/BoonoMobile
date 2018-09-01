@@ -29,19 +29,18 @@ void main() {
       await NewInfo.updateNewInfo(false);
 
       await tester.pumpWidget(
-          MaterialApp(home: Scaffold(body: NotifyBookListViewScreen()))
-      );
+          MaterialApp(home: Scaffold(body: NotifyBookListViewScreen())));
 
       final Finder progress = find.byType(CircularProgressIndicator);
       expect(progress, findsOneWidget);
-
 
       await tester.pump(const Duration(milliseconds: 1000));
       await tester.pump(const Duration(milliseconds: 1000));
       final Finder listItem = find.byType(Card);
       expect(listItem, findsWidgets);
 
-      final TestGesture gesture = await tester.startGesture(tester.getTopRight(listItem));
+      final TestGesture gesture =
+          await tester.startGesture(tester.getTopRight(listItem));
       await gesture.moveTo(tester.getTopLeft(listItem));
 
       await gesture.up();

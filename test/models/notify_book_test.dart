@@ -42,23 +42,22 @@ void main() {
     SharedPreferences prefs;
     Function eq;
 
-    setUp( () async {
+    setUp(() async {
       eq = const ListEquality<dynamic>().equals;
       prefs = await prefsMock();
     });
 
-    tearDown((){
+    tearDown(() {
       prefs.clear();
     });
 
-    test('fromStringList',() {
+    test('fromStringList', () {
       expect(NotifyBook.fromStringList(stringList, 12) == nBook, isTrue);
       expect(NotifyBook.fromStringList(stringList, 13) == nBook, isFalse);
     });
 
-    test('toStringList', (){
-
-      expect(eq(stringList,nBook.toStringList()), isTrue);
+    test('toStringList', () {
+      expect(eq(stringList, nBook.toStringList()), isTrue);
     });
 
     test('save', () async {
@@ -93,10 +92,11 @@ void main() {
       await nBook.save();
       await nBook2.save();
 
-      expect(eq(await NotifyBook.getBookDateFromLocal(), [nBook, nBook2]), isTrue);
+      expect(
+          eq(await NotifyBook.getBookDateFromLocal(), [nBook, nBook2]), isTrue);
     });
 
-    group('all', (){
+    group('all', () {
       test('サーバー上のデータに変更がない時', () async {
         NewInfo.updateNewInfo(false);
         await nBook.save();

@@ -19,40 +19,36 @@ class NotifyBook {
   String synopsis;
   String amount;
 
-  NotifyBook({
-    this.id,
-    this.title,
-    this.author,
-    this.publishDate,
-    this.imageUrl,
-    this.bigImageUrl,
-    this.synopsis,
-    this.amount
-  });
+  NotifyBook(
+      {this.id,
+      this.title,
+      this.author,
+      this.publishDate,
+      this.imageUrl,
+      this.bigImageUrl,
+      this.synopsis,
+      this.amount});
 
-  NotifyBook.fromStringList(List<String> list, int notifyBookId){
-    id =            notifyBookId.toInt();
-    title =         list[0];
-    author =        list[1];
-    imageUrl=       list[2];
-    bigImageUrl =   list[3];
-    publishDate =   list[4];
-    synopsis =      list[5];
-    amount =        list[6];
+  NotifyBook.fromStringList(List<String> list, int notifyBookId) {
+    id = notifyBookId.toInt();
+    title = list[0];
+    author = list[1];
+    imageUrl = list[2];
+    bigImageUrl = list[3];
+    publishDate = list[4];
+    synopsis = list[5];
+    amount = list[6];
   }
 
   static Future<List> all() async {
-    if(await NewInfo.newInfo()){
+    if (await NewInfo.newInfo()) {
       try {
         return getBookDateFromServer();
-      }
-
-      catch (e){
+      } catch (e) {
         print(e);
         return getBookDateFromLocal();
       }
-    }
-    else
+    } else
       return getBookDateFromLocal();
   }
 
@@ -71,13 +67,13 @@ class NotifyBook {
     final List jsonArray = json.decode(res.body);
     final List<NotifyBook> nBooks = [];
 
-    for(var nBook in jsonArray) {
+    for (var nBook in jsonArray) {
       String amount = nBook['book']['amount'].toString();
-      amount = amount != '0' ? amount+'円' : '情報なし';
+      amount = amount != '0' ? amount + '円' : '情報なし';
 
       NotifyBook notifyBook = new NotifyBook(
         id: nBook['notify_book']['id'],
-        title:  nBook['book']['title'],
+        title: nBook['book']['title'],
         author: nBook['book']['author'],
         imageUrl: nBook['book']['image_url'],
         bigImageUrl: nBook['book']['big_image_url'],
@@ -98,8 +94,9 @@ class NotifyBook {
     List<String> ids = prefs.getStringList('ids') ?? [];
     List<NotifyBook> nBooks = [];
 
-    for(var id in ids) {
-      NotifyBook notifyBook = NotifyBook.fromStringList(prefs.getStringList('notifyBook$id'), int.parse(id));
+    for (var id in ids) {
+      NotifyBook notifyBook = NotifyBook.fromStringList(
+          prefs.getStringList('notifyBook$id'), int.parse(id));
       nBooks.add(notifyBook);
     }
 
@@ -111,10 +108,9 @@ class NotifyBook {
     List ids = await prefs.getStringList('ids');
     http.Response res;
 
-    if(ids.remove(id.toString())){
+    if (ids.remove(id.toString())) {
       await prefs.setStringList('ids', ids);
       await prefs.remove('notifyBook$id');
-
 
       res = await http.delete(
         NotifyBookURL + '/$id',
@@ -123,8 +119,7 @@ class NotifyBook {
       print(res.body);
     }
 
-    if(res?.statusCode == 200)
-      return true;
+    if (res?.statusCode == 200) return true;
 
     return false;
   }
@@ -139,8 +134,7 @@ class NotifyBook {
     await prefs.setStringList('notifyBook$id', toStringList());
   }
 
-  List<String> toStringList() =>
-      [
+  List<String> toStringList() => [
         title,
         author,
         imageUrl,
@@ -152,14 +146,13 @@ class NotifyBook {
 
   @override
   // ignore: hash_and_equals
-  bool operator == (Object other) {
-    return
-      other is NotifyBook
-          && other.id == id
-          && other.title == title
-          && other.imageUrl == imageUrl
-          && other.bigImageUrl == bigImageUrl
-          && other.synopsis == synopsis
-          && other.amount == amount;
+  bool operator ==(Object other) {
+    return other is NotifyBook &&
+        other.id == id &&
+        other.title == title &&
+        other.imageUrl == imageUrl &&
+        other.bigImageUrl == bigImageUrl &&
+        other.synopsis == synopsis &&
+        other.amount == amount;
   }
 }

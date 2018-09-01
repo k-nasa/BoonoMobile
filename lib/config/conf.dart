@@ -11,7 +11,7 @@ class Config {
   String token;
 
   //アプリを開いたときにcall
-  Future<bool>init() async {
+  Future<bool> init() async {
     await dbManager.openDB();
 
     if (!await isTokenSetting()) {
@@ -24,23 +24,24 @@ class Config {
   }
 
   Future<bool> isTokenSetting() async {
-    final List<Map<String, dynamic>> config =  await dbManager.database.rawQuery('select * from config');
-    if(config == null || config.isEmpty)
-      return false;
+    final List<Map<String, dynamic>> config =
+        await dbManager.database.rawQuery('select * from config');
+    if (config == null || config.isEmpty) return false;
 
     return config?.first['token'] != null;
   }
 
   Future<void> generateToken() async {
     http.Response res;
-    try{
+    try {
       res = await http.post(UserCreateURL);
-    }catch(e) {
-      return ;
+    } catch (e) {
+      return;
     }
 
-    if(res.statusCode == 200) {
-      await dbManager.database.insert('config', <String, dynamic>{ 'token': res.body });
+    if (res.statusCode == 200) {
+      await dbManager.database
+          .insert('config', <String, dynamic>{'token': res.body});
       await putDeviceToken();
     }
   }
@@ -53,14 +54,11 @@ class Config {
     final FirebaseMessaging _fm = FirebaseMessaging();
     _fm.configure();
 
-    _fm.getToken().then((String token) async{
-      http.patch(
-        UserUpdateURL,
-        body: {
-          'token': userToken,
-          'device_token': token,
-        }
-      );
+    _fm.getToken().then((String token) async {
+      http.patch(UserUpdateURL, body: {
+        'token': userToken,
+        'device_token': token,
+      });
     });
   }
 }

@@ -19,7 +19,7 @@ class NewInfo {
   }
 
   // new_infoをサーバーからもらう
-  static Future<void>  fetchNewInfo() async {
+  static Future<void> fetchNewInfo() async {
     final DBManager db = new DBManager();
     final String userToken = await db.fetchUserToken();
 
@@ -28,7 +28,7 @@ class NewInfo {
       final bool newInfo = res.body == 'true';
 
       await NewInfo.updateNewInfo(newInfo);
-    } catch (e){
+    } catch (e) {
       print(e);
       await NewInfo.updateNewInfo(false);
     }

@@ -9,40 +9,38 @@ SubItemTask subItemTask = SubItemTask(
   url: 'dummy_url',
 );
 
-Map subItemTaskMap = <String, dynamic> {
+Map subItemTaskMap = <String, dynamic>{
   'http_method': 'get',
   'url': 'dummy_url',
   'sub_id': 12,
 };
 
-
 void main() {
   group('SubItemTask', () {
-
     MethodChannel sqfliteChannel = sqfliteMock();
 
     sqfliteChannel.setMockMethodCallHandler((MethodCall methodCall) async {
-      if(methodCall.method == 'query') {
+      if (methodCall.method == 'query') {
         return [subItemTaskMap];
       }
 
       return null;
     });
 
-   test('toMap', (){
-     expect(subItemTask.toMap(), subItemTaskMap);
-   });
+    test('toMap', () {
+      expect(subItemTask.toMap(), subItemTaskMap);
+    });
 
-   test('fromMap', (){
-     expect(SubItemTask.fromMap(subItemTaskMap), subItemTask);
-   });
+    test('fromMap', () {
+      expect(SubItemTask.fromMap(subItemTaskMap), subItemTask);
+    });
 
-   test('all', () async {
-     expect(await SubItemTask.all(), [subItemTask]);
-   });
+    test('all', () async {
+      expect(await SubItemTask.all(), [subItemTask]);
+    });
 
-   test('execute', () async{
-     SubItemTask.execute();
-   });
+    test('execute', () async {
+      SubItemTask.execute();
+    });
   });
 }

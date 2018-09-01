@@ -8,12 +8,7 @@ import '../helper/sqflite_helper.dart';
 void main() {
   testWidgets('AddSubscriptionItemPage', (WidgetTester tester) async {
     await tester.pumpWidget(
-        MaterialApp(
-            home: Scaffold(
-                body: AddSubscriptionItemPage()
-            )
-        )
-    );
+        MaterialApp(home: Scaffold(body: AddSubscriptionItemPage())));
 
     sqfliteMock();
 
@@ -54,7 +49,6 @@ void main() {
     await tester.tap(authorIcon);
     await tester.pump(const Duration(milliseconds: 1000));
     // TODO テストコード追加
-
 
     await tester.tap(titleIcon);
     await tester.pump(const Duration(milliseconds: 1000));

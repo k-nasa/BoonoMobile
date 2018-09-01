@@ -25,10 +25,11 @@ class SubscriptionItem {
     try {
       id = await db.database.insert(TABLE_NAME, toMap());
 
-     var task = new SubItemTask(httpMethod: 'post', subId: id, url: SubscriptionCreateURL);
-     task.save();
-     SubItemTask.execute();
-    }catch(e) {
+      var task = new SubItemTask(
+          httpMethod: 'post', subId: id, url: SubscriptionCreateURL);
+      task.save();
+      SubItemTask.execute();
+    } catch (e) {
       return false;
     }
 
@@ -37,17 +38,17 @@ class SubscriptionItem {
     return true;
   }
 
-  static Future<List<SubscriptionItem>> all() async{
+  static Future<List<SubscriptionItem>> all() async {
     DBManager db = new DBManager();
     await db.openDB();
 
-    final List<Map> subItemsMap =  await db.database.rawQuery('select * from $TABLE_NAME');
-    if (subItemsMap.isEmpty)
-      return null;
+    final List<Map> subItemsMap =
+        await db.database.rawQuery('select * from $TABLE_NAME');
+    if (subItemsMap.isEmpty) return null;
 
     List<SubscriptionItem> subItems = [];
 
-    for(var subItemMap in subItemsMap)
+    for (var subItemMap in subItemsMap)
       subItems.add(SubscriptionItem.fromMap(subItemMap));
 
     return subItems;
@@ -57,10 +58,12 @@ class SubscriptionItem {
     DBManager db = new DBManager();
     await db.openDB();
 
-    int count = await db.database.delete(TABLE_NAME, where: 'id= ?', whereArgs: <int>[id]);
+    int count = await db.database
+        .delete(TABLE_NAME, where: 'id= ?', whereArgs: <int>[id]);
 
-    if(count == 1){
-      var task = new SubItemTask(httpMethod: 'delete', subId: id, url: SubscriptionDeleteURL);
+    if (count == 1) {
+      var task = new SubItemTask(
+          httpMethod: 'delete', subId: id, url: SubscriptionDeleteURL);
       task.save();
       SubItemTask.execute();
       NewInfo.updateNewInfo(true);
@@ -69,32 +72,27 @@ class SubscriptionItem {
     return count == 1;
   }
 
-
-  Map toMap() =>
-      <String, dynamic>{
+  Map toMap() => <String, dynamic>{
         'id': id,
         'type': type,
         'content': content,
       };
 
-  static Future<SubscriptionItem> find(int id) async{
+  static Future<SubscriptionItem> find(int id) async {
     DBManager db = new DBManager();
     await db.openDB();
 
-    List<Map> maps = await db.database.query(TABLE_NAME,
-        where: 'id = ?',
-        whereArgs: <int>[id]
-    );
+    List<Map> maps = await db.database
+        .query(TABLE_NAME, where: 'id = ?', whereArgs: <int>[id]);
     return SubscriptionItem.fromMap(maps.first);
   }
 
   @override
   // ignore: hash_and_equals
-  bool operator == (Object other) {
-    return
-      other is SubscriptionItem
-          && other.id == id
-          && other.type == type
-          && other.content == content;
+  bool operator ==(Object other) {
+    return other is SubscriptionItem &&
+        other.id == id &&
+        other.type == type &&
+        other.content == content;
   }
 }

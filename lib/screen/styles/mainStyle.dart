@@ -25,24 +25,28 @@ final themeData = new ThemeData(
     display3: TextStyle(color: CustomColors.textColor, fontSize: 18.0),
 
     // ちょっとした見出しに使う
-    display4: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: 20.0),
+    display4: TextStyle(
+        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20.0),
 
     caption: TextStyle(color: CustomColors.textColor),
     subhead: TextStyle(color: CustomColors.textColor),
     headline: TextStyle(color: CustomColors.textColor),
-    title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: CustomColors.textColor),
+    title: TextStyle(
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+        color: CustomColors.textColor),
   ),
 
   accentIconTheme: const IconThemeData(
-      color: Colors.blueAccent,
+    color: Colors.blueAccent,
   ),
 
   inputDecorationTheme: const InputDecorationTheme(
     fillColor: Colors.white,
     filled: true,
     hintStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: CustomColors.textColor,
+      fontWeight: FontWeight.bold,
+      color: CustomColors.textColor,
     ),
   ),
 );
@@ -72,16 +76,18 @@ final themeDataDark = new ThemeData(
     display3: TextStyle(color: CustomColors.textColorDark, fontSize: 18.0),
 
     // ちょっとした見出しに使う
-    display4: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20.0),
+    display4: TextStyle(
+        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
 
     caption: TextStyle(color: CustomColors.textColorDark),
     subhead: TextStyle(color: Colors.white),
     headline: TextStyle(color: Colors.white),
-    title: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
+    title: TextStyle(
+        fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
   ),
 
   accentIconTheme: const IconThemeData(
-      color: Colors.cyanAccent,
+    color: Colors.cyanAccent,
   ),
   inputDecorationTheme: const InputDecorationTheme(
     fillColor: const Color.fromRGBO(64, 75, 96, 0.9),
@@ -92,7 +98,8 @@ final themeDataDark = new ThemeData(
     ),
   ),
 );
-class CustomColors{
+
+class CustomColors {
   static const Map<int, Color> theme = const <int, Color>{
     100: Color(0xFF3C4A60),
   };

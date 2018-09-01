@@ -9,29 +9,28 @@ SubscriptionItem subscriptionItem = SubscriptionItem(
   content: '約束のネバーランド',
 );
 
-Map subItemMap = <String, dynamic> {
+Map subItemMap = <String, dynamic>{
   'id': 12,
   'type': 'TitleItem',
   'content': '約束のネバーランド',
 };
-
 
 void main() {
   group('SubItemTask', () {
     MethodChannel sqflite = sqfliteMock();
 
     sqflite.setMockMethodCallHandler((MethodCall methodCall) async {
-      if(methodCall.method == 'query') {
+      if (methodCall.method == 'query') {
         return [subItemMap];
       }
       return null;
     });
 
-    test('toMap', (){
+    test('toMap', () {
       expect(subscriptionItem.toMap(), subItemMap);
     });
 
-    test('fromMap', (){
+    test('fromMap', () {
       expect(SubscriptionItem.fromMap(subItemMap), subscriptionItem);
     });
 

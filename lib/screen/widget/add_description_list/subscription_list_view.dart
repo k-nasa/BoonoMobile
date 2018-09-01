@@ -18,15 +18,16 @@ class SubscriptionListView extends StatelessWidget {
       },
     );
   }
-
 }
 
 class SubscriptionListViewContent extends StatefulWidget {
   @override
-  _SubscriptionListViewContentState createState() => new _SubscriptionListViewContentState();
+  _SubscriptionListViewContentState createState() =>
+      new _SubscriptionListViewContentState();
 }
 
-class _SubscriptionListViewContentState extends State<SubscriptionListViewContent> {
+class _SubscriptionListViewContentState
+    extends State<SubscriptionListViewContent> {
   List<SubscriptionItem> subItems;
 
   @override
@@ -35,27 +36,24 @@ class _SubscriptionListViewContentState extends State<SubscriptionListViewConten
         future: SubscriptionItem.all(),
         builder: (_, AsyncSnapshot snapshot) => new Flexible(
             child: GestureDetector(
-                onTap: () => FocusScope.of(context).requestFocus(new FocusNode()),
-                child: buildSubscriptionList(snapshot))
-        )
-    );
+                onTap: () =>
+                    FocusScope.of(context).requestFocus(new FocusNode()),
+                child: buildSubscriptionList(snapshot))));
   }
 
   Widget buildSubscriptionList(AsyncSnapshot snapshot) {
-    switch(snapshot.connectionState){
+    switch (snapshot.connectionState) {
       case ConnectionState.none:
       case ConnectionState.waiting:
         return CircularProgressIndicator();
       default:
-        if(snapshot.data == null){
+        if (snapshot.data == null) {
           // MEMO カスタムメニューを画面下に出したいのでListViewにして返している
           return ListView(
             children: const <Widget>[
               Center(
-                child: Text(
-                    '''まだ購読リストに登録されていません。
-                    \n購読したい本を登録して、新着本情報を受け取りましょう'''
-                ),
+                child: Text('''まだ購読リストに登録されていません。
+                    \n購読したい本を登録して、新着本情報を受け取りましょう'''),
               )
             ],
           );
@@ -64,9 +62,9 @@ class _SubscriptionListViewContentState extends State<SubscriptionListViewConten
         subItems = snapshot.data;
         print(subItems.length);
         return new ListView.builder(
-            itemBuilder: (BuildContext context, int index) => _createSubscription(context, index),
-            itemCount: subItems.length
-        );
+            itemBuilder: (BuildContext context, int index) =>
+                _createSubscription(context, index),
+            itemCount: subItems.length);
     }
   }
 
@@ -74,7 +72,6 @@ class _SubscriptionListViewContentState extends State<SubscriptionListViewConten
     return new Card(
         color: Theme.of(context).secondaryHeaderColor,
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 1.0),
-        child: new CustomListTile(subItem: subItems[index])
-    );
+        child: new CustomListTile(subItem: subItems[index]));
   }
 }

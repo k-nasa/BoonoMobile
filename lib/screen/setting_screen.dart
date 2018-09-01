@@ -10,7 +10,6 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ListView(
       children: <Widget>[
         ThemeSwitcher(),
@@ -20,32 +19,36 @@ class SettingScreen extends StatelessWidget {
 }
 
 class ThemeSwitcher extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     ThemeData currentTheme = Theme.of(context);
 
     return SimpleDialog(
-        title: const Text('テーマ選択'),
-        children: <Widget>[
-          // MEMO トグルスイッチでいいのでは？
-          new RadioListTile<Color>(
-            value: themeData.primaryColor,
+      title: const Text('テーマ選択'),
+      children: <Widget>[
+        // MEMO トグルスイッチでいいのでは？
+        new RadioListTile<Color>(
+          value: themeData.primaryColor,
+          groupValue: currentTheme.primaryColor,
+          onChanged: (value) async {
+            setThemeData(themeData, context);
+          },
+          title: new Text(
+            'Light　🌞',
+            style: Theme.of(context).textTheme.display3,
+          ),
+        ),
+        new RadioListTile<Color>(
+            value: themeDataDark.primaryColor,
             groupValue: currentTheme.primaryColor,
-            onChanged: (value) async {
-              setThemeData(themeData, context);
+            onChanged: (value) {
+              setThemeData(themeDataDark, context);
             },
-            title: new Text('Light　🌞', style: Theme.of(context).textTheme.display3,),
-          ),
-          new RadioListTile<Color>(
-              value: themeDataDark.primaryColor,
-              groupValue: currentTheme.primaryColor,
-              onChanged: (value){
-                setThemeData(themeDataDark, context);
-              },
-              title: Text('Dark　👻', style: Theme.of(context).textTheme.display3,)
-          ),
-        ],
+            title: Text(
+              'Dark　👻',
+              style: Theme.of(context).textTheme.display3,
+            )),
+      ],
     );
   }
 

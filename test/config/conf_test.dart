@@ -6,13 +6,14 @@ import '../helper/shared_preferences_helper.dart';
 import '../helper/sqflite_helper.dart';
 
 void main() {
-  group('Config', (){
+  group('Config', () {
     SharedPreferences prefs;
     Config config = Config();
 
     sqfliteMock();
 
-    const MethodChannel('plugins.flutter.io/firebase_messaging').setMockMethodCallHandler((MethodCall methodCall) async {
+    const MethodChannel('plugins.flutter.io/firebase_messaging')
+        .setMockMethodCallHandler((MethodCall methodCall) async {
       return null;
     });
 
@@ -20,11 +21,11 @@ void main() {
       prefs = await prefsMock();
     });
 
-    tearDown((){
+    tearDown(() {
       prefs.clear();
     });
 
-    group('init',() {
+    group('init', () {
       test('prefsに初期データが有る時cleaする', () async {
         prefs.setBool('hoge', false);
         expect(await prefs.getBool('hoge'), isFalse);

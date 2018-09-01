@@ -9,39 +9,33 @@ class DBManager {
   Database database;
 
   Future<void> openDB() async {
-    if (database != null)
-      return ;
+    if (database != null) return;
 
     final Directory directory = await getApplicationDocumentsDirectory();
-    database = await openDatabase(
-        join(directory.path, 'hog453eg2345687653.db'), //path
-        version: 1,
-        onCreate: (Database db, int version) async {
-          createConfigTable(db);
-          createSubscriptionItemsTable(db);
-          createSubItemTasksTable(db);
-        }
-    );
+    database =
+        await openDatabase(join(directory.path, 'hog453eg2345687653.db'), //path
+            version: 1, onCreate: (Database db, int version) async {
+      createConfigTable(db);
+      createSubscriptionItemsTable(db);
+      createSubItemTasksTable(db);
+    });
   }
 
   void createConfigTable(Database db) {
     const String TABLE_NAME = 'config';
     const String TOKEN = 'token';
 
-    db.execute(
-      '''create table $TABLE_NAME(
-        $TOKEN text not null)'''
-    );
+    db.execute('''create table $TABLE_NAME(
+        $TOKEN text not null)''');
   }
 
-  void createSubscriptionItemsTable(Database db){
+  void createSubscriptionItemsTable(Database db) {
     const String TABLE_NAME = 'subscription_items';
     const String ID = 'id';
     const String TYPE = 'type';
     const String CONTENT = 'content';
 
-    db.execute(
-        '''
+    db.execute('''
         create table $TABLE_NAME(
         $ID integer PRIMARY KEY AUTOINCREMENT,
         $TYPE string not null,
@@ -56,22 +50,19 @@ class DBManager {
     const String URL = 'url';
     const String SUB_ID = 'sub_id';
 
-    db.execute(
-        '''create table $TABLE_NAME(
+    db.execute('''create table $TABLE_NAME(
         $HTTP_METHOD string,
         $URL text not null,
         $SUB_ID integer not null
-        )'''
-    );
+        )''');
   }
 
   Future<String> fetchUserToken() async {
     await openDB();
 
-    final config =  await database.rawQuery('select * from config');
+    final config = await database.rawQuery('select * from config');
 
-    if (config == null || config.isEmpty)
-      return null ;
+    if (config == null || config.isEmpty) return null;
 
     return config.first['token'];
   }

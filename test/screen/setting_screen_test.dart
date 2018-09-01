@@ -8,18 +8,15 @@ import '../helper/shared_preferences_helper.dart';
 
 void main() {
   testWidgets('setting_screen', (WidgetTester tester) async {
-    await tester.pumpWidget(
-        DynamicTheme(
-            defaultBrightness: Brightness.light,
-            data: (_) => themeData,
-            themedWidgetBuilder: (BuildContext context, ThemeData theme) {
-              return MaterialApp(
-                theme: themeData,
-                home: Scaffold(body: SettingScreen()),
-              );
-            }
-        )
-    );
+    await tester.pumpWidget(DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (_) => themeData,
+        themedWidgetBuilder: (BuildContext context, ThemeData theme) {
+          return MaterialApp(
+            theme: themeData,
+            home: Scaffold(body: SettingScreen()),
+          );
+        }));
     SharedPreferences prefs = await prefsMock();
 
     Finder themeSwitch = find.text('Dark　👻');

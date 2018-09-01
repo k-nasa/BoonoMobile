@@ -27,11 +27,10 @@ class SubItemTask {
 
   static void execute() async {
     List<SubItemTask> tasks = await all();
-    if(tasks == null)
-      return;
+    if (tasks == null) return;
 
-    for(SubItemTask task in tasks){
-      if(await task.exe()){
+    for (SubItemTask task in tasks) {
+      if (await task.exe()) {
         await task.delete();
       }
     }
@@ -55,26 +54,26 @@ class SubItemTask {
     DBManager db = new DBManager();
     await db.openDB();
 
-    await db.database.delete(TABLE_NAME, where: 'sub_id= ?', whereArgs: <int>[subId]);
+    await db.database
+        .delete(TABLE_NAME, where: 'sub_id= ?', whereArgs: <int>[subId]);
     print('タスク完了しました');
   }
 
-  static Future<List<SubItemTask>> all() async{
+  static Future<List<SubItemTask>> all() async {
     DBManager db = new DBManager();
     await db.openDB();
 
-    final List<Map> maps =  await db.database.rawQuery('select * from $TABLE_NAME');
+    final List<Map> maps =
+        await db.database.rawQuery('select * from $TABLE_NAME');
 
     List<SubItemTask> tasks = [];
 
-    for(var task in maps ?? <List>[])
-      tasks.add(SubItemTask.fromMap(task));
+    for (var task in maps ?? <List>[]) tasks.add(SubItemTask.fromMap(task));
 
     return tasks;
   }
 
-  Map<String, dynamic> toMap() =>
-      <String, dynamic> {
+  Map<String, dynamic> toMap() => <String, dynamic>{
         'http_method': httpMethod,
         'url': url,
         'sub_id': subId,
@@ -84,11 +83,11 @@ class SubItemTask {
     final db = new DBManager();
     String userToken = await db.fetchUserToken();
 
-    switch(httpMethod){
+    switch (httpMethod) {
       case 'post':
         SubscriptionItem subItem = await SubscriptionItem.find(subId);
 
-        Map requestBody = <String,dynamic>{ 'token': userToken }
+        Map requestBody = <String, dynamic>{'token': userToken}
           ..addAll(subItem.toMap())
           ..remove('id')
           ..addAll(<String, dynamic>{'sub_id': subId.toString()});
@@ -103,11 +102,10 @@ class SubItemTask {
 
   @override
   // ignore: hash_and_equals
-  bool operator == (Object other) {
-    return
-      other is SubItemTask
-          && other.httpMethod == httpMethod
-          && other.subId == subId
-          && other.url == url;
+  bool operator ==(Object other) {
+    return other is SubItemTask &&
+        other.httpMethod == httpMethod &&
+        other.subId == subId &&
+        other.url == url;
   }
 }

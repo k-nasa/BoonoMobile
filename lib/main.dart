@@ -12,18 +12,16 @@ import 'screen/widget/concerns/splash_screen.dart';
 
 void main() async {
   var currentTheme = await getCurrentThemeData();
-  runApp(
-      MaterialApp(
-        theme: currentTheme,
-        home: MySplashScreen(),
-      )
-  );
+  runApp(MaterialApp(
+    theme: currentTheme,
+    home: MySplashScreen(),
+  ));
 
   final Config config = Config();
   await NewInfo.fetchNewInfo();
 
   // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
-  if(await config.init())
+  if (await config.init())
     runApp(App(currentTheme: currentTheme));
   else
     // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
@@ -37,7 +35,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     SubItemTask.execute();
 
     /* FIXME InheritedWidgetが効いてないのかMainBlocProviderを子Widgetから参照できなかったので
@@ -49,14 +46,13 @@ class App extends StatelessWidget {
     return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (_) => currentTheme ?? themeData,
-        themedWidgetBuilder: (BuildContext context, ThemeData theme){
+        themedWidgetBuilder: (BuildContext context, ThemeData theme) {
           return MaterialApp(
             title: 'Boono!',
             theme: theme,
             home: BottomNavigation(),
           );
-        }
-    );
+        });
   }
 }
 
@@ -64,16 +60,15 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Boono',
-      theme: ThemeData(primaryColor: Colors.blue),
-      home: const Scaffold(
-        //TODO 後からちゃんとしたエラーページに差し替える
-        // 優先度は結構低い
-        body: Center(
-          child: Text('初期設定にネットワーク環境が必要です\nネットに繋いだ状態でアプリを再起動してください'),
-        ),
-      )
-    );
+        title: 'Boono',
+        theme: ThemeData(primaryColor: Colors.blue),
+        home: const Scaffold(
+          //TODO 後からちゃんとしたエラーページに差し替える
+          // 優先度は結構低い
+          body: Center(
+            child: Text('初期設定にネットワーク環境が必要です\nネットに繋いだ状態でアプリを再起動してください'),
+          ),
+        ));
   }
 }
 
@@ -81,8 +76,7 @@ Future<ThemeData> getCurrentThemeData() async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   final String currentThemeString = prefs.getString('themeData');
-  if(currentThemeString == null)
-    return themeData;
+  if (currentThemeString == null) return themeData;
 
-  return currentThemeString == 'dark'? themeDataDark : themeData;
+  return currentThemeString == 'dark' ? themeDataDark : themeData;
 }

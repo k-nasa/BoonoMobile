@@ -31,13 +31,13 @@ _MockHttpClient createMockImageHttpClient(SecurityContext _) {
   when(response.contentLength).thenReturn(_image.length);
   when(response.statusCode).thenReturn(200);
   when(response.listen(any)).thenAnswer((Invocation invocation) {
-  final void Function(List<int>) onData = invocation.positionalArguments[0];
-  final void Function() onDone = invocation.namedArguments[#onDone];
-  final void Function(Object, [StackTrace]) onError =
-  invocation.namedArguments[#onError];
-  final bool cancelOnError = invocation.namedArguments[#cancelOnError];
-  return Stream<List<int>>.fromIterable(<List<int>>[_image]).listen(onData,
-  onDone: onDone, onError: onError, cancelOnError: cancelOnError);
+    final void Function(List<int>) onData = invocation.positionalArguments[0];
+    final void Function() onDone = invocation.namedArguments[#onDone];
+    final void Function(Object, [StackTrace]) onError =
+        invocation.namedArguments[#onError];
+    final bool cancelOnError = invocation.namedArguments[#cancelOnError];
+    return Stream<List<int>>.fromIterable(<List<int>>[_image]).listen(onData,
+        onDone: onDone, onError: onError, cancelOnError: cancelOnError);
   });
   return client;
 }

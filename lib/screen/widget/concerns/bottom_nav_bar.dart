@@ -5,17 +5,17 @@ import 'package:boono_mobile/screen/notify_book_list_view.dart';
 import 'package:boono_mobile/screen/setting_screen.dart';
 
 class BottomNavigation extends StatefulWidget {
-
   @override
   _BottomNavigationState createState() => new _BottomNavigationState();
 }
 
-class _BottomNavigationState extends State<BottomNavigation> with TickerProviderStateMixin {
+class _BottomNavigationState extends State<BottomNavigation>
+    with TickerProviderStateMixin {
   int _currentIndex = 0;
   final BottomNavigationBarType _type = BottomNavigationBarType.shifting;
   List<Widget> _pages;
 
-  List<Widget> pages (){
+  List<Widget> pages() {
     return [
       NotifyBookListViewScreen(),
       AddSubscriptionItemPage(),
@@ -25,8 +25,7 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
-
-    List <BottomNavigationBarItem> botNavBarList = <BottomNavigationBarItem>[
+    List<BottomNavigationBarItem> botNavBarList = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
         icon: Icon(Icons.notifications),
         title: Text('タイムライン'),
@@ -55,7 +54,8 @@ class _BottomNavigationState extends State<BottomNavigation> with TickerProvider
     );
 
     // ignore: prefer_const_constructors
-    Widget appBar = PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
+    Widget appBar =
+        PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0));
 
     return Scaffold(
       appBar: appBar,

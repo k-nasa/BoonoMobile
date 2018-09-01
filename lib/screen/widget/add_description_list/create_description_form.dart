@@ -17,8 +17,8 @@ class AddSubscriptionForm extends StatelessWidget {
   Widget build(BuildContext context) {
     SubscriptionBloc subscriptionBloc = SubscriptionBlocProvider.of(context);
 
-    void listener(){
-      if(focusNode.hasFocus)
+    void listener() {
+      if (focusNode.hasFocus)
         subscriptionBloc.showField.add(true);
       else
         subscriptionBloc.showField.add(false);
@@ -53,7 +53,7 @@ class AddSubscriptionForm extends StatelessWidget {
                 ),
                 controller: _controller,
                 validator: (val) => val.isNotEmpty ? null : 'なにか入力してください！',
-                onFieldSubmitted:(_) => _submit(),
+                onFieldSubmitted: (_) => _submit(),
               ),
             ),
             IconButton(
@@ -70,4 +70,3 @@ class AddSubscriptionForm extends StatelessWidget {
     );
   }
 }
-
