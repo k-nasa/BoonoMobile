@@ -10,24 +10,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:boono_mobile/model/new_info.dart';
 
 class NotifyBook {
-  int id;
-  String title;
-  String author;
-  String publishDate;
-  String imageUrl;
-  String bigImageUrl;
-  String synopsis;
-  String amount;
-
   NotifyBook(
       {this.id,
-      this.title,
-      this.author,
-      this.publishDate,
-      this.imageUrl,
-      this.bigImageUrl,
-      this.synopsis,
-      this.amount});
+        this.title,
+        this.author,
+        this.publishDate,
+        this.imageUrl,
+        this.bigImageUrl,
+        this.synopsis,
+        this.amount});
 
   NotifyBook.fromStringList(List<String> list, int notifyBookId) {
     id = notifyBookId.toInt();
@@ -39,6 +30,16 @@ class NotifyBook {
     synopsis = list[5];
     amount = list[6];
   }
+
+  int id;
+  String title;
+  String author;
+  String publishDate;
+  String imageUrl;
+  String bigImageUrl;
+  String synopsis;
+  String amount;
+
 
   static Future<List> all() async {
     if (await NewInfo.newInfo()) {
