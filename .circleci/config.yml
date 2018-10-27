@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Install Flutter SDK
-          command: git clone -b v0.5.8 https://github.com/flutter/flutter.git ~/flutter
+          command: git clone -b v0.10.1 https://github.com/flutter/flutter.git ~/flutter
       - run:
           name: Flutter packages get
           command: ~/flutter/bin/flutter packages get
