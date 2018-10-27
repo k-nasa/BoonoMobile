@@ -4,14 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:boono_mobile/bloc/description_bloc.dart';
 
 class SubscriptionBlocProvider extends InheritedWidget {
-  final SubscriptionBloc subscriptionBloc;
-
   SubscriptionBlocProvider({
     Key key,
     SubscriptionBloc subscriptionBloc,
     @required Widget child,
   })  : subscriptionBloc = subscriptionBloc ?? SubscriptionBloc(),
         super(key: key, child: child);
+
+  final SubscriptionBloc subscriptionBloc;
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
