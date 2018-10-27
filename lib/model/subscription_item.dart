@@ -5,12 +5,6 @@ import 'package:boono_mobile/model/new_info.dart';
 import 'sub_item_task.dart';
 
 class SubscriptionItem {
-  String content;
-  String type;
-  int id;
-
-  static const String TABLE_NAME = 'subscription_items';
-
   SubscriptionItem({this.content, this.type, this.id});
 
   SubscriptionItem.fromMap(Map map) {
@@ -18,6 +12,12 @@ class SubscriptionItem {
     content = map['content'];
     type = map['type'];
   }
+
+  String content;
+  String type;
+  int id;
+
+  static const String TABLE_NAME = 'subscription_items';
 
   Future<bool> save() async {
     DBManager db = new DBManager();

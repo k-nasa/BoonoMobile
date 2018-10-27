@@ -67,19 +67,19 @@ class NotifyBookListView extends StatelessWidget {
 
 @immutable
 class NotifyBookListItem extends StatefulWidget {
+  const NotifyBookListItem(this.notifyBook);
   final NotifyBook notifyBook;
 
-  const NotifyBookListItem(this.notifyBook);
   @override
   _NotifyBookListItemState createState() =>
       new _NotifyBookListItemState(notifyBook);
 }
 
 class _NotifyBookListItemState extends State<NotifyBookListItem> {
+  _NotifyBookListItemState(this.notifyBook);
+
   NotifyBook notifyBook;
   bool onDisplay = true;
-
-  _NotifyBookListItemState(this.notifyBook);
 
   @override
   Widget build(BuildContext context) {

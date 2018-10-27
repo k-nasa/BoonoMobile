@@ -4,9 +4,8 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'styles/mainStyle.dart';
 
 class SettingScreen extends StatelessWidget {
-  final ValueChanged<ThemeData> onSelectedTheme;
-
   const SettingScreen({Key key, this.onSelectedTheme}) : super(key: key);
+  final ValueChanged<ThemeData> onSelectedTheme;
 
   @override
   Widget build(BuildContext context) {

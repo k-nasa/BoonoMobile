@@ -3,9 +3,8 @@ import 'package:boono_mobile/model/notify_book.dart';
 
 @immutable
 class Detail extends StatelessWidget {
-  final NotifyBook notifyBook;
-
   const Detail(this.notifyBook);
+  final NotifyBook notifyBook;
 
   @override
   Widget build(BuildContext context) {

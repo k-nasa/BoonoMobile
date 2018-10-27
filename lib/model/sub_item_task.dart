@@ -4,10 +4,6 @@ import 'package:boono_mobile/model/subscription_item.dart';
 import 'package:http/http.dart' as http;
 
 class SubItemTask {
-  String httpMethod;
-  String url;
-  int subId;
-
   SubItemTask({this.httpMethod, this.url, this.subId});
 
   SubItemTask.fromMap(Map map) {
@@ -15,6 +11,10 @@ class SubItemTask {
     httpMethod = map['http_method'];
     url = map['url'];
   }
+
+  String httpMethod;
+  String url;
+  int subId;
 
   static const String TABLE_NAME = 'subscription_item_tasks';
 
