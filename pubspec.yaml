@@ -3,9 +3,9 @@ description: A new Flutter project.
 
 dependencies:
   # SQLite
-  sqflite: 0.11.0
+  sqflite: any
   # Httpリクエストを送るため
-  http: ^0.11.3
+  http: ^0.12.0
   rxdart: any
   # ファイルパスと取得するため
   path_provider: any
