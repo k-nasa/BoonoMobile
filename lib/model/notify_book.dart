@@ -42,15 +42,15 @@ class NotifyBook {
 
 
   static Future<List> all() async {
-    if (await NewInfo.newInfo()) {
-      try {
-        return getBookDateFromServer();
-      } catch (e) {
-        print(e);
-        return getBookDateFromLocal();
-      }
-    } else
+    if (!await NewInfo.newInfo())
       return getBookDateFromLocal();
+
+    try {
+      return getBookDateFromServer();
+    } catch (e) {
+      print(e);
+      return getBookDateFromLocal();
+    }
   }
 
   static Future<List<NotifyBook>> getBookDateFromServer() async {
