@@ -17,6 +17,7 @@ class NotifyBook {
         this.publishDate,
         this.imageUrl,
         this.bigImageUrl,
+        this.detailUrl,
         this.synopsis,
         this.amount});
 
@@ -26,9 +27,10 @@ class NotifyBook {
     author = list[1];
     imageUrl = list[2];
     bigImageUrl = list[3];
-    publishDate = list[4];
-    synopsis = list[5];
-    amount = list[6];
+    detailUrl = list[4];
+    publishDate = list[5];
+    synopsis = list[6];
+    amount = list[7];
   }
 
   int id;
@@ -37,6 +39,7 @@ class NotifyBook {
   String publishDate;
   String imageUrl;
   String bigImageUrl;
+  String detailUrl;
   String synopsis;
   String amount;
 
@@ -66,6 +69,7 @@ class NotifyBook {
     );
 
     final List jsonArray = json.decode(res.body);
+
     final List<NotifyBook> nBooks = [];
 
     for (var nBook in jsonArray) {
@@ -78,6 +82,7 @@ class NotifyBook {
         author: nBook['book']['author'],
         imageUrl: nBook['book']['image_url'],
         bigImageUrl: nBook['book']['big_image_url'],
+        detailUrl: nBook['book']['detail_url'],
         publishDate: nBook['book']['publish_date'],
         synopsis: nBook['book']['synopsis'],
         amount: amount,
@@ -87,6 +92,7 @@ class NotifyBook {
       NewInfo.updateNewInfo(false);
       nBooks.add(notifyBook);
     }
+
     return nBooks;
   }
 
@@ -98,6 +104,7 @@ class NotifyBook {
     for (var id in ids) {
       NotifyBook notifyBook = NotifyBook.fromStringList(
           prefs.getStringList('notifyBook$id'), int.parse(id));
+
       nBooks.add(notifyBook);
     }
 
@@ -140,6 +147,7 @@ class NotifyBook {
         author,
         imageUrl,
         bigImageUrl,
+        detailUrl,
         publishDate,
         synopsis,
         amount,
@@ -153,6 +161,7 @@ class NotifyBook {
         other.title == title &&
         other.imageUrl == imageUrl &&
         other.bigImageUrl == bigImageUrl &&
+        other.detailUrl == detailUrl &&
         other.synopsis == synopsis &&
         other.amount == amount;
   }
