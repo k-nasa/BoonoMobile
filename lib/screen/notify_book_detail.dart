@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/notify_book.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+
 
 @immutable
 class Detail extends StatelessWidget {
