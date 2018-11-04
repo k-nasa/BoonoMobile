@@ -72,7 +72,25 @@ class Detail extends StatelessWidget {
                   padding: const EdgeInsets.all(10.0),
                   child: Text(notifyBook.synopsis, style: defaultTextStyle),
                 ),
+
+                FlatButton(
+                  child: Text('amazonで開く', style: captionTextStyle,),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute<Null>(
+                            settings: const RouteSettings(name: '/web_view'),
+                            builder: (BuildContext context) =>
+                                WebviewScaffold(
+                                  appBar: PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0)),
+                                  url: notifyBook.detailUrl,
+                                )
+                        ));
+                  },
+                )
               ])),
-            ])));
+            ])
+        )
+    );
   }
 }
