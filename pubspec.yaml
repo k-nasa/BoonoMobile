@@ -18,6 +18,8 @@ dependencies:
   # image.network用のモックプラグイン
   mockery: any
 
+  flutter_webview_plugin: any
+
   collection: any
 
   # Theme切り替えのため

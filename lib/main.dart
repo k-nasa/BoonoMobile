@@ -8,23 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:boono_mobile/screen/widget/concerns/bottom_nav_bar.dart';
 import 'model/new_info.dart';
 import 'screen/styles/mainStyle.dart';
-import 'screen/widget/concerns/splash_screen.dart';
 
 void main() async {
   var currentTheme = await getCurrentThemeData();
-  runApp(MaterialApp(
-    theme: currentTheme,
-    home: MySplashScreen(),
-  ));
 
   final Config config = Config();
   await NewInfo.fetchNewInfo();
 
-  // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
   if (await config.init())
     runApp(App(currentTheme: currentTheme));
   else
-    // FIXME こういう判定もAppないでやって描画するScreenを変えるべき
     runApp(new ErrorPage());
 }
 
