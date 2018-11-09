@@ -82,7 +82,7 @@ class Detail extends StatelessWidget {
                             settings: const RouteSettings(name: '/web_view'),
                             builder: (BuildContext context) =>
                                 WebviewScaffold(
-                                  appBar: PreferredSize(child: AppBar(), preferredSize: Size(0.0, 0.0)),
+                                  appBar: AppBar(),
                                   url: notifyBook.detailUrl,
                                 )
                         ));
