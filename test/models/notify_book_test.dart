@@ -12,10 +12,10 @@ void main() {
       'レイモンド・レディントン',
       'dummyUrl',
       'dummyUrl',
-      'dummyUrl',
       '2017-1-9',
-      'あらすじ',
-      '400',
+      //'dummyUrl',
+      //'あらすじ',
+      //'400',
     ];
 
     NotifyBook nBook = NotifyBook(
@@ -23,11 +23,11 @@ void main() {
       title: 'ブラックリスト',
       author: 'レイモンド・レディントン',
       imageUrl: 'dummyUrl',
-      bigImageUrl: 'dummyUrl',
       detailUrl: 'dummyUrl',
       publishDate: '2017-1-9',
-      synopsis: 'あらすじ',
-      amount: '400',
+      //bigImageUrl: 'dummyUrl',
+      //synopsis: 'あらすじ',
+      //amount: '400',
     );
 
     NotifyBook nBook2 = NotifyBook(
@@ -35,11 +35,11 @@ void main() {
       title: 'ブラックリスト',
       author: 'レイモンド・レディントン',
       imageUrl: 'dummyUrl',
-      bigImageUrl: 'dummyUrl',
       detailUrl: 'dummyUrl',
       publishDate: '2017-1-9',
-      synopsis: 'あらすじ',
-      amount: '400',
+      //bigImageUrl: 'dummyUrl',
+      //synopsis: 'あらすじ',
+      //amount: '400',
     );
 
     SharedPreferences prefs;

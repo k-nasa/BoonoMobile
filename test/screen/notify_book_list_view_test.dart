@@ -13,10 +13,10 @@ void main() {
     title: 'ブラックリスト',
     author: 'レイモンド・レディントン',
     imageUrl: 'dummyUrl',
-    bigImageUrl: 'dummyUrl',
     publishDate: '2017-1-9',
-    synopsis: 'あらすじ',
-    amount: '400',
+    //bigImageUrl: 'dummyUrl',
+    //synopsis: 'あらすじ',
+    //amount: '400',
   );
 
   setUp(() async {
