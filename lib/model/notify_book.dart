@@ -10,27 +10,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:boono_mobile/model/new_info.dart';
 
 class NotifyBook {
-  NotifyBook(
-      {this.id,
-        this.title,
-        this.author,
-        this.publishDate,
-        this.imageUrl,
-        this.bigImageUrl,
-        this.detailUrl,
-        this.synopsis,
-        this.amount});
+  NotifyBook({
+    this.id,
+    this.title,
+    this.author,
+    this.publishDate,
+    this.imageUrl,
+    this.detailUrl,
+    //this.bigImageUrl,
+    //this.synopsis,
+    //this.amount
+  });
 
   NotifyBook.fromStringList(List<String> list, int notifyBookId) {
     id = notifyBookId.toInt();
     title = list[0];
     author = list[1];
     imageUrl = list[2];
-    bigImageUrl = list[3];
-    detailUrl = list[4];
-    publishDate = list[5];
-    synopsis = list[6];
-    amount = list[7];
+    detailUrl = list[3];
+    publishDate = list[4];
+    //bigImageUrl = list[3];
+    //synopsis = list[6];
+    //amount = list[7];
   }
 
   int id;
@@ -38,10 +39,10 @@ class NotifyBook {
   String author;
   String publishDate;
   String imageUrl;
-  String bigImageUrl;
   String detailUrl;
-  String synopsis;
-  String amount;
+  //String bigImageUrl;
+  //String synopsis;
+  //String amount;
 
 
   static Future<List> all() async {
@@ -81,11 +82,11 @@ class NotifyBook {
         title: nBook['book']['title'],
         author: nBook['book']['author'],
         imageUrl: nBook['book']['image_url'],
-        bigImageUrl: nBook['book']['big_image_url'],
         detailUrl: nBook['book']['detail_url'],
         publishDate: nBook['book']['publish_date'],
-        synopsis: nBook['book']['synopsis'],
-        amount: amount,
+        //bigImageUrl: nBook['book']['big_image_url'],
+        //synopsis: nBook['book']['synopsis'],
+        //amount: amount,
       );
 
       notifyBook.save();
@@ -146,11 +147,11 @@ class NotifyBook {
         title,
         author,
         imageUrl,
-        bigImageUrl,
         detailUrl,
         publishDate,
-        synopsis,
-        amount,
+        //bigImageUrl,
+        //synopsis,
+        //amount,
       ];
 
   @override
@@ -160,9 +161,9 @@ class NotifyBook {
         other.id == id &&
         other.title == title &&
         other.imageUrl == imageUrl &&
-        other.bigImageUrl == bigImageUrl &&
-        other.detailUrl == detailUrl &&
-        other.synopsis == synopsis &&
-        other.amount == amount;
+        other.detailUrl == detailUrl;
+        //other.bigImageUrl == bigImageUrl &&
+        //other.synopsis == synopsis &&
+        //other.amount == amount;
   }
 }
