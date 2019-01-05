@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:boono_mobile/model/notify_book.dart';
 import 'package:boono_mobile/bloc/notify_book_bloc.dart';
-import 'package:boono_mobile/screen/notify_book_detail.dart';
 import 'package:boono_mobile/model/new_info.dart';
 import 'package:boono_mobile/bloc/notify_book_bloc_provider.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class NotifyBookListViewScreen extends StatelessWidget {
   @override
@@ -102,9 +102,14 @@ class _NotifyBookListItemState extends State<NotifyBookListItem> {
         onTap: () {
           Navigator.push(
               context,
-              new MaterialPageRoute<Null>(
-                  settings: const RouteSettings(name: '/detail'),
-                  builder: (BuildContext context) => Detail(notifyBook)));
+              MaterialPageRoute<Null>(
+                  settings: const RouteSettings(name: '/web_view'),
+                  builder: (BuildContext context) =>
+                      WebviewScaffold(
+                        appBar: AppBar(),
+                        url: notifyBook.detailUrl,
+                      )
+              ));
         },
         //trailing: Text(publishDate),
       ),

@@ -13,12 +13,14 @@ class DBManager {
 
     final Directory directory = await getApplicationDocumentsDirectory();
     database =
-        await openDatabase(join(directory.path, 'hog453eg2345687653.db'), //path
-            version: 1, onCreate: (Database db, int version) async {
-      createConfigTable(db);
-      createSubscriptionItemsTable(db);
-      createSubItemTasksTable(db);
-    });
+        await openDatabase(join(directory.path, 'boono2.db'),
+            version: 1,
+            onCreate: (Database db, int version) async {
+              createConfigTable(db);
+              createSubscriptionItemsTable(db);
+              createSubItemTasksTable(db);
+            }
+        );
   }
 
   void createConfigTable(Database db) {
