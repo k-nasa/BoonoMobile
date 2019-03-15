@@ -10,9 +10,9 @@ dependencies:
   # ファイルパスと取得するため
   path_provider: any
   # Push通知を受け取るため
-  firebase_messaging: 1.0.3
+  firebase_messaging: any
   # テータを格納するためのやつ
-  shared_preferences: 0.4.2
+  shared_preferences: any
   #テスト用のモック
   mockito: any
   # image.network用のモックプラグイン
